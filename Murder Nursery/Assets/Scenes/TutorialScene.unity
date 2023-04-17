@@ -21007,15 +21007,15 @@ GameObject:
   - component: {fileID: 484519441}
   - component: {fileID: 484519440}
   - component: {fileID: 484519442}
-  - component: {fileID: 484519443}
   - component: {fileID: 484519444}
+  - component: {fileID: 484519445}
   m_Layer: 0
   m_Name: IntroCam
   m_TagString: IntroCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &484519440
 Camera:
   m_ObjectHideFlags: 0
@@ -21134,35 +21134,6 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!114 &484519443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484519438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 405f0abc32c93534d96c93c11a2f76ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  introTextBox: {fileID: 1717037056}
-  introTextBox2: {fileID: 1533206118}
-  dialoguePanel1: {fileID: 1943223194}
-  dialoguePanel2: {fileID: 1070115144}
-  initialCam: {fileID: 484519438}
-  mainGameCam: {fileID: 963194225}
-  manager: {fileID: 1174809226}
-  player: {fileID: 993592945}
-  inIntro: 1
-  initialPos: {fileID: 75840196}
-  chasePos: {fileID: 261452001}
-  scarletPos: {fileID: 655847494}
-  jBPos: {fileID: 694931281}
-  eddiePos: {fileID: 1960835223}
-  introAudioSource: {fileID: 8943197106577203507}
-  introMusic: {fileID: 8300000, guid: be7e896cd40e69544b2e1fbbd4b4b519, type: 3}
-  gameplayMusic: {fileID: 8300000, guid: 9f125478eff24434a9f206437f418e45, type: 3}
 --- !u!114 &484519444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21177,6 +21148,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   colorblindShader: {fileID: 4800000, guid: b35b8f7ae8cf168488129d5f5f39ebf4, type: 3}
+--- !u!114 &484519445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484519438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405f0abc32c93534d96c93c11a2f76ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introTextBox: {fileID: 0}
+  introTextBox2: {fileID: 0}
+  dialoguePanel1: {fileID: 0}
+  dialoguePanel2: {fileID: 0}
+  initialCam: {fileID: 0}
+  mainGameCam: {fileID: 0}
+  manager: {fileID: 0}
+  player: {fileID: 0}
+  inIntro: 0
+  initialPos: {fileID: 0}
+  chasePos: {fileID: 0}
+  scarletPos: {fileID: 0}
+  jBPos: {fileID: 0}
+  eddiePos: {fileID: 0}
+  introAudioSource: {fileID: 0}
+  introMusic: {fileID: 0}
+  gameplayMusic: {fileID: 0}
 --- !u!1 &484922629
 GameObject:
   m_ObjectHideFlags: 0
@@ -28209,11 +28209,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654720766}
   m_CullTransparentMesh: 1
---- !u!1 &655847494 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 655847494, guid: ec29c44ed3bb89647840c47cd92a3f03, type: 3}
-  m_PrefabInstance: {fileID: 1757886374}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &656150463
 GameObject:
   m_ObjectHideFlags: 0
@@ -30587,11 +30582,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693535274}
   m_CullTransparentMesh: 1
---- !u!1 &694931281 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 694931281, guid: 2807d3a4f81fe0a4f80ccff67f7ff649, type: 3}
-  m_PrefabInstance: {fileID: 3470219178810516050}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &695155811
 GameObject:
   m_ObjectHideFlags: 0
@@ -40834,7 +40824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 484519441}
+  volumeTrigger: {fileID: 0}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -49209,11 +49199,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170885198}
   m_CullTransparentMesh: 1
---- !u!1 &1174809226 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 496276116719015325, guid: 4d9c5fa7567cc5342a1f683293399cd6, type: 3}
-  m_PrefabInstance: {fileID: 8943197106577203505}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1179160499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67988,7 +67973,7 @@ PrefabInstance:
     - target: {fileID: 1906126975, guid: 04709edae85b29045bb20e108e46a170, type: 3}
       propertyPath: initialCam
       value: 
-      objectReference: {fileID: 484519438}
+      objectReference: {fileID: 0}
     - target: {fileID: 1906126975, guid: 04709edae85b29045bb20e108e46a170, type: 3}
       propertyPath: scarletCam
       value: 
@@ -87180,11 +87165,6 @@ PrefabInstance:
 --- !u!4 &8943197106577203506 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 559351865225577949, guid: 4d9c5fa7567cc5342a1f683293399cd6, type: 3}
-  m_PrefabInstance: {fileID: 8943197106577203505}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &8943197106577203507 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 5784351030811161589, guid: 4d9c5fa7567cc5342a1f683293399cd6, type: 3}
   m_PrefabInstance: {fileID: 8943197106577203505}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8948470475622446154

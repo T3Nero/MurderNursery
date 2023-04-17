@@ -1004,7 +1004,7 @@ public class DialogueManager : MonoBehaviour
             qMark4.SetActive(true);
             qMark5.SetActive(true);
         }
-       // npcName.GetComponent<TextMeshProUGUI>().text = activeNPC.gameObject.name;
+        npcName.GetComponent<TextMeshProUGUI>().text = activeNPC.gameObject.name;
         //npcSprite.sprite = activeNPC.GetComponent<NPCDialogue>().sprite;
         //npcDescription.GetComponent<TextMeshProUGUI>().text = activeNPC.GetComponent<NPCDialogue>().description;
 

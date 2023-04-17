@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IntroCutscene : MonoBehaviour
 {
@@ -20,12 +21,13 @@ public class IntroCutscene : MonoBehaviour
     [Header("Intro Variables")]
     public GameObject manager; //Stores the game manager
     public GameObject player; //Stores the player game object
-    public bool inIntro = true; //Signals that the player is in the intro
+    public bool inIntro = false; //Signals that the player is in the intro
     private int progress = 0; //Tracks the player's progress through the intro
 
     public GameObject initialPos, chasePos, scarletPos, jBPos, eddiePos; // positions for camera to transition to
 
     readonly List<GameObject> positions = new(); // list of all possible positions
+    
     
     //Intro Dialogue 
     private string playerStatement1 = "There I was, only one day into this new nursery gig, and naptime was callin’ my name somethin’ awful";
@@ -49,6 +51,10 @@ public class IntroCutscene : MonoBehaviour
     void Start()
     {
         intro = this;
+        if (initialCam.activeInHierarchy)
+        {
+            inIntro = true;
+        }
         dialoguePanel1.SetActive(true);//Activates the intro dialogue UI 
         introTextBox.GetComponent<TextMeshProUGUI>().text = playerStatement1; //Loads the first dialogue piece
         introAudioSource.clip = introMusic;

@@ -324,7 +324,7 @@ public class Interrogation : MonoBehaviour
             mostRecentEddieNode = activeNode;
         }
         npcStatement.GetComponent<TextMeshProUGUI>().text = activeInterrogant.name + ": " + newNode.speech;
-        intResponseText1.GetComponent<TextMeshProUGUI>().text = activeNode.responses[0];
+        //intResponseText1.GetComponent<TextMeshProUGUI>().text = activeNode.responses[0];
         if (activeNode.lifeLoss > 0)
         {
             interrogationSource.PlayOneShot(lifeLostSound, 0.5f);
