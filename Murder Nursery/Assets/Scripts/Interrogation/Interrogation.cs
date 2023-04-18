@@ -603,6 +603,7 @@ public class Interrogation : MonoBehaviour
         {
             if(pressedButton.GetComponent<EvidenceSlot>().evidenceText == activeNode.evidenceRequired)
             {
+                pressedButton.GetComponent<EvidenceSlot>().evidenceTooltip.SetActive(false);
                 playerResponse1.GetComponent<TextMeshProUGUI>().text = activeNode.responses[0];
                 LoadIntNodeInfo(activeNode.children[0]);
                 interrogationPanel.SetActive(true);

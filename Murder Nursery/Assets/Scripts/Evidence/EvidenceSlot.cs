@@ -59,6 +59,7 @@ public class EvidenceSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             {
                 
                 Destroy(prefab);
+                pinboardManager.GetComponent<PinboardManager>().clearingEv = true;
                 pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(evidence);
             }
             

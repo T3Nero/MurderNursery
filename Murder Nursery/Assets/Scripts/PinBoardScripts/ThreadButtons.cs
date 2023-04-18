@@ -32,8 +32,6 @@ public class ThreadButtons : MonoBehaviour //NEED TO REVISIT AND REWORK SCRIPT
                 if (this.gameObject.name == "JuiceBox" || this.gameObject.name == "Chase" || this.gameObject.name == "Grace" || this.gameObject.name == "Scarlet" || this.gameObject.name == "Eddie")
                 
                     threadManager.GetComponent<ThreadManager>().firstThreadItem = this.gameObject;
-                
-
             }
         }
     }

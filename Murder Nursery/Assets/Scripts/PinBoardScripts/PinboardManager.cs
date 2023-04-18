@@ -79,6 +79,7 @@ public class PinboardManager : MonoBehaviour
     public GameObject popUpManager;
     public Image evidenceIcon;
     public GameObject evidenceText;
+    public bool clearingEv = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -116,7 +117,14 @@ public class PinboardManager : MonoBehaviour
 
     public void UpdateEvidenceImages(EvidenceClass evidence) //Updates the evidence pinboard visually after player interaction
     {
-        popUpManager.GetComponent<PopUpManager>().FadeImage(evidenceIcon, evidenceText);
+        if(!clearingEv)
+        {
+            popUpManager.GetComponent<PopUpManager>().FadeImage(evidenceIcon, evidenceText);
+        }
+        if(clearingEv)
+        {
+            clearingEv = false;
+        }
         GameObject newImage = Instantiate(evidence.evidenceImage, evidenceList.transform);
         newImage.GetComponent<DragAndDrop>().itemID = evidence.evidenceID;
     }
