@@ -82,7 +82,7 @@ public class MainMenuSettings : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.Escape) && SceneManager.GetActiveScene().name == "MainScene" && !IntroCutscene.intro.inIntro)
         {
-            if(!DM.dialogueZone.activeInHierarchy && !PM.pinBoard.activeInHierarchy && !IM.interrogationPanel.activeInHierarchy && !inventoryManager.inventoryUI.activeInHierarchy && !inventoryManager.notebook.activeInHierarchy && !TM.tutorialPanel.activeInHierarchy)
+            if(!DM.dialogueZone.activeInHierarchy && !PM.pinBoard.activeInHierarchy && !IM.interrogationPanel.activeInHierarchy && !inventoryManager.inventoryUI.activeInHierarchy && !inventoryManager.notebook.activeInHierarchy)
             {
                 ToggleMenu();
             }
@@ -116,12 +116,7 @@ public class MainMenuSettings : MonoBehaviour
                 inventoryManager.notebook.SetActive(false);
                 ToggleMenu();
             }
-            if(TM.tutorialPanel.activeInHierarchy)
-            {
-                inTutorial = true;
-                TM.tutorialPanel.SetActive(false);
-                ToggleMenu();
-            }
+            
             
         }
 

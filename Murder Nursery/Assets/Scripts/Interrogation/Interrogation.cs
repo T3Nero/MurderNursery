@@ -65,6 +65,7 @@ public class Interrogation : MonoBehaviour
     private string lastResponseScarlet = null;
     private string lastResponseEddie = null;
     private string lastResponseChase = null;
+    private string lastResponseGrace = null;
     //private string lastResponse2;
     private string npcLastResponse1;
     private string npcLastResponse2;
@@ -74,6 +75,7 @@ public class Interrogation : MonoBehaviour
     public DialogueNode mostRecentEddieNode;
     public DialogueNode mostRecentJuiceBoxNode;
     public DialogueNode mostRecentScarletNode;
+    public DialogueNode mostRecentGraceNode;
     private int pos = 0;
     private int playerChoice = 0;
 
@@ -92,22 +94,26 @@ public class Interrogation : MonoBehaviour
     public GameObject chasePlayerResponseText;
     public GameObject scarletPlayerResponseText;
     public GameObject eddiePlayerResponseText;
+    public GameObject gracePlayerResponseText;
 
     public GameObject juiceBoxPlayerResponseBox;
     public GameObject chasePlayerResponseBox;
     public GameObject eddiePlayerResponseBox;
     public GameObject scarletPlayerResponseBox;
+    public GameObject gracePlayerResponseBox;
 
     [Header("NPC Response Objects")]
     public GameObject juiceBoxStatementText;
     public GameObject scarletStatementText;
     public GameObject eddieStatementText;
     public GameObject chaseStatementText;
+    public GameObject graceStatementText;
 
     public GameObject juiceBoxStatementBox;
     public GameObject scarletStatementBox;
     public GameObject eddieStatementBox;
     public GameObject chaseStatementBox;
+    public GameObject graceStatementBox;
 
     [Header("Pop Ups")]
     public GameObject popUpManager;
@@ -115,6 +121,9 @@ public class Interrogation : MonoBehaviour
     public GameObject successText;
     public Image failIcon;
     public GameObject failText;
+
+    public GameObject tutorialManager;
+    public GameObject tutorialGrace;
     // Start is called before the first frame update
     void Start()
     {
@@ -122,6 +131,7 @@ public class Interrogation : MonoBehaviour
         response1Position = new Vector3(2030.744140625f, 326.246826171875f, 0.0f); //Stores UI element position
         response2Position = new Vector3(2030.777587890625f, 228.91348266601563f, 0.0f); //''
         popUpManager = GameObject.FindGameObjectWithTag("PUManager");
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
         
     }
 
@@ -176,6 +186,10 @@ public class Interrogation : MonoBehaviour
                     {
                     lastResponseChase = activeNode.responses[0];
                    
+                }
+                if(activeInterrogant.name == "Grace")
+                {
+                    lastResponseGrace = activeNode.responses[0];
                 }
                 //lastResponse = activeNode.responses[0]; //Stores the last response from the player
                 LoadIntNodeInfo(activeNode.children[0]); //Loads the next node 
@@ -274,12 +288,15 @@ public class Interrogation : MonoBehaviour
         {
             eddieCompleted = true;
         }
+        
         inInterrogation = false;
         manager.GetComponent<SceneTransition>().successfulInterrogation = true;
         manager.GetComponent<SceneTransition>().ChangeToMainArea(); //Transitions the player back to the main area
         interrogationPanel.SetActive(false);
         ClearDialogue(); //Clears the last interrogation's data
         popUpManager.GetComponent<PopUpManager>().FadeImage(successIcon, successText);
+
+        
         
     }
 
@@ -322,6 +339,10 @@ public class Interrogation : MonoBehaviour
         if(activeInterrogant.name == "Eddie (The Goon)")
         {
             mostRecentEddieNode = activeNode;
+        }
+        if(activeInterrogant.name == "Grace")
+        {
+            mostRecentGraceNode = activeNode;
         }
         npcStatement.GetComponent<TextMeshProUGUI>().text = activeInterrogant.name + ": " + newNode.speech;
         //intResponseText1.GetComponent<TextMeshProUGUI>().text = activeNode.responses[0];
@@ -414,6 +435,18 @@ public class Interrogation : MonoBehaviour
                     playerResponse1.GetComponent<TextMeshProUGUI>().text =  lastResponseChase;
                 }
             }
+            if(activeInterrogant.name == "Grace")
+        {       
+            if(mostRecentGraceNode == null)
+            {
+                LoadIntNodeInfo(startNode);
+            }
+            else if(mostRecentGraceNode != null)
+            {
+                LoadIntNodeInfo(mostRecentGraceNode);
+                playerResponse1.GetComponent<TextMeshProUGUI>().text = lastResponseGrace;
+            }
+        }
       //  }
       //  if (firstTry)
       //  {
@@ -459,6 +492,8 @@ public class Interrogation : MonoBehaviour
         scarletPlayerResponseBox.SetActive(false);
         eddiePlayerResponseBox.SetActive(false);
         eddieStatementBox.SetActive(false);
+        gracePlayerResponseBox.SetActive(false);
+        graceStatementBox.SetActive(false);
         playerResponse1 = null;
         npcStatement = null;
        // playerResponse1.SetActive(false);
@@ -471,6 +506,11 @@ public class Interrogation : MonoBehaviour
     {
         pinboard.SetActive(true);
         interrogationPanel.SetActive(false);
+        if(tutorialManager.GetComponent<Tutorials>().inIPBTutorial)
+        {
+            tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().ipbText1;
+            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(true);
+        }
         
     }
 
@@ -607,6 +647,7 @@ public class Interrogation : MonoBehaviour
                 playerResponse1.GetComponent<TextMeshProUGUI>().text = activeNode.responses[0];
                 LoadIntNodeInfo(activeNode.children[0]);
                 interrogationPanel.SetActive(true);
+                tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
                 pinboard.SetActive(false);
                 
             }

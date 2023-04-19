@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tutorials : MonoBehaviour
 {
@@ -20,16 +23,90 @@ public class Tutorials : MonoBehaviour
     public GameObject tutorialPanel;
     public GameObject tutorialText;
     public bool firstLD = true;
+
+    [Header("New Tutorial")]
+    public GameObject dialogueManager;
+    public GameObject tutorialGrace;
+    public GameObject deadGrace;
+    public GameObject blanket;
+    public Image blackFade;
+    private float currentCountdownValue = 2;
+    public bool inTutorial;
+    public GameObject inventoryManager;
+
+    [Header("Pinboard Tutorial")]
+    public GameObject pbTextObject;
+    public GameObject overPBText;
+    private string pbText1 = "Now what you gotta do is scroll through the evidence in the bar at the bottom of your screen - there’s just one piece for now - and click and drag it onto your pinboard! Remember, if you forget what the evidence is, you can click on it to read a short description.";
+    public bool inPBTutorial1 = false;
+    public bool inPBTutorial2 = false;
+    public string pbText2 = "Next, click a classmate to begin a thread, and then choose a piece of evidence to join that thread to! This is reeeeally important, because it means you can keep track of who’s who and what’s what in the nursery! ";
+    public bool inPBTutorial3 = false;
+    public string pbText3 = "It also means you can use that evidence to point out when your friends are lying, and argue your way to the truth - so long as you assign it to the right person! If you think you’ve connected a thread incorrectly, you can click on the rubber next to a clue on the pinboard to send it back to the evidence box.";
+    public string pbText4 = "So, keep an eye out for whenever you get a new piece of evidence, okay? You should see a pop-up on your screen when you get one! Plus, getting to the pinboard is as easy as pressing “I” for inventory. Now let's thread that inventory one more time as practice!";
+    public bool inPBTutorial4 = false;
+    public GameObject pbTutorialButton;
+
+    [Header("Interrogation Tutorial")]
+    public GameObject isTextObject;
+    public GameObject isOverText;
+    public bool inISTutorial1 = true;
+    public string isText1 = "Now, this is where you get to find out a little about the person you’re interrogating, and whether you have all the evidence you need to get your classmate to spill the beans! That’s what reveals some important info you can’t get anywhere else!";
+    public string isText2 = "See that tick? That means you found the right evidence, and it’s assigned correctly! If you assigned it to the wrong person, there would be a cross. And if you didn’t find the evidence yet, it would be blank! ";
+    public bool inISTutorial2 = false;
+    public string isText3 = "I recommend checking back here every so often to see whether you’re on the right track. You can enter this screen anytime when you’re talking to your classmates! Remember though, different people will require different evidence! Everybody has their own side to the story, right? ";
+    public bool inISTutorial3 = false;
+    public string isText4 = "Okay, go ahead and begin the interrogation now!";
+    public bool inISTutorial4 = false;
+    public bool inIPBTutorial = false;
+    public string ipbText1 = "Oh, you think you caught me in a lie, huh? Well, prove it! Click on the evidence you think contradicts my statement! ";
+
+    [Header("Dress Up Tutorial")]
+    public bool inDUTutorial = false;
+    public bool inDUTutorial2 = false;
+
+    [Header("Listening Device Tutorial")]
+    public bool inLDTutorial = false;
+    public GameObject ld2;
+    public GameObject tutorialLD;
+
+
+    [Header("Notebook Tutorial")]
+    public bool nbTutorial = false;
+    public bool nbTutorial2 = false;
+    public bool nbTutorial3 = false;
+    public bool nbTutorial4 = false;
+    public string nbText1 = "This is where you can look back at conversations you've overheard, get help with figuring out how to investigate, and read over information you've obtained from interrogations!\r\n";
+    public string nbText2 = "You'll get a notification whenever your notebook updates, so check back here whenever you need to from the inventory!";
+    public GameObject nbButton;
+
+    [Header("Cameras")]
+    public Camera graceCam1;
+    public Camera graceCam2;
+    public Camera introCam;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        inTutorial = true;
+        inISTutorial1 = true;
+        //dialogueManager = GameObject.FindGameObjectWithTag("Manager");
+        dialogueManager.GetComponent<DialogueManager>().StartConversation(tutorialGrace.GetComponent<NPCDialogue>().dialogueTree[0], tutorialGrace, graceCam1);
+        tutorialGrace.GetComponent<NPCDialogue>().inConversation = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!inTutorial && tutorialGrace.activeInHierarchy)
+        {
+            tutorialGrace.SetActive(false);
+        }
         
+      //  if(ld2.activeInHierarchy && inLDTutorial)
+       // {
+      //      ld2.SetActive(false);
+     //   }
     }
 
     public void ActivateTutorial(string message)
@@ -42,7 +119,130 @@ public class Tutorials : MonoBehaviour
     {
         tutorialPanel.SetActive(false);
         Time.timeScale = 1.0f;
+        inTutorial = false; 
         
     }
-    
+
+    public void PinboardTutorial()
+    {
+        inPBTutorial1 = true;
+        inventoryManager.GetComponent<ToggleUIVisibility>().TogglePinboard();
+        pbTextObject.SetActive(true);
+        overPBText.GetComponent<TextMeshProUGUI>().text = pbText1;
+    }
+
+    public void EndTutorial()
+    {
+        StartCoroutine(BlackTransition(graceCam1.gameObject, introCam.gameObject));
+        StartCoroutine(WaitForSeconds());
+        
+    }
+
+    public IEnumerator BlackTransition(GameObject currentCam, GameObject desiredCam, bool transitionToBlack = true, int timeToFade = 1)
+    {
+        
+        blackFade.gameObject.SetActive(true);
+        Color screenColour = blackFade.color;
+        float fadeProgress;
+        if (transitionToBlack)
+        {
+            while (blackFade.color.a < 1)
+            {
+                fadeProgress = screenColour.a + (timeToFade * Time.deltaTime);
+                screenColour = new Color(screenColour.r, screenColour.g, screenColour.b, fadeProgress);
+                blackFade.color = screenColour;
+                if (fadeProgress > 0.99f)
+                {
+
+                    ChangeCam(currentCam, desiredCam);
+                    introCam.GetComponent<IntroCutscene>().inIntro = true;
+                    inTutorial = false;
+                    deadGrace.SetActive(true);
+                    blanket.SetActive(true);
+                }
+
+                yield return null;
+            }
+        }
+        else
+        {
+            while (blackFade.color.a > 0)
+            {
+                fadeProgress = screenColour.a - (timeToFade * Time.deltaTime);
+                screenColour = new Color(screenColour.r, screenColour.g, screenColour.b, fadeProgress);
+                blackFade.color = screenColour;
+                if (fadeProgress < 0.01f)
+                {
+
+                    blackFade.gameObject.SetActive(false);
+                    dialogueManager.GetComponent<IntroCutscene>().inIntro = true;
+
+                    yield return null;
+
+                }
+                yield return null;
+            }
+        }
+    }
+
+    private void ChangeCam(GameObject currentCam, GameObject desiredCam)
+    {
+        currentCam.SetActive(false);
+        desiredCam.SetActive(true);
+    }
+
+    public IEnumerator WaitForSeconds(float countdownValue = 2) //Waits for a specified period of time 
+    {
+        currentCountdownValue = countdownValue;
+        while (currentCountdownValue > 0)
+        {
+            yield return new WaitForSeconds(1);
+            currentCountdownValue--;
+        }
+        StartCoroutine(BlackTransition(introCam.gameObject, graceCam1.gameObject, false));
+    }
+
+    public void StartSecondGraceConvo()
+    {
+        inventoryManager.GetComponent<ToggleUIVisibility>().TogglePinboard();
+        pbTextObject.SetActive(false);
+        dialogueManager.GetComponent<DialogueManager>().StartConversation(tutorialGrace.GetComponent<NPCDialogue>().dialogueTree[4], tutorialGrace, graceCam1);
+    }
+
+    public void NavigateISText()
+    {
+        if(inISTutorial3)
+        {
+            isOverText.GetComponent<TextMeshProUGUI>().text = isText4;
+            inISTutorial4 = true;
+        }
+        if(inISTutorial2)
+        {
+            isOverText.GetComponent<TextMeshProUGUI>().text = isText3;
+            inISTutorial2 = false;
+            inISTutorial3 = true;
+        }
+        if(inISTutorial1)
+        {
+            isOverText.GetComponent<TextMeshProUGUI>().text = isText2;
+            inISTutorial1 = false;
+            inISTutorial2 = true;
+        }
+    }
+
+    public void NavigateNBText()
+    {
+        if(nbTutorial4)
+        {
+            inventoryManager.GetComponent<ToggleUIVisibility>().ToggleNotebook();
+            dialogueManager.GetComponent<DialogueManager>().LoadNodeInfo(tutorialGrace.GetComponent<NPCDialogue>().dialogueTree[15]);
+            pbTextObject.SetActive(false);
+        }
+        if(nbTutorial3)
+        {
+            overPBText.GetComponent<TextMeshProUGUI>().text = nbText2;
+            nbTutorial3 = false;
+            nbTutorial4 = true;
+        }
+    }
 }

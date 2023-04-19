@@ -60,8 +60,14 @@ public class DialogueNode : MonoBehaviour
 
     [Header("Bribery")]
     public bool bribeGiven = false; //Indicates if a bribe has been given
-   
 
+    [Header("Tutorial")]
+    public bool exitTutorial;
+    public bool pinboardTutorial;
+    public bool interroSummaryTutorial;
+    public bool dressUpTutorial;
+    public bool dressUpTutorial2;
+    public bool notebookTutorial;
     private void Start()
     {
         firstPathLocked = false; //Sets all the paths to unlocked at the beginning of play

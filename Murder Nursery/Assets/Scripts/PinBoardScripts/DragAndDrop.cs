@@ -23,6 +23,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     public GameObject pinboardManager;
     public int i = 0;
     private GameObject[] evidencePanels;
+    public GameObject tutorialManager;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         hoverOverText = GameObject.FindGameObjectWithTag("TestText");
         pinboardManager = GameObject.FindGameObjectWithTag("PinBoard Manager");
         evidencePanels = GameObject.FindGameObjectsWithTag("Evidence Panel");
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
     }
 
     // Called when object is clicked on
@@ -69,6 +71,12 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     // Called when mouse click is released
     public void OnEndDrag(PointerEventData eventData)
     {
+        if(tutorialManager.GetComponent<Tutorials>().inPBTutorial2)
+        {
+            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(true);
+            tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().pbText2;
+        }
+
         //hoverOverText.SetActive(false);
         evidencePanels[0].GetComponent<Image>().enabled = true;
         evidencePanels[1].GetComponent<EvidenceSlider>().ToggleEvidencePanel();

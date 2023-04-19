@@ -51,11 +51,8 @@ public class IntroCutscene : MonoBehaviour
     void Start()
     {
         intro = this;
-        if (initialCam.activeInHierarchy)
-        {
-            inIntro = true;
-        }
-        dialoguePanel1.SetActive(true);//Activates the intro dialogue UI 
+        
+        //dialoguePanel1.SetActive(true);//Activates the intro dialogue UI 
         introTextBox.GetComponent<TextMeshProUGUI>().text = playerStatement1; //Loads the first dialogue piece
         introAudioSource.clip = introMusic;
         introAudioSource.Play();//Plays the intro music 
@@ -65,6 +62,12 @@ public class IntroCutscene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(inIntro &&  !dialoguePanel1.activeInHierarchy && this.name != "IntroCam")//&& !initialCam.activeInHierarchy)
+        {
+            initialCam.SetActive(true);
+            mainGameCam.SetActive(false);
+            dialoguePanel1.SetActive(true);//Activates the intro dialogue UI 
+        }
         if(Input.GetKeyUp(KeyCode.Return) && inIntro) //Allows the player to navigate through the intro dialogue 
         {
             switch(progress)
@@ -97,9 +100,9 @@ public class IntroCutscene : MonoBehaviour
                 case 7: introTextBox.GetComponent<TextMeshProUGUI>().text = playerStatement9;
                     progress++;
                     break;
-                case 8: dialoguePanel2.SetActive(true);
-                    dialoguePanel1.SetActive(false);
-                    introTextBox2.GetComponent<TextMeshProUGUI>().text = "Teacher: " + teacherStatement;
+                case 8: 
+                    
+                    introTextBox.GetComponent<TextMeshProUGUI>().text = "Teacher: " + teacherStatement;
                     progress++;
                     break;
                 case 9: ChangePosition(0);
@@ -108,16 +111,18 @@ public class IntroCutscene : MonoBehaviour
                     introTextBox.GetComponent<TextMeshProUGUI>().text = playerStatement10;
                     progress++;
                     break;
-                case 10: dialoguePanel1.SetActive(false);
+                case 10: 
                     inIntro = false;
+                    dialoguePanel1.SetActive(false);
                     ChangeCams(initialCam, mainGameCam);
                     introAudioSource.Stop();
                     manager.GetComponent<AudioSource>().clip = gameplayMusic;
                     manager.GetComponent<AudioSource>().Play();
                     break;
             }
+           // MoveCameraPosition();
         }
-        MoveCameraPosition();
+       MoveCameraPosition();
     }
 
     public void ChangeCams(GameObject currentCam, GameObject newCam) //Changes the camera which is currently active
@@ -156,13 +161,13 @@ public class IntroCutscene : MonoBehaviour
     {
         if(positions.Count > 0 && inIntro)
         {
-            transform.SetPositionAndRotation(Vector3.Lerp(transform.position,
+                transform.SetPositionAndRotation(Vector3.Lerp(transform.position,
                     positions[0].transform.position, 1.5f * Time.deltaTime), Quaternion.Lerp(transform.rotation,
                     positions[0].transform.rotation, 1.5f * Time.deltaTime));
         }
-        else
-        {
-            inIntro = false;
-        }
+     //   else
+      //  {
+      //     inIntro = false;
+      //  }
     }
 }

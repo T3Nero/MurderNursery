@@ -53,6 +53,7 @@ public class InventoryManager : MonoBehaviour
 
     public bool inventoryToggled = false;
     private bool canToggleMGlass = true;
+    public GameObject tutorialManager;
     private void Awake()
     {
         inventory = this;
@@ -63,6 +64,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
         AddItem(pinboard); //Adds the fundamental items to the player's inventory
         AddItem(mGlass); //''
       //  AddItem(listeningDevice);
@@ -71,7 +73,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.I) && !IntroCutscene.intro.inIntro && !DM.GetComponent<DialogueManager>().inConvo && !DM.GetComponent<Conclusion>().inEnding && !interManager.GetComponent<Interrogation>().inInterrogation && !menuUI.menuOpen)  //Used to open and close the player's inventory
+        if(Input.GetKeyUp(KeyCode.I) &&!tutorialManager.GetComponent<Tutorials>().inTutorial && !IntroCutscene.intro.inIntro && !DM.GetComponent<DialogueManager>().inConvo && !DM.GetComponent<Conclusion>().inEnding && !interManager.GetComponent<Interrogation>().inInterrogation && !menuUI.menuOpen)  //Used to open and close the player's inventory
         {
             UIVisibility.ToggleInventory();
             if(blur.activeSelf)

@@ -11,10 +11,12 @@ public class EvidenceSlider : MonoBehaviour
     float timeToMove = 0.1f;
     public Vector3 openTransform;
     public Vector3 closeTransform;
+    public GameObject tutorialManager;
     // Start is called before the first frame update
     void Start()
     {
         evidenceOpen = false;
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
     }
 
     // Update is called once per frame
@@ -25,6 +27,12 @@ public class EvidenceSlider : MonoBehaviour
 
     public void ToggleEvidencePanel()
     { 
+        if(tutorialManager.GetComponent<Tutorials>().inPBTutorial1)
+        {
+            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
+            tutorialManager.GetComponent<Tutorials>().inPBTutorial1 = false;
+            tutorialManager.GetComponent<Tutorials>().inPBTutorial2 = true;
+        }
         if(!evidenceOpen)
         {
             evidencePanel.transform.position = openTransform;

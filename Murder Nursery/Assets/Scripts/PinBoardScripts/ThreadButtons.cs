@@ -11,9 +11,11 @@ public class ThreadButtons : MonoBehaviour //NEED TO REVISIT AND REWORK SCRIPT
     public Button firstButton; //Thread buttons
     public Button secondButton; // 
     public GameObject interrogationManager;
+    public GameObject tutorialManager;
 
     public void Update()
     {
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
         if (interrogationManager == null)
         {
             interrogationManager = GameObject.FindGameObjectWithTag("InterrogationManager");
@@ -21,6 +23,12 @@ public class ThreadButtons : MonoBehaviour //NEED TO REVISIT AND REWORK SCRIPT
     }
     public void SetThreadPosition()
     {
+        if(tutorialManager.GetComponent<Tutorials>().inPBTutorial2)
+        {
+            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
+            tutorialManager.GetComponent<Tutorials>().inPBTutorial2 = false;
+            tutorialManager.GetComponent<Tutorials>().inPBTutorial3 = true;
+        }
         if (!interrogationManager.GetComponent<Interrogation>().inInterrogation)
         {
             if (threadManager.GetComponent<ThreadManager>().firstThreadItem != null)

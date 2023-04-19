@@ -61,17 +61,22 @@ public class DressUp : MonoBehaviour
     public Image gangsterEquipped;
     public GameObject gangsterText;
 
+    public GameObject manager;
+    public GameObject graceTutorial;
+
     
     // Start is called before the first frame update
     void Start()
     {
         activeOutfit = "Detective Outfit"; //Sets the active outfit to the detective outfit at the start of the game 
-        firstButton = new Vector3(386.5f, 540.0f, 0.0f); //Sets the initial positions of the buttons
-        secondButton = new Vector3(960.0f, 540.0f, 0.0f);//''
-        thirdButton = new Vector3(1533.5f, 540.0f, 0.0f);//''
+        firstButton = new Vector3(431.3134765625f, 762.06396484375f, 0.0f);
+        secondButton = new Vector3(968.8134765625f, 762.06396484375f, 0.0f);
+        thirdButton = new Vector3(1480.3134765625f, 757.7489624023438f, 0.0f);
         inactiveButton = detectiveButton; //Sets the inactive button as the detective button
         currentOutfit = detectiveOutfit;
         popUpManager = GameObject.FindGameObjectWithTag("PUManager");
+        manager = GameObject.FindGameObjectWithTag("Manager");
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
     }
 
     
@@ -82,17 +87,12 @@ public class DressUp : MonoBehaviour
     {
         if (interactable && Input.GetKeyDown(KeyCode.E) && !magGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass) //Allows the player to open the dress up menu 
         {
-            if(firstDressUP)
-            {
-                tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().dressupTutorial);
-                firstDressUP = false;
-            }
-            inDressUp = true; //Signals that the player is in dress up 
-            interactableText.SetActive(false); 
-            dressUpMenu.SetActive(true); //Activates the dress up menu UI
-            Cursor.visible = true; //CURSOR STUFF - UPDATE
-            Cursor.lockState = CursorLockMode.None;
-            playerAudio.PlayOneShot(openBoxSound, 0.5f); //Plays the toggle dress up menu sound 
+            //  if(firstDressUP)
+            // {
+            //      tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().dressupTutorial);
+            //       firstDressUP = false;
+            //   }
+            EnterDressUp();
         }
 
         if(inDressUp && Input.GetKeyDown(KeyCode.Escape)) //Allows the player to leave the dress up menu 
@@ -131,6 +131,8 @@ public class DressUp : MonoBehaviour
         currentOutfit = artistOutfit;
         artistOutfit.SetActive(true);
         popUpManager.GetComponent<PopUpManager>().FadeImage(artistEquipped, artistPUText);
+
+
         //artistOutfit.transform.position = playerPosition.position;
         //playerCam.GetComponent<CinemachineVirtualCamera>().Follow = artistOutfit.transform;
         //playerCam.GetComponent<CinemachineVirtualCamera>().LookAt = artistOutfit.transform;
@@ -213,7 +215,7 @@ public class DressUp : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other) //Used to detect if the player is within range of the dress up box
     {
-        if (other.gameObject.name == "DetectiveDrew" && !magGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass)
+        if (other.gameObject.name == "DetectiveDrew" && !magGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass && !tutorialManager.GetComponent<Tutorials>().inDUTutorial)
         {
             interactable = true;
             interactableText.SetActive(true);
@@ -236,5 +238,19 @@ public class DressUp : MonoBehaviour
         interactableText.SetActive(true);
         inDressUp = false;
         Cursor.visible = false;
+        if(tutorialManager.GetComponent<Tutorials>().inDUTutorial2)
+        {
+            manager.GetComponent<DialogueManager>().StartConversation(graceTutorial.GetComponent<NPCDialogue>().dialogueTree[11], graceTutorial, tutorialManager.GetComponent<Tutorials>().graceCam2);
+        }
+    }
+
+    public void EnterDressUp()
+    {
+        inDressUp = true; //Signals that the player is in dress up 
+        interactableText.SetActive(false);
+        dressUpMenu.SetActive(true); //Activates the dress up menu UI
+        Cursor.visible = true; //CURSOR STUFF - UPDATE
+        Cursor.lockState = CursorLockMode.None;
+        playerAudio.PlayOneShot(openBoxSound, 0.5f); //Plays the toggle dress up menu sound 
     }
 }

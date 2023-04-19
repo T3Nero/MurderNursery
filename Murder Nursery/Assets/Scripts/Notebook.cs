@@ -24,9 +24,14 @@ public class Notebook : MonoBehaviour
 
     public GameObject juiceboxChasePlaceholder;
     public GameObject juiceboxChase;
+
+    public bool tutorialComplete = false;
+    public GameObject tutorialManager;
+    public GameObject tutorialTranscript;
     private void Start()
     {
         interrogationManager = GameObject.FindGameObjectWithTag("InterrogationManager");
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
     }
     // Update is called once per frame
     void Update()
@@ -96,6 +101,16 @@ public class Notebook : MonoBehaviour
             juiceboxChasePlaceholder.SetActive(false);
             juiceboxChase.SetActive(true);  
         }
+       // if(tutorialManager.GetComponent<Tutorials>().inTutorial)
+       // {
+        //    juiceboxChasePlaceholder.SetActive(false);
+          //  chaseEddiePlaceholder.SetActive(false);
+            //scarletEddiePlaceholder.SetActive(false);
+            //if(tutorialComplete)
+           // {
+             //   tutorialTranscript.SetActive(true);
+            //}
+       // }
     }
 
     public void SwitchToConversation(GameObject conversation)

@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3480883043495859750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8024310265325356385}
+  - component: {fileID: 3499891356269125111}
+  m_Layer: 0
+  m_Name: GraceConvo1B
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8024310265325356385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480883043495859750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8900001, y: 1.2, z: 7.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3499891356269125111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480883043495859750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b70be5e9440559442826bf7731a6e3b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 3499891356269125111, guid: 6f0f409537365994e82d362a38133163, type: 3}
+  children:
+  - {fileID: 3499891356269125111, guid: 61193694abbc3534ba44bab6e29a0013, type: 3}
+  - {fileID: 3499891356269125111, guid: 6a02da44656d2a74989d8b2a79cdc9b8, type: 3}
+  speech: "Now you\u2019re getting it! Sometimes, you even get a couple of different
+    things you can say. Depending on what you pick, you could find out something
+    new! Is this feeling familiar, or do you want me to run through a couple more
+    things for ya?"
+  responses:
+  - "I\u2019m an experienced detective, ma\u2019am. (Skip tutorial)"
+  - "I\u2019m as green as grass! Help me out! (Run tutorial)"
+  nonAnimatedSpeech: "Now you\u2019re getting it! Sometimes, you even get a couple
+    of different things you can say. Depending on what you pick, you could find out
+    something new! Is this feeling familiar, or do you want me to run through a couple
+    more things for ya?"
+  repLevelOption1: -10
+  repLevelOption2: -10
+  repLevelOption3: -10
+  repGainResponse1: 0
+  repGainResponse2: 0
+  repGainResponse3: 0
+  nodeActive: 0
+  interrogationNode: 0
+  exitNode: 0
+  nodeVisited: 1
+  briberyAvailable: 0
+  fitCheck: 0
+  evidenceToDiscover: {fileID: 0}
+  lockingNode: 0
+  firstPathLocked: 0
+  secondPathLocked: 0
+  thirdPathLocked: 0
+  lockingFirstPath: 0
+  lockingSecondPath: 0
+  lockingThirdPath: 0
+  triggerTrueEnd: 0
+  triggerGoodEnd: 0
+  triggerBadEnd: 0
+  dressUpNode: {fileID: 0}
+  requiredOutfit: 
+  lifeLoss: 0
+  evidenceRequired: 
+  evidenceRequiredImage: {fileID: 0}
+  evidenceNeededCheck: 0
+  evImagesGenerated: 0
+  nodeEmotion: 4
+  bribeGiven: 0
+  exitTutorial: 0

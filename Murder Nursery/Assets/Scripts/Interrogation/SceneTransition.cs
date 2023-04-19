@@ -30,6 +30,7 @@ public class SceneTransition : MonoBehaviour
     public GameObject juiceIntObject;//''
     public GameObject goonIntObject;//''
     public GameObject coolIntObject; //''
+    public GameObject graceIntObject;
 
     public bool successfulInterrogation = false;
     public GameObject jbSummary;
@@ -42,13 +43,15 @@ public class SceneTransition : MonoBehaviour
     private bool eddieSummaryViewed = false;
     private bool chaseSummaryViewed = false;
 
-    
+    public GameObject tutorialManager;
+    public GameObject tutorialGrace;
 
     // Start is called before the first frame update
     void Start()
     {
         manager = GameObject.FindGameObjectWithTag("Manager"); //Finds and stores manager object
         interrogationActive = false; //Signals that the player is not in an interrogation when they spawn in
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
     }
 
 
@@ -100,6 +103,7 @@ public class SceneTransition : MonoBehaviour
           //  interrogationManager.GetComponent<Interrogation>().npcStatement.GetComponent<TextMeshProUGUI>().text = "Juice Box:";
             juiceIntObject.SetActive(true);
             activeInterrogant=juiceIntObject;
+            
             interrogationManager.GetComponent<Interrogation>().StartInterrogation(activeInterrogant.GetComponent<NPCDialogue>().dialogueTree[0], activeInterrogant);
             
         }
@@ -113,6 +117,16 @@ public class SceneTransition : MonoBehaviour
           //  interrogationManager.GetComponent<Interrogation>().npcStatement.GetComponent<TextMeshProUGUI>().text = "Eddie: ";
             goonIntObject.SetActive(true);
             activeInterrogant = goonIntObject;
+            interrogationManager.GetComponent<Interrogation>().StartInterrogation(activeInterrogant.GetComponent<NPCDialogue>().dialogueTree[0], activeInterrogant);
+        }
+        if(npc.name == "Grace")
+        {
+            interrogationManager.GetComponent<Interrogation>().playerResponse1 = interrogationManager.GetComponent<Interrogation>().gracePlayerResponseText;
+            interrogationManager.GetComponent<Interrogation>().npcStatement = interrogationManager.GetComponent<Interrogation>().graceStatementText;
+            interrogationManager.GetComponent<Interrogation>().gracePlayerResponseBox.SetActive(true);
+            interrogationManager.GetComponent<Interrogation>().graceStatementBox.SetActive (true);
+            graceIntObject.SetActive(true);
+            activeInterrogant = graceIntObject;
             interrogationManager.GetComponent<Interrogation>().StartInterrogation(activeInterrogant.GetComponent<NPCDialogue>().dialogueTree[0], activeInterrogant);
         }
     }
@@ -182,6 +196,11 @@ public class SceneTransition : MonoBehaviour
                     activeInterrogant.SetActive(false);
                     interrogationManager.GetComponent<Interrogation>().interrogationPanel.SetActive(false);
                     interrogationActive = false;
+                    if (tutorialManager.GetComponent<Tutorials>().inIPBTutorial)
+                    {
+                        manager.GetComponent<DialogueManager>().StartConversation(tutorialGrace.GetComponent<NPCDialogue>().dialogueTree[7], tutorialGrace, tutorialManager.GetComponent<Tutorials>().graceCam1);
+                        tutorialManager.GetComponent<Tutorials>().inIPBTutorial=false;
+                    }
                 }
 
                 yield return null;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Profiling;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -66,6 +67,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject juiceBox; //Juice Box's game object
     public GameObject eddie; //Eddie's game object
     public GameObject chase; //Chase's game object
+    public GameObject grace;
 
     [Header("Audio")]
     public AudioSource playerAudio; //Audio source for the player
@@ -156,12 +158,19 @@ public class DialogueManager : MonoBehaviour
     public Sprite eddieSummary;
     public Sprite scarletSummary;
     public Sprite jbSummary;
+    public Sprite graceSummary;
     public GameObject qMark1;
     public GameObject qMark2;
     public GameObject qMark3;
     public GameObject qMark4;
     public GameObject qMark5;
-    
+    public GameObject summaryLeaveButton;
+    public GameObject beginInterrogationButton;
+
+    public GameObject leaveButton;
+    public GameObject graceCam2;
+    public Camera graceCam3;
+    public Camera graceCam4;
 
     // Start is called before the first frame update
     void Start()
@@ -185,7 +194,12 @@ public class DialogueManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
 
+        if(!beginInterrogationButton.activeInHierarchy && tutorialManager.GetComponent<Tutorials>().inISTutorial4)
+        {
+            beginInterrogationButton.SetActive(true);
+            tutorialManager.GetComponent<Tutorials>().inISTutorial4 = false;
 
+        }
 
         //if(gainingRep) //Checks if the player is gaining rep and displays the rep increase sprite
       //  {
@@ -257,7 +271,11 @@ public class DialogueManager : MonoBehaviour
 
     public void StartConversation(DialogueNode startNode, GameObject npc, Camera npcCam) //Begins the dialogue interaction with chosen NPC
     {
-       
+       if(tutorialManager.GetComponent<Tutorials>().inTutorial)
+        {
+            interrogateButton.SetActive(false);
+            leaveButton.SetActive(false);
+        }
         Cursor.visible = true; //CURSOR STUFF
         player.SetActive(false); //Deactivates the player object for camera reasons
         currentNPCCam = npcCam; 
@@ -345,6 +363,12 @@ public class DialogueManager : MonoBehaviour
             activeNode = startNode; //Updates the active node to the start node of the conversation
             LoadNodeInfo(startNode); //Loads the node information to the UI elements
         }
+
+        if(activeNPC == grace)
+        {
+            activeNode = startNode;
+            LoadNodeInfo(activeNode);
+        }
         
         npcStatement.SetActive(true);
         npcStatement.GetComponent<TextMeshProUGUI>().text = activeNode.speech;
@@ -357,13 +381,16 @@ public class DialogueManager : MonoBehaviour
         npcSprite3.sprite = npc.GetComponent<NPCDialogue>().sprite;//''
         npcSprite4.sprite = npc.GetComponent<NPCDialogue>().sprite;//''
 
-        if(dresserBox.GetComponent<DressUp>().activeOutfit != "Detective Outfit")
+        if (!tutorialManager.GetComponent<Tutorials>().inTutorial)
         {
-            interrogateButton.SetActive(false);
-        }
-        else
-        {
-            interrogateButton.SetActive(true);
+            if (dresserBox.GetComponent<DressUp>().activeOutfit != "Detective Outfit")
+            {
+                interrogateButton.SetActive(false);
+            }
+            else
+            {
+                interrogateButton.SetActive(true);
+            }
         }
     }
 
@@ -389,8 +416,32 @@ public class DialogueManager : MonoBehaviour
         player.SetActive(true);
         activeNPC.GetComponent<NPCDialogue>().ToggleConversation();
         //activeNPC.GetComponent<NPCDialogue>().inConversation = false;
-        playerCam.gameObject.SetActive(true);
-        currentNPCCam.gameObject.SetActive(false);
+        if (!tutorialManager.GetComponent<Tutorials>().inTutorial)
+        {
+            playerCam.gameObject.SetActive(true);
+            currentNPCCam.gameObject.SetActive(false);
+        }
+        if(tutorialManager.GetComponent<Tutorials>().inDUTutorial)
+        {
+            playerCam.gameObject.SetActive(true);
+            currentNPCCam.gameObject.SetActive(false);
+        }
+        if (tutorialManager.GetComponent<Tutorials>().inLDTutorial)
+        {
+            playerCam.gameObject.SetActive(true);
+            graceCam3.gameObject.SetActive(false);
+            tutorialManager.GetComponent<Tutorials>().inLDTutorial = false;
+            tutorialManager.GetComponent<Tutorials>().nbTutorial = true;
+        }
+
+        if (tutorialManager.GetComponent<Tutorials>().inDUTutorial2)
+        {
+            playerCam.gameObject.SetActive(true);
+            graceCam2.SetActive(false);
+            tutorialManager.GetComponent<Tutorials>().inLDTutorial = true;
+        }
+        
+    
         
         
         dialogueZone.SetActive(false);
@@ -402,6 +453,32 @@ public class DialogueManager : MonoBehaviour
 
     public void LoadNodeInfo(DialogueNode newNode) //Loads the information of the new node
     {
+        if(newNode.exitTutorial)
+        {
+            ExitConversation();
+            tutorialManager.GetComponent<Tutorials>().EndTutorial();
+            return;
+        }    
+        if(newNode.pinboardTutorial)
+        {
+            ExitConversation();
+            tutorialManager.GetComponent<Tutorials>().PinboardTutorial();
+            return;
+        }
+        if(newNode.interroSummaryTutorial)
+        {
+            interrogateButton.SetActive(true);
+        }
+        if(newNode.dressUpTutorial)
+        {
+            tutorialManager.GetComponent<Tutorials>().inDUTutorial = true;
+        }
+        if(newNode.dressUpTutorial2)
+        {
+            dresserBox.GetComponent<DressUp>().EnterDressUp();
+            ExitConversation();
+            return;
+        }
         if(summaryPanel.activeInHierarchy)
         {
             summaryPanel.SetActive(false);
@@ -546,23 +623,26 @@ public class DialogueManager : MonoBehaviour
 
         switch (activeNode.responses.Length) //Updates the UI depending on the number of responses available to the player 
         {
-            case 0:                                   
-                playerFirstResponse.GetComponent<TextMeshProUGUI>().text = "Press Escape To Leave Conversation";
+            case 0:
+                playerFirstResponseBox.SetActive(false);
                 playerSecondResponseBox.SetActive(false);
                 playerThirdResponseBox.SetActive(false);
                 break;
             case 1:
+                playerFirstResponseBox.SetActive(true);
                 playerSecondResponseBox.SetActive(false);
                 playerThirdResponseBox.SetActive(false);
                 playerFirstResponse.GetComponent<TextMeshProUGUI>().text = activeNode.responses[0].ToString();
                 break;
             case 2:
+                playerFirstResponseBox.SetActive(true);
                 playerThirdResponseBox.SetActive(false);
                 playerSecondResponseBox.SetActive(true);
                 playerFirstResponse.GetComponent<TextMeshProUGUI>().text = activeNode.responses[0].ToString();
                 playerSecondResponse.GetComponent<TextMeshProUGUI>().text = activeNode.responses[1].ToString();
                 break;
             case 3:
+                playerFirstResponseBox.SetActive(true);
                 playerFirstResponse.GetComponent<TextMeshProUGUI>().text = activeNode.responses[0].ToString();
                 playerSecondResponseBox.SetActive(true);
                 playerSecondResponse.GetComponent<TextMeshProUGUI>().text = activeNode.responses[1].ToString();
@@ -745,8 +825,13 @@ public class DialogueManager : MonoBehaviour
     public void EnterInterrogation() //Enters an interrogation 
     {
         GameObject interrogatedNPC = activeNPC;
+        if(interrogatedNPC == grace)
+        {
+            tutorialManager.GetComponent<Tutorials>().inIPBTutorial = true;
+        }
         interrogationManager.GetComponent<Interrogation>().inInterrogation = true;
         ExitConversation();
+        tutorialManager.GetComponent<Tutorials>().isTextObject.SetActive(false);
         manager.GetComponent<SceneTransition>().ChangeToInterrogation(interrogatedNPC);
         summaryPanel.SetActive(false);
         
@@ -758,12 +843,12 @@ public class DialogueManager : MonoBehaviour
         if (!activeNPC.GetComponent<NPCDialogue>().bribeGiven)
         {
             //dialogueZone.SetActive(false);
-            if (firstBribe)
-            {
-                Time.timeScale = 0;
-                tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().bribeTutorial);
-                firstBribe = false;
-            }
+            //if (firstBribe)
+          //  {
+          //      Time.timeScale = 0;
+          //      tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().bribeTutorial);
+         //       firstBribe = false;
+         //   }
             briberyPanel.SetActive(true);
             //bribe.gameObject.SetActive(false);
             //item1.gameObject.SetActive(false);
@@ -966,12 +1051,12 @@ public class DialogueManager : MonoBehaviour
 
     public void ToggleSummary()
     {
-        if(firstInterrogation)
-        {
-            Time.timeScale = 0;
-            tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().interrogationTutorial);
-            firstInterrogation = false;
-        }
+       // if(firstInterrogation)
+       // {
+       //     Time.timeScale = 0;
+       //     tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().interrogationTutorial);
+      //      firstInterrogation = false;
+      //  }
         summaryPanel.SetActive(!summaryPanel.activeSelf);
         if(activeNPC == chase)
         {
@@ -989,7 +1074,17 @@ public class DialogueManager : MonoBehaviour
         {
             summaryPanel.GetComponent<Image>().sprite = jbSummary;
         }
-
+        if(activeNPC == grace)
+        {
+            //if(tutorialManager.GetComponent<Tutorials>().inISTutorial1)
+          //  {
+                tutorialManager.GetComponent<Tutorials>().isOverText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().isText1;
+                tutorialManager.GetComponent<Tutorials>().isTextObject.SetActive(true);
+                summaryLeaveButton.SetActive(false);
+                tutorialManager.GetComponent<Tutorials>().pbTutorialButton.SetActive(true);
+          //  }
+            summaryPanel.GetComponent<Image>().sprite = graceSummary;
+        }    
         
         if(summaryPanel.activeSelf)
         {

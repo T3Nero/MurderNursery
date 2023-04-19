@@ -51,9 +51,11 @@ public class ToggleUIVisibility : MonoBehaviour
     public bool scarletEddieComplete = false;
     public bool chaseEddieComplete = false;
     public bool juiceboxChaseComplete = false;
+
+    public GameObject closePB;
     public void Start()
     {
-        
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
     }
     public void Update()
     {
@@ -61,6 +63,11 @@ public class ToggleUIVisibility : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+        }
+        if(pinboardOpen)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
@@ -70,11 +77,11 @@ public class ToggleUIVisibility : MonoBehaviour
         
         if(inventoryOpen = !inventoryOpen)
         {
-            if(firstInventory)
-            {
-                tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().inventoryTutorial);
-                firstInventory = false;
-            }
+        //    if(firstInventory)
+         //   {
+         //       tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().inventoryTutorial);
+         //       firstInventory = false;
+         //   }
                 
             playerAudioSource.PlayOneShot(openInventorySound, 0.2f) ;
             inventoryUI.SetActive(true);
@@ -110,11 +117,15 @@ public class ToggleUIVisibility : MonoBehaviour
         {
             if (pinboardOpen = !pinboardOpen)
             {
-                if(firstPinboard)
+                if (tutorialManager.GetComponent<Tutorials>().inTutorial && !closePB.activeInHierarchy)
                 {
-                    tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().pinboardTutorial);
-                    firstPinboard = false;
+                    closePB.SetActive(true);
                 }
+                //   if(firstPinboard)
+                //  {
+                //       tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().pinboardTutorial);
+                //       firstPinboard = false;
+                //   }
                 playerAudioSource.PlayOneShot(openPinBoardSound, 0.5f);
                 pinboardUI.SetActive(true);
                 blur.SetActive(true);
@@ -178,11 +189,11 @@ public class ToggleUIVisibility : MonoBehaviour
     {
         if(!notebookOpen)
         {
-            if(firstNotebook)
-            {
-                tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().notebookTutorial);
-                firstNotebook = false;
-            }
+           // if(firstNotebook)
+         //   {
+         //       tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().notebookTutorial);
+         //       firstNotebook = false;
+         //   }
             notebook.GetComponent<Notebook>().CheckConversationProgress();
             notebookOpen = true;
             notebook.SetActive(true);

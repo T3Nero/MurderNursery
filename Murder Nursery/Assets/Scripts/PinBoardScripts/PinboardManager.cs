@@ -80,6 +80,9 @@ public class PinboardManager : MonoBehaviour
     public Image evidenceIcon;
     public GameObject evidenceText;
     public bool clearingEv = false;
+    public EvidenceClass tutorialEvidence;
+    public GameObject tutorialManager;
+    public GameObject closePB;
     // Start is called before the first frame update
     void Awake()
     {
@@ -89,6 +92,7 @@ public class PinboardManager : MonoBehaviour
 
     private void Start()
     {
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
         popUpManager = GameObject.FindGameObjectWithTag("PUManager");
         foreach (EvidenceClass evidence in evidencePieces)
         {
@@ -96,8 +100,9 @@ public class PinboardManager : MonoBehaviour
         }
         discoveredEvidence = new List<EvidenceClass>();
         threadedEvidence = new List<string>();
+        UpdateEvidenceImages(tutorialEvidence);
     }
-
+    
     // Called when we want to update the pin board after discovering a characters likes/dislikes/events
     // content determines whos likes/dislikes/events we are updating / string is what we want the content to say
     public void UpdatePinboard(Transform content, string pinboardText) 
@@ -117,7 +122,7 @@ public class PinboardManager : MonoBehaviour
 
     public void UpdateEvidenceImages(EvidenceClass evidence) //Updates the evidence pinboard visually after player interaction
     {
-        if(!clearingEv)
+        if(!clearingEv && !tutorialManager.GetComponent<Tutorials>().inTutorial)
         {
             popUpManager.GetComponent<PopUpManager>().FadeImage(evidenceIcon, evidenceText);
         }

@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         // stops player movement & disables camera whilst UI open
         if (inventory.UIVisibility.inventoryOpen || inventory.UIVisibility.pinboardOpen 
             || dialogueZone.activeInHierarchy || manager.GetComponent<SceneTransition>().interrogationActive 
-            || inventory.UIVisibility.jotterOpen || dressUpManager.GetComponent<DressUp>().inDressUp || introCam.GetComponent<IntroCutscene>().inIntro
+            || inventory.UIVisibility.jotterOpen || dressUpManager.GetComponent<DressUp>().inDressUp || manager.GetComponent<IntroCutscene>().inIntro
             || menu.menuOpen || inspectingItem || inventory.UIVisibility.notebookOpen || inLD || conclusionManager.GetComponent<Conclusion>().inEnding || 
             interrogationManager.GetComponent<Interrogation>().inInterrogation)
         {

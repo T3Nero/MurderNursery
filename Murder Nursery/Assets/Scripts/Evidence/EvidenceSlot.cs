@@ -17,6 +17,7 @@ public class EvidenceSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public List<GameObject> threads = new List<GameObject>();
 
     public GameObject evidenceTooltip; // shows a description popup of the evidence placed
+    public GameObject tutorialManager;
 
     //private bool clearing = false;
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class EvidenceSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         evidenceTooltip = GameObject.FindGameObjectWithTag("Evidence Tooltip");
         evidenceTooltip.SetActive(false);
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
     }
 
     // Update is called once per frame
@@ -45,6 +47,13 @@ public class EvidenceSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void ClearEvidence()
     {
+        if(tutorialManager.GetComponent<Tutorials>().inPBTutorial3)
+        {
+            tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().pbText4;
+            
+            tutorialManager.GetComponent<Tutorials>().inPBTutorial3 = false;
+            tutorialManager.GetComponent<Tutorials>().inPBTutorial4 = true;
+        }
         this.GetComponent<Image>().sprite = null;
         slotFilled = false;
         this.gameObject.SetActive(false);

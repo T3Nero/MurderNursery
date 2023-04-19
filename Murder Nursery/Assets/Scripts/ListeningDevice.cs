@@ -13,7 +13,7 @@ public class ListeningDevice : MonoBehaviour
     private bool inRange = false;
     public string requiredOutfit;
 
-    [HideInInspector]
+    
     public GameObject dressUpManager;
     [HideInInspector]
     public GameObject manager;
@@ -36,7 +36,7 @@ public class ListeningDevice : MonoBehaviour
     private int convoProgress = 0;
     private bool fadeComplete = false;
 
-    [HideInInspector]
+    
     public GameObject player;
 
     [HideInInspector]
@@ -66,6 +66,7 @@ public class ListeningDevice : MonoBehaviour
         progress = 0;
         convoProgress = 0;
         popUpManager = GameObject.FindGameObjectWithTag("PUManager");
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
         
     }
 
@@ -77,17 +78,15 @@ public class ListeningDevice : MonoBehaviour
           //  print("Turning off cam");
             //currentCam.SetActive(false);
         //}
+        
         if (inRange && Input.GetKeyDown(KeyCode.E) && !inLD && !ePressed)
         {
             ePressed = true;
-            if (dressUpManager.GetComponent<DressUp>().activeOutfit == requiredOutfit)
+            if (dressUpManager.GetComponent<DressUp>().activeOutfit != "Detective Outfit")
             {
                 inLD = true;
                 StartListening();
                 popUpManager.GetComponent<PopUpManager>().FadeImage(ldIcon, ldText);
-            }
-            else
-            {
                 print("Wrong Outfit");
             }
         }
@@ -136,7 +135,7 @@ public class ListeningDevice : MonoBehaviour
                                     evidenceAlreadyCollected = true;
                                 }
                             }
-                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)
+                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)// && !tutorialManager.GetComponent<Tutorials>().inTutorial)
                             {
                                 pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
                                 pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
@@ -171,12 +170,20 @@ public class ListeningDevice : MonoBehaviour
                                     evidenceAlreadyCollected = true;
                                 }
                             }
-                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)
+
+                            if (tutorialManager.GetComponent<Tutorials>().inTutorial)
                             {
-                                pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
-                                pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
-                                heardEvidence.evidenceFound = true;
+                                break;
+                                
                             }
+                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected )//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                {
+                                    
+                                    pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
+                                    pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
+                                    heardEvidence.evidenceFound = true;
+                                }
+                            
                             break;
                         }
                         fifthTextBox.SetActive(true);
@@ -203,7 +210,7 @@ public class ListeningDevice : MonoBehaviour
                                     evidenceAlreadyCollected = true;
                                 }
                             }
-                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)
+                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected )//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
                             {
                                 pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
                                 pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
@@ -235,7 +242,7 @@ public class ListeningDevice : MonoBehaviour
                                     evidenceAlreadyCollected = true;
                                 }
                             }
-                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)
+                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected )//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
                             {
                                 pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
                                 pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
@@ -271,7 +278,7 @@ public class ListeningDevice : MonoBehaviour
                                     evidenceAlreadyCollected = true;
                                 }
                             }
-                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)
+                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected )//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
                             {
                                 pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
                                 pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
@@ -292,25 +299,25 @@ public class ListeningDevice : MonoBehaviour
         {
             
             
-            if(tutorialManager.GetComponent<Tutorials>().firstLD)
-            {
-                Time.timeScale = 0;
-                tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().ldTutorial);
-                tutorialManager.GetComponent<Tutorials>().firstLD = false;
-                Cursor.visible = true;
-            }
+         //   if(tutorialManager.GetComponent<Tutorials>().firstLD)
+         //   {
+         //       Time.timeScale = 0;
+         //       tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().ldTutorial);
+         //       tutorialManager.GetComponent<Tutorials>().firstLD = false;
+        //        Cursor.visible = true;
+         //   }
             if (convoID == 0 && !notebook.GetComponent<Notebook>().chaseEddieComplete)
             {
-                if (dressUpManager.GetComponent<DressUp>().activeOutfit == requiredOutfit)
-                {
+               if (dressUpManager.GetComponent<DressUp>().activeOutfit == requiredOutfit)
+               {
                     textPrompt.SetActive(true);
                 }
                 inRange = true;
             }
             if(convoID == 1 && !notebook.GetComponent<Notebook>().scarletEddieComplete)
             {
-                if (dressUpManager.GetComponent<DressUp>().activeOutfit == requiredOutfit)
-                {
+               if (dressUpManager.GetComponent<DressUp>().activeOutfit == requiredOutfit)
+              {
                     textPrompt.SetActive(true);
                 }
                 inRange = true;
@@ -321,6 +328,11 @@ public class ListeningDevice : MonoBehaviour
                 {
                     textPrompt.SetActive(true);
                 }
+                inRange = true;
+            }
+            if(convoID == 3 && !notebook.GetComponent<Notebook>().tutorialComplete)
+            {
+                textPrompt.SetActive(true);
                 inRange = true;
             }
 
@@ -336,10 +348,10 @@ public class ListeningDevice : MonoBehaviour
         }
     }
 
-    private void StartListening()
+    public void StartListening()
     {
-        print("calling");
-        player.GetComponent<PlayerMovement>().inLD = true;
+        
+        //player.GetComponent<PlayerMovement>().inLD = true;
         StartCoroutine(BlackTransition(currentCam, desiredCam, true));
         StartCoroutine(WaitForSeconds(true));
     }
@@ -363,15 +375,15 @@ public class ListeningDevice : MonoBehaviour
                     ChangeCam(currentCam, desiredCam);
 
                     noirFilter.GetComponent<PostProcessingActivation>().TurnFilterOn(true);
-                    if(intoLD)
-                    {
-                        player.SetActive(false);
-                        
-                    }
-                    if (!intoLD)
-                    {
-                        player.SetActive(true);
-                    }
+                  //  if(intoLD)
+                  //  {
+                 //       player.SetActive(false);
+                 //       
+                  //  }
+                  //  if (!intoLD)
+                  //  {
+                  //      player.SetActive(true);
+                  //  }
                 }
 
                 yield return null;
@@ -440,6 +452,10 @@ public class ListeningDevice : MonoBehaviour
                 break;
             case 2: 
                 notebook.GetComponent<Notebook>().juiceboxChaseComplete = true;
+                break;
+            case 3:
+                notebook.GetComponent<Notebook>().tutorialComplete = true;
+                manager.GetComponent<DialogueManager>().StartConversation(manager.GetComponent<DialogueManager>().grace.GetComponent<NPCDialogue>().dialogueTree[12], manager.GetComponent<DialogueManager>().grace, manager.GetComponent<DialogueManager>().graceCam3);
                 break;
         }
 

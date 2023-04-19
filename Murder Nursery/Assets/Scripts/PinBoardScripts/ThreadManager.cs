@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,12 @@ public class ThreadManager : MonoBehaviour
     public string newEvidenceText; //Stores a new evidence text
     public GameObject pinBoardManager; //Stores the pinboard manager
     public GameObject interrogationManager;
+    public GameObject tutorialManager;
+
+    public void Start()
+    {
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
+    }
 
     // Update is called once per frame
     void Update() 
@@ -30,23 +37,74 @@ public class ThreadManager : MonoBehaviour
                     GameObject newThread = null;
                     if (firstThreadItem.name == "Scarlet")
                     {
+                        if(tutorialManager.GetComponent<Tutorials>().inPBTutorial3)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(true);
+                            tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().pbText3;
+                        }
+                        
                          newThread = this.GetComponent<PinboardThread>().MakeLine(firstThreadItem.transform.position.x, firstThreadItem.transform.position.y, secondThreadItem.transform.position.x, secondThreadItem.transform.position.y, Color.red); //Creates the thread
+                        if (tutorialManager.GetComponent<Tutorials>().inPBTutorial4)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
+                            tutorialManager.GetComponent<Tutorials>().StartSecondGraceConvo();
+                        }
                     }
                     if(firstThreadItem.name == "Chase")
                     {
+                        if (tutorialManager.GetComponent<Tutorials>().inPBTutorial3)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(true);
+                            tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().pbText3;
+                        }
                         newThread = this.GetComponent<PinboardThread>().MakeLine(firstThreadItem.transform.position.x, firstThreadItem.transform.position.y, secondThreadItem.transform.position.x, secondThreadItem.transform.position.y, Color.yellow);
+                        if (tutorialManager.GetComponent<Tutorials>().inPBTutorial4)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
+                            tutorialManager.GetComponent<Tutorials>().StartSecondGraceConvo();
+                        }
                     }
                     if(firstThreadItem.name == "Grace")
                     {
+                        if (tutorialManager.GetComponent<Tutorials>().inPBTutorial3)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(true);
+                            tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().pbText3;
+                        }
                         newThread = this.GetComponent<PinboardThread>().MakeLine(firstThreadItem.transform.position.x, firstThreadItem.transform.position.y, secondThreadItem.transform.position.x, secondThreadItem.transform.position.y, Color.cyan);
+                        if (tutorialManager.GetComponent<Tutorials>().inPBTutorial4)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
+                            tutorialManager.GetComponent<Tutorials>().StartSecondGraceConvo();
+                        }
                     }
                     if(firstThreadItem.name == "Eddie")
                     {
+                        if (tutorialManager.GetComponent<Tutorials>().inPBTutorial3)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(true);
+                            tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().pbText3;
+                        }
                         newThread = this.GetComponent<PinboardThread>().MakeLine(firstThreadItem.transform.position.x, firstThreadItem.transform.position.y, secondThreadItem.transform.position.x, secondThreadItem.transform.position.y, Color.blue);
+                        if (tutorialManager.GetComponent<Tutorials>().inPBTutorial4)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
+                            tutorialManager.GetComponent<Tutorials>().StartSecondGraceConvo();
+                        }
                     }
                     if(firstThreadItem.name == "JuiceBox")
                     {
+                        if (tutorialManager.GetComponent<Tutorials>().inPBTutorial3)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(true);
+                            tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().pbText3;
+                        }
                         newThread = this.GetComponent<PinboardThread>().MakeLine(firstThreadItem.transform.position.x, firstThreadItem.transform.position.y, secondThreadItem.transform.position.x, secondThreadItem.transform.position.y, Color.green);
+                        if (tutorialManager.GetComponent<Tutorials>().inPBTutorial4)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
+                            tutorialManager.GetComponent<Tutorials>().StartSecondGraceConvo();
+                        }
                     }
                     secondThreadItem.GetComponent<EvidenceSlot>().threads.Add(newThread);
                     
