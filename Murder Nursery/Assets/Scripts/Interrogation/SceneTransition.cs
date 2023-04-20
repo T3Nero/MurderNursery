@@ -196,11 +196,7 @@ public class SceneTransition : MonoBehaviour
                     activeInterrogant.SetActive(false);
                     interrogationManager.GetComponent<Interrogation>().interrogationPanel.SetActive(false);
                     interrogationActive = false;
-                    if (tutorialManager.GetComponent<Tutorials>().inIPBTutorial)
-                    {
-                        manager.GetComponent<DialogueManager>().StartConversation(tutorialGrace.GetComponent<NPCDialogue>().dialogueTree[7], tutorialGrace, tutorialManager.GetComponent<Tutorials>().graceCam1);
-                        tutorialManager.GetComponent<Tutorials>().inIPBTutorial=false;
-                    }
+                    
                 }
 
                 yield return null;
@@ -240,7 +236,12 @@ public class SceneTransition : MonoBehaviour
                         chaseSummary.SetActive(true);
                         successfulInterrogation = false;
                         chaseSummaryViewed = true;
-                    }    
+                    }
+                    if (tutorialManager.GetComponent<Tutorials>().inIPBTutorial)
+                    {
+                        manager.GetComponent<DialogueManager>().StartConversation(tutorialGrace.GetComponent<NPCDialogue>().dialogueTree[7], tutorialGrace, tutorialManager.GetComponent<Tutorials>().graceCam1);
+                        tutorialManager.GetComponent<Tutorials>().inIPBTutorial = false;
+                    }
                     yield return null;
                 }
                 yield return null;

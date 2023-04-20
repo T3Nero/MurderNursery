@@ -15,7 +15,7 @@ public class ListeningDevice : MonoBehaviour
 
     
     public GameObject dressUpManager;
-    [HideInInspector]
+    
     public GameObject manager;
 
     public GameObject currentCam;
@@ -39,7 +39,7 @@ public class ListeningDevice : MonoBehaviour
     
     public GameObject player;
 
-    [HideInInspector]
+    
     public GameObject pinboardManager;
 
     public EvidenceClass heardEvidence;
@@ -55,6 +55,7 @@ public class ListeningDevice : MonoBehaviour
     public GameObject popUpManager;
     public Image ldIcon;
     public GameObject ldText;
+    private bool tutorialTransition = false;
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +83,7 @@ public class ListeningDevice : MonoBehaviour
         if (inRange && Input.GetKeyDown(KeyCode.E) && !inLD && !ePressed)
         {
             ePressed = true;
-            if (dressUpManager.GetComponent<DressUp>().activeOutfit != "Detective Outfit")
+            if (dressUpManager.GetComponent<DressUp>().activeOutfit == requiredOutfit)
             {
                 inLD = true;
                 StartListening();
@@ -311,6 +312,7 @@ public class ListeningDevice : MonoBehaviour
                if (dressUpManager.GetComponent<DressUp>().activeOutfit == requiredOutfit)
                {
                     textPrompt.SetActive(true);
+                    player = other.gameObject;
                 }
                 inRange = true;
             }
@@ -319,6 +321,7 @@ public class ListeningDevice : MonoBehaviour
                if (dressUpManager.GetComponent<DressUp>().activeOutfit == requiredOutfit)
               {
                     textPrompt.SetActive(true);
+                    player = other.gameObject;
                 }
                 inRange = true;
             }
@@ -327,12 +330,14 @@ public class ListeningDevice : MonoBehaviour
                 if (dressUpManager.GetComponent<DressUp>().activeOutfit == requiredOutfit)
                 {
                     textPrompt.SetActive(true);
+                    player = other.gameObject;
                 }
                 inRange = true;
             }
             if(convoID == 3 && !notebook.GetComponent<Notebook>().tutorialComplete)
             {
                 textPrompt.SetActive(true);
+                player = other.gameObject;
                 inRange = true;
             }
 
@@ -351,7 +356,7 @@ public class ListeningDevice : MonoBehaviour
     public void StartListening()
     {
         
-        //player.GetComponent<PlayerMovement>().inLD = true;
+        player.GetComponent<PlayerMovement>().inLD = true;
         StartCoroutine(BlackTransition(currentCam, desiredCam, true));
         StartCoroutine(WaitForSeconds(true));
     }
@@ -375,15 +380,15 @@ public class ListeningDevice : MonoBehaviour
                     ChangeCam(currentCam, desiredCam);
 
                     noirFilter.GetComponent<PostProcessingActivation>().TurnFilterOn(true);
-                  //  if(intoLD)
-                  //  {
-                 //       player.SetActive(false);
-                 //       
-                  //  }
-                  //  if (!intoLD)
-                  //  {
-                  //      player.SetActive(true);
-                  //  }
+                    if(intoLD)
+                   {
+                        player.SetActive(false);
+                       
+                    }
+                    if (!intoLD)
+                    {
+                        player.SetActive(true);
+                    }
                 }
 
                 yield return null;
@@ -413,6 +418,12 @@ public class ListeningDevice : MonoBehaviour
                      if(!intoLD)
                     {
                         ePressed = false;
+                        if(tutorialTransition)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().inDUTutorial2 = false;
+                            manager.GetComponent<DialogueManager>().StartConversation(manager.GetComponent<DialogueManager>().grace.GetComponent<NPCDialogue>().dialogueTree[12], manager.GetComponent<DialogueManager>().grace, manager.GetComponent<DialogueManager>().graceCam3);
+                            tutorialTransition = false;
+                        }
                     }
                     
                     yield return null;
@@ -455,7 +466,7 @@ public class ListeningDevice : MonoBehaviour
                 break;
             case 3:
                 notebook.GetComponent<Notebook>().tutorialComplete = true;
-                manager.GetComponent<DialogueManager>().StartConversation(manager.GetComponent<DialogueManager>().grace.GetComponent<NPCDialogue>().dialogueTree[12], manager.GetComponent<DialogueManager>().grace, manager.GetComponent<DialogueManager>().graceCam3);
+                
                 break;
         }
 
@@ -471,6 +482,10 @@ public class ListeningDevice : MonoBehaviour
         player.GetComponent<PlayerMovement>().inLD = false;
         fadeComplete = false;
         inRange = false;
+        if(tutorialManager.GetComponent<Tutorials>().inLDTutorial)
+        {
+            tutorialTransition = true;
+        }
         
     }
     

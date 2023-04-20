@@ -124,6 +124,7 @@ public class Interrogation : MonoBehaviour
 
     public GameObject tutorialManager;
     public GameObject tutorialGrace;
+    public GameObject returnButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -138,6 +139,10 @@ public class Interrogation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!tutorialManager.GetComponent<Tutorials>().inTutorial && !returnButton.activeInHierarchy)
+        {
+            returnButton.SetActive(true);
+        }
         interrogationUnderway = manager.GetComponent<SceneTransition>().interrogationActive; //Checks if an interrogation is active
 
         //if(inInterrogation && lastResponse == null)

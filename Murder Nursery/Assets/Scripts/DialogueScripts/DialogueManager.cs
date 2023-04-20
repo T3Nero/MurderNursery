@@ -201,6 +201,13 @@ public class DialogueManager : MonoBehaviour
 
         }
 
+        if(!tutorialManager.GetComponent<Tutorials>().inTutorial)
+        {
+            beginInterrogationButton.SetActive(true);
+            leaveButton.SetActive(true);
+            summaryLeaveButton.SetActive(true);
+        }
+
         //if(gainingRep) //Checks if the player is gaining rep and displays the rep increase sprite
       //  {
         //    for (int i = 0; i < 1; i++)

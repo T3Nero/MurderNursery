@@ -215,6 +215,7 @@ public class Tutorials : MonoBehaviour
         {
             isOverText.GetComponent<TextMeshProUGUI>().text = isText4;
             inISTutorial4 = true;
+            pbTutorialButton.SetActive(false);
         }
         if(inISTutorial2)
         {
@@ -235,12 +236,18 @@ public class Tutorials : MonoBehaviour
         if(nbTutorial4)
         {
             inventoryManager.GetComponent<ToggleUIVisibility>().ToggleNotebook();
+         //   dialogueManager.GetComponent<DialogueManager>().npcStatement3.SetActive(true);
+          //  dialogueManager.GetComponent<DialogueManager>().playerResponse2.SetActive(true);
+            dialogueManager.GetComponent<DialogueManager>().npcStatement3.GetComponent<TextMeshProUGUI>().text = dialogueManager.GetComponent<DialogueManager>().activeNode.speech;
+            dialogueManager.GetComponent<DialogueManager>().playerResponse2.GetComponent<TextMeshProUGUI>().text = "I for inventory, easy!";
+            dialogueManager.GetComponent<DialogueManager>().npcStatement.GetComponent<TextMeshProUGUI>().text = tutorialGrace.GetComponent<NPCDialogue>().dialogueTree[15].speech;
             dialogueManager.GetComponent<DialogueManager>().LoadNodeInfo(tutorialGrace.GetComponent<NPCDialogue>().dialogueTree[15]);
-            pbTextObject.SetActive(false);
+            
+            isTextObject.SetActive(false);
         }
         if(nbTutorial3)
         {
-            overPBText.GetComponent<TextMeshProUGUI>().text = nbText2;
+            isOverText.GetComponent<TextMeshProUGUI>().text = nbText2;
             nbTutorial3 = false;
             nbTutorial4 = true;
         }
