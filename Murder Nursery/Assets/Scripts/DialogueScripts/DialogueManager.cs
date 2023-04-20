@@ -432,6 +432,7 @@ public class DialogueManager : MonoBehaviour
         {
             playerCam.gameObject.SetActive(true);
             currentNPCCam.gameObject.SetActive(false);
+            grace.GetComponent<AIScript>().SetDestination(grace.GetComponent<AIScript>().patrolPoints[0].transform.position);
         }
         if (tutorialManager.GetComponent<Tutorials>().inLDTutorial)
         {
@@ -479,6 +480,7 @@ public class DialogueManager : MonoBehaviour
         if(newNode.dressUpTutorial)
         {
             tutorialManager.GetComponent<Tutorials>().inDUTutorial = true;
+            
         }
         if(newNode.dressUpTutorial2)
         {

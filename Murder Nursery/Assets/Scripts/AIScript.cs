@@ -12,7 +12,9 @@ public class AIScript : MonoBehaviour
     Animator animator;
 
     [SerializeField]
-    GameObject[] patrolPoints;
+    GameObject graceDUPos;
+
+    public GameObject[] patrolPoints;
 
     bool destinationSet;
     float velocity;
@@ -25,15 +27,6 @@ public class AIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SetDestination(patrolPoints[0].transform.position);
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SetDestination(patrolPoints[1].transform.position);
-        }
-        
         if(destinationSet)
         {
             velocity += Time.deltaTime * agent.acceleration;
@@ -41,18 +34,24 @@ public class AIScript : MonoBehaviour
             
         }
 
-        if((transform.position - currentDestination).magnitude <= agent.stoppingDistance)
+        if ((transform.position - currentDestination).magnitude < agent.stoppingDistance)
         {
             velocity -= Time.deltaTime * agent.acceleration;
             velocity = Mathf.Clamp(velocity, 0, 1);
             destinationSet = false;
         }
 
+        if(destinationSet == false && currentDestination == patrolPoints[0].transform.position)
+        {
+            graceDUPos.SetActive(true); 
+            gameObject.SetActive(false);
+        }
+
 
         animator.SetFloat("Velocity", velocity);
     }
 
-    void SetDestination(Vector3 target)
+    public void SetDestination(Vector3 target)
     {
         agent.SetDestination(target);
         currentDestination = target;
