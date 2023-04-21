@@ -281,9 +281,12 @@ GameObject:
   - component: {fileID: 6033213988898901253}
   - component: {fileID: 8909490961894223879}
   - component: {fileID: 3690930734701698717}
+  - component: {fileID: 1084264478}
+  - component: {fileID: 1084264479}
+  - component: {fileID: 1084264483}
   m_Layer: 0
   m_Name: GraceAnimated
-  m_TagString: Untagged
+  m_TagString: IgnoreCameraCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,7 +300,7 @@ Transform:
   m_GameObject: {fileID: 1144060218236949504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.4, y: 2.4, z: 2.4}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4710687867448753655}
@@ -315,7 +318,7 @@ Animator:
   m_GameObject: {fileID: 1144060218236949504}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 27e48e0e6aea7f24287d07100f5f5a07, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -343,6 +346,111 @@ CharacterController:
   m_SkinWidth: 0.05
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.16, z: 0}
+--- !u!114 &1084264478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144060218236949504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aff3df34d1a0534c8a555fa114fe618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 1084264479}
+  animator: {fileID: 8909490961894223879}
+  graceDUPos: {fileID: 0}
+  patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!195 &1084264479
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144060218236949504}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.08
+  m_Speed: 2
+  m_Acceleration: 2
+  avoidancePriority: 50
+  m_AngularSpeed: 360
+  m_StoppingDistance: 0.6
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.3
+  m_BaseOffset: -0.01
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1084264483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144060218236949504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f8d5bca7ad0ec4a8896ea0a7636382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueTree:
+  - {fileID: 3499891356269125111, guid: 6f0f409537365994e82d362a38133163, type: 3}
+  - {fileID: 3499891356269125111, guid: d05ebb7982db40d4ea457b2d5bd6c2b7, type: 3}
+  - {fileID: 3499891356269125111, guid: 61193694abbc3534ba44bab6e29a0013, type: 3}
+  - {fileID: 3499891356269125111, guid: e0b3b1dc0cb3dbb4cacec80996770802, type: 3}
+  - {fileID: 3499891356269125111, guid: 76e0fe324a912b5419042eaeeb22adeb, type: 3}
+  - {fileID: 3499891356269125111, guid: 0535e41bdc1af644da58faedfbb2f7e6, type: 3}
+  - {fileID: 3499891356269125111, guid: eb41b78974b942e43ad13586a655a507, type: 3}
+  - {fileID: 3499891356269125111, guid: 865c519cebd276547843bb2af0beb162, type: 3}
+  - {fileID: 3499891356269125111, guid: 88233e597d7184b4192fe191baa87aee, type: 3}
+  - {fileID: 3499891356269125111, guid: d9a20538b517b834fadda88a9b277c1b, type: 3}
+  - {fileID: 3499891356269125111, guid: fb8511adcede66241b6699cb562c65b2, type: 3}
+  - {fileID: 3499891356269125111, guid: 812913ee4c3b1ae4ead45c9dc3241abc, type: 3}
+  - {fileID: 3499891356269125111, guid: 3dd0aef1ee359854d9040fc37827bd28, type: 3}
+  - {fileID: 3499891356269125111, guid: 5d0da5e10d54ac34680f0134584b7617, type: 3}
+  - {fileID: 3499891356269125111, guid: 1edc21dad8c97584b879504f50618b87, type: 3}
+  - {fileID: 3499891356269125111, guid: 98d0c18c3e5172f4b91615ba4b2ac407, type: 3}
+  - {fileID: 3499891356269125111, guid: f97a3c96e88552b4097de8000eabdc70, type: 3}
+  isInteractable: 0
+  inConversation: 0
+  interactionMessage: {fileID: 0}
+  manager: {fileID: 0}
+  npcCam: {fileID: 0}
+  mainCam: {fileID: 0}
+  interrogationManager: {fileID: 0}
+  magnifyingGlass: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 238cd9b61ca70b94caf4dfb9bc684490, type: 3}
+  defaultEmotion: {fileID: 2800000, guid: 2f0eead912dd7604099b9b5290b6a630, type: 3}
+  angryEmotion: {fileID: 2800000, guid: ee87638781c838847aefad0dd64d9ca0, type: 3}
+  cryingEmotion: {fileID: 2800000, guid: 99a374a4a4e65ad4eb67bcf405088dfc, type: 3}
+  guiltyEmotion: {fileID: 2800000, guid: 7ef2f9cebcb25414b8a3abc8d20c5f34, type: 3}
+  playfulEmotion: {fileID: 2800000, guid: 8dfa8b08d7918c14d90923b8dd591fea, type: 3}
+  sadEmotion: {fileID: 2800000, guid: 840cb3be3ea7e30468421adf9bc04c3c, type: 3}
+  shockedEmotion: {fileID: 2800000, guid: 3c66ebbf0b8328449bc242f9770dd854, type: 3}
+  thinkingEmotion: {fileID: 2800000, guid: 738536f0f6e58eb419bbff8bbc9208e8, type: 3}
+  textureToChange: {fileID: 2100000, guid: 8af8ac44cf2cc6b4bbab05c66f430a3e, type: 2}
+  bribeItem: 
+  bribePath: {fileID: 0}
+  bribeFailPath: {fileID: 0}
+  bribeGiven: 0
+  interrogationNode: {fileID: 0}
+  introNode: {fileID: 3499891356269125111, guid: 6f0f409537365994e82d362a38133163, type: 3}
+  requiredEvidence1: Juice Box is an artist
+  requiredEvidence2: 
+  requiredEvidence3: 
+  requiredEvidence4: 
+  requiredEvidence5: 
+  description: 
+  reEv1Found: 0
+  reEv2Found: 0
+  reEv3Found: 0
+  reEv4Found: 0
+  reEv5Found: 0
 --- !u!1 &1205216016945431771
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,7 +1298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4710687867448753655}
   m_Layer: 0
-  m_Name: Grace_Idle
+  m_Name: Grace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -11,8 +11,13 @@ public class AIScript : MonoBehaviour
     [SerializeField]
     Animator animator;
 
-    [SerializeField]
-    GameObject graceDUPos;
+    public GameObject grace;
+
+    public GameObject graceDU;
+
+    public GameObject graceLD;
+
+    public GameObject graceNotebook;
 
     public GameObject[] patrolPoints;
 
@@ -43,8 +48,20 @@ public class AIScript : MonoBehaviour
 
         if(destinationSet == false && currentDestination == patrolPoints[0].transform.position)
         {
-            graceDUPos.SetActive(true); 
-            gameObject.SetActive(false);
+            graceDU.SetActive(true); 
+            grace.SetActive(false);
+        }
+
+        if(destinationSet == false && currentDestination == patrolPoints[1].transform.position)
+        {
+            graceLD.SetActive(true); 
+            grace.SetActive(false);
+        }
+
+        if(destinationSet == false && currentDestination == patrolPoints[2].transform.position)
+        {
+            graceNotebook.SetActive(true);
+            grace.SetActive(false);
         }
 
 
@@ -53,6 +70,7 @@ public class AIScript : MonoBehaviour
 
     public void SetDestination(Vector3 target)
     {
+        grace.SetActive(true);
         agent.SetDestination(target);
         currentDestination = target;
         destinationSet = true;

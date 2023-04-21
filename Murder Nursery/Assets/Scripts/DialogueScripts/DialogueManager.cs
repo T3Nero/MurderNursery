@@ -428,18 +428,31 @@ public class DialogueManager : MonoBehaviour
             playerCam.gameObject.SetActive(true);
             currentNPCCam.gameObject.SetActive(false);
         }
+
         if(tutorialManager.GetComponent<Tutorials>().inDUTutorial)
         {
             playerCam.gameObject.SetActive(true);
             currentNPCCam.gameObject.SetActive(false);
             grace.GetComponent<AIScript>().SetDestination(grace.GetComponent<AIScript>().patrolPoints[0].transform.position);
         }
+
+        if(tutorialManager.GetComponent<Tutorials>().nbTutorial && !tutorialManager.GetComponent<Tutorials>().inDUTutorial2)
+        {
+            playerCam.gameObject.SetActive(true);
+            graceCam3.gameObject.SetActive(false);
+            tutorialManager.GetComponent<Tutorials>().inLDTutorial = false;
+            grace.GetComponent<AIScript>().graceLD.SetActive(false);
+            grace.GetComponent<AIScript>().SetDestination(grace.GetComponent<AIScript>().patrolPoints[2].transform.position);
+        }
+
         if (tutorialManager.GetComponent<Tutorials>().inLDTutorial)
         {
             playerCam.gameObject.SetActive(true);
             graceCam3.gameObject.SetActive(false);
             tutorialManager.GetComponent<Tutorials>().inLDTutorial = false;
             tutorialManager.GetComponent<Tutorials>().nbTutorial = true;
+            grace.GetComponent<AIScript>().graceDU.SetActive(false);
+            grace.GetComponent<AIScript>().SetDestination(grace.GetComponent<AIScript>().patrolPoints[1].transform.position);
         }
 
         if (tutorialManager.GetComponent<Tutorials>().inDUTutorial2)
@@ -448,10 +461,11 @@ public class DialogueManager : MonoBehaviour
             graceCam2.SetActive(false);
             tutorialManager.GetComponent<Tutorials>().inLDTutorial = true;
         }
-        
-    
-        
-        
+
+
+
+
+
         dialogueZone.SetActive(false);
         inConvo = false;
         ClearDialogue();
