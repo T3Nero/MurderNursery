@@ -80,6 +80,20 @@ public class Tutorials : MonoBehaviour
     public string nbText2 = "You'll get a notification whenever your notebook updates, so check back here whenever you need to from the inventory!";
     public GameObject nbButton;
 
+    [Header("Magnifying Glass Tutorial")]
+    public GameObject mgTextObject;
+    public GameObject mgText;
+    public GameObject mgButton;
+    public string mgText1 = "While you're using the magnifying glass, you can see things you can't usually - as long as they're pretty close to you! Just try and look around a little and see if anything sticks out a little, and once you do, interact with it! There should be something near my feet…\r\n";
+    public string mgText2 = "Perfect! Now, you can rotate the object around and look for a fingerprint. That's a key part of finding out if there's more to a clue!\r\n";
+    public string mgText3 = "Some clues have a story all on their own without a fingerprint, so don't worry, if you don't find one. Give it a try now, click and drag in the direction you wish to rotate the object. Click on a fingerprint if you spot it!";
+    public string mgText4 = "Nice, you found a fingerprint!. Now, you gotta find out who it belongs to before you can use it on your pinboard...";
+    public string mgText5 = "Now, we have a list of all the fingerprints at the nursery, and who they belong to!. Your job is to click the one you think matches the one you found, to gain some juicy evidence!";
+    public bool mGlassTutorial1 = false;
+    public bool mGlassTutorial2 = false;
+    public bool mGlassTutorial3;
+    public bool mGlassTutorial4;
+
     [Header("Cameras")]
     public Camera graceCam1;
     public Camera graceCam2;
@@ -236,13 +250,14 @@ public class Tutorials : MonoBehaviour
         if(nbTutorial4)
         {
             inventoryManager.GetComponent<ToggleUIVisibility>().ToggleNotebook();
-         //   dialogueManager.GetComponent<DialogueManager>().npcStatement3.SetActive(true);
-          //  dialogueManager.GetComponent<DialogueManager>().playerResponse2.SetActive(true);
+            dialogueManager.GetComponent<DialogueManager>().npcStatement3.SetActive(true);
+            dialogueManager.GetComponent<DialogueManager>().playerResponse2.SetActive(true);
             dialogueManager.GetComponent<DialogueManager>().npcStatement3.GetComponent<TextMeshProUGUI>().text = dialogueManager.GetComponent<DialogueManager>().activeNode.speech;
             dialogueManager.GetComponent<DialogueManager>().playerResponse2.GetComponent<TextMeshProUGUI>().text = "I for inventory, easy!";
             dialogueManager.GetComponent<DialogueManager>().npcStatement.GetComponent<TextMeshProUGUI>().text = tutorialGrace.GetComponent<NPCDialogue>().dialogueTree[15].speech;
             dialogueManager.GetComponent<DialogueManager>().LoadNodeInfo(tutorialGrace.GetComponent<NPCDialogue>().dialogueTree[15]);
-            
+            nbTutorial4 = false;
+            mGlassTutorial1 = true;
             isTextObject.SetActive(false);
         }
         if(nbTutorial3)
@@ -250,6 +265,24 @@ public class Tutorials : MonoBehaviour
             isOverText.GetComponent<TextMeshProUGUI>().text = nbText2;
             nbTutorial3 = false;
             nbTutorial4 = true;
+        }
+    }
+
+    public void NavigateMGText()
+    {
+        if(mGlassTutorial2)
+        {
+            mgText.GetComponent<TextMeshProUGUI>().text = mgText2;
+        }
+
+        if(mGlassTutorial3)
+        {
+            mgText.GetComponent<TextMeshProUGUI>().text = mgText3;
+        }
+
+        if(mGlassTutorial4)
+        {
+            mgText.GetComponent<TextMeshProUGUI>().text = mgText4;
         }
     }
 }

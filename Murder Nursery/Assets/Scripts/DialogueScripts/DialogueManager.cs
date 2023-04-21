@@ -421,7 +421,12 @@ public class DialogueManager : MonoBehaviour
     public void ExitConversation() //Is called when the conversation is exited
     {       
         player.SetActive(true);
-        activeNPC.GetComponent<NPCDialogue>().ToggleConversation();
+
+        if(!tutorialManager.GetComponent<Tutorials>().mGlassTutorial1)
+        {
+            activeNPC.GetComponent<NPCDialogue>().ToggleConversation();
+        }
+
         //activeNPC.GetComponent<NPCDialogue>().inConversation = false;
         if (!tutorialManager.GetComponent<Tutorials>().inTutorial)
         {
@@ -460,6 +465,12 @@ public class DialogueManager : MonoBehaviour
             playerCam.gameObject.SetActive(true);
             graceCam2.SetActive(false);
             tutorialManager.GetComponent<Tutorials>().inLDTutorial = true;
+        }
+
+        if (tutorialManager.GetComponent<Tutorials>().mGlassTutorial1)
+        {
+            playerCam.gameObject.SetActive(true);
+            graceCam4.gameObject.SetActive(false);
         }
 
 

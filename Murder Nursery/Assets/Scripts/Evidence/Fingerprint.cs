@@ -12,6 +12,7 @@ public class Fingerprint : MonoBehaviour
     public GameObject fingerprintUI; // UI to compare fingerprints
     public GameObject fingerprintFound;
     public GameObject evidenceItem;
+    public GameObject tutorialManager;
 
     // Update is called once per frame
     void Update()
@@ -31,6 +32,9 @@ public class Fingerprint : MonoBehaviour
                         Sprite fpSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
                         fingerprintFound.GetComponent<Image>().sprite = fpSprite;
                         fingerprintUI.SetActive(true);
+                        tutorialManager.GetComponent<Tutorials>().mGlassTutorial3 = false;
+                        tutorialManager.GetComponent<Tutorials>().mGlassTutorial4 = true;
+                        tutorialManager.GetComponent<Tutorials>().NavigateMGText();
                     }
                 }
             }
