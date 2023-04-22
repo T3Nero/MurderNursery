@@ -79,7 +79,6 @@ public class Interrogation : MonoBehaviour
     private int pos = 0;
     private int playerChoice = 0;
 
-    [HideInInspector]
     public bool inInterrogation = false;
     private bool lastResponsePlayer = false;
 

@@ -35,7 +35,6 @@ public class MainMenuSettings : MonoBehaviour
     private string index;
     private string colourblindIndex;
 
-    [HideInInspector]
     public bool menuOpen;
 
     public ToggleUIVisibility inventoryManager;
@@ -80,7 +79,7 @@ public class MainMenuSettings : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Escape) && SceneManager.GetActiveScene().name == "MainScene" && !IntroCutscene.intro.inIntro)
+        if(Input.GetKeyUp(KeyCode.Escape) && SceneManager.GetActiveScene().name == "MainScene" && !DM.GetComponent<IntroCutscene>().inIntro)
         {
             if(!DM.dialogueZone.activeInHierarchy && !PM.pinBoard.activeInHierarchy && !IM.interrogationPanel.activeInHierarchy && !inventoryManager.inventoryUI.activeInHierarchy && !inventoryManager.notebook.activeInHierarchy)
             {

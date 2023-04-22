@@ -32,9 +32,12 @@ public class Fingerprint : MonoBehaviour
                         Sprite fpSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
                         fingerprintFound.GetComponent<Image>().sprite = fpSprite;
                         fingerprintUI.SetActive(true);
-                        tutorialManager.GetComponent<Tutorials>().mGlassTutorial3 = false;
-                        tutorialManager.GetComponent<Tutorials>().mGlassTutorial4 = true;
-                        tutorialManager.GetComponent<Tutorials>().NavigateMGText();
+                        if(tutorialManager.GetComponent<Tutorials>().mGlassTutorial3)
+                        {
+                            tutorialManager.GetComponent<Tutorials>().mGlassTutorial3 = false;
+                            tutorialManager.GetComponent<Tutorials>().mGlassTutorial4 = true;
+                            tutorialManager.GetComponent<Tutorials>().NavigateMGText();
+                        }
                     }
                 }
             }

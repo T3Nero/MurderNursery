@@ -85,7 +85,6 @@ public class DialogueManager : MonoBehaviour
     public GameObject repLockResponse2; //''
     public GameObject repLockResponse3; //''
 
-    [HideInInspector]
     public bool inConvo = false; //Signals that the player is speaking to an NPC
     [HideInInspector]
     public DialogueNode activeNode; //Stores the currently displayed node

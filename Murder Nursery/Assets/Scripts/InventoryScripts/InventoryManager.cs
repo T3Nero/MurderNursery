@@ -73,7 +73,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.I) &&!tutorialManager.GetComponent<Tutorials>().inTutorial && !IntroCutscene.intro.inIntro && !DM.GetComponent<DialogueManager>().inConvo && !DM.GetComponent<Conclusion>().inEnding && !interManager.GetComponent<Interrogation>().inInterrogation && !menuUI.menuOpen)  //Used to open and close the player's inventory
+        if(Input.GetKeyUp(KeyCode.I) && !DM.GetComponent<IntroCutscene>().inIntro && !DM.GetComponent<DialogueManager>().inConvo && !DM.GetComponent<Conclusion>().inEnding && !interManager.GetComponent<Interrogation>().inInterrogation && !menuUI.menuOpen && !tutorialManager.GetComponent<Tutorials>().inTutorial)  //Used to open and close the player's inventory
         {
             UIVisibility.ToggleInventory();
             if(blur.activeSelf)
@@ -94,7 +94,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         // Toggle Magnifying Glass
-        if(Input.GetKeyUp(KeyCode.M) && !IntroCutscene.intro.inIntro && !DM.GetComponent<DialogueManager>().inConvo && !DM.GetComponent<Conclusion>().inEnding && !interManager.GetComponent<Interrogation>().inInterrogation && !dressUp.GetComponent<DressUp>().inDressUp && canToggleMGlass && !menuUI.menuOpen)
+        if(Input.GetKeyUp(KeyCode.M) && !DM.GetComponent<IntroCutscene>().inIntro && !DM.GetComponent<DialogueManager>().inConvo && !DM.GetComponent<Conclusion>().inEnding && !interManager.GetComponent<Interrogation>().inInterrogation && !dressUp.GetComponent<DressUp>().inDressUp && canToggleMGlass && !menuUI.menuOpen && !tutorialManager.GetComponent<Tutorials>().inTutorial)
         {
             if (MG.GetComponent<MagnifyingGlass>().OutfitCheck())
             {

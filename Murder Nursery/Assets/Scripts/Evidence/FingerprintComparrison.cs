@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class FingerprintComparrison : MonoBehaviour
 {
@@ -22,11 +23,24 @@ public class FingerprintComparrison : MonoBehaviour
     [SerializeField]
     GameObject particleStar;
 
+    [SerializeField]
+    GameObject dialogueManager;
+
+    [SerializeField]
+    GameObject graceTutoritalMessage;
+
+    [SerializeField]
+    GameObject playerMGResponceObject;
+
+    [SerializeField]
+    GameObject playerMGResponceObjectText;
+
     public AudioSource sfxAudio;
     public AudioClip sfxAudioClip;
 
     private GameObject evidenceItem;
     private bool comparingFingerprint;
+    private string playerMGResponceText = "Detective Drew: Looks like Grace is the dame with a hidden love for juice! Who woulda thought it? Now I'm wonderin' just how far she'll go for the next hit…";
 
     public void CloseFingerprintUI()
     {
@@ -87,6 +101,13 @@ public class FingerprintComparrison : MonoBehaviour
             StartCoroutine(StopStarParticle(1f));
             correctMatchText.SetActive(true);
             comparingFingerprint = false;
+
+            if(playerMGResponceObject)
+            {
+                graceTutoritalMessage.SetActive(false);
+                playerMGResponceObject.SetActive(true);
+                playerMGResponceObjectText.GetComponent<TextMeshProUGUI>().text = playerMGResponceText;
+            }
         }
     }
 
@@ -108,6 +129,28 @@ public class FingerprintComparrison : MonoBehaviour
             particleStar.GetComponent<ParticleSystem>().Stop();
             correctMatchText.SetActive(false);
             CloseFingerprintUI();
+
+            if(playerMGResponceObject)
+            {
+                InventoryManager.inventory.MG.GetComponent<MagnifyingGlass>().ToggleMagnifyingGlass();
+                if(InventoryManager.inventory.UIVisibility.inventoryOpen)
+                {
+                    InventoryManager.inventory.UIVisibility.ToggleInventory();
+                    InventoryManager.inventory.itemTooltip.SetActive(false);
+                }
+                Cursor.visible = true;
+            }
+
+            
         }
+    }
+
+    public void ContinueTutorial()
+    {
+        if(playerMGResponceObject)
+            {
+                dialogueManager.GetComponent<DialogueManager>().StartConversation(dialogueManager.GetComponent<DialogueManager>().grace.GetComponent<NPCDialogue>().dialogueTree[17], dialogueManager.GetComponent<DialogueManager>().grace, dialogueManager.GetComponent<DialogueManager>().graceCam4);
+                playerMGResponceObject.SetActive(false);
+            }
     }
 }

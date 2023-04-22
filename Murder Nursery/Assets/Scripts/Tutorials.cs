@@ -93,11 +93,19 @@ public class Tutorials : MonoBehaviour
     public bool mGlassTutorial2 = false;
     public bool mGlassTutorial3;
     public bool mGlassTutorial4;
+    public bool mGlassTutorial5;
 
     [Header("Cameras")]
     public Camera graceCam1;
     public Camera graceCam2;
     public Camera introCam;
+    public Camera graceNotebookCam;
+
+    [SerializeField]
+    GameObject drewIntroPos;
+
+    [SerializeField]
+    GameObject graceNotebook;
 
     // Start is called before the first frame update
     void Start()
@@ -149,6 +157,9 @@ public class Tutorials : MonoBehaviour
     {
         StartCoroutine(BlackTransition(graceCam1.gameObject, introCam.gameObject));
         StartCoroutine(WaitForSeconds());
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = drewIntroPos.transform.position;
+        player.transform.rotation = new Quaternion(0,0,0,0);
         
     }
 
@@ -169,8 +180,11 @@ public class Tutorials : MonoBehaviour
                 {
 
                     ChangeCam(currentCam, desiredCam);
+                    graceNotebookCam.gameObject.SetActive(false);
                     introCam.GetComponent<IntroCutscene>().inIntro = true;
                     inTutorial = false;
+                    tutorialGrace.SetActive(false);
+                    graceNotebook.SetActive(false);
                     deadGrace.SetActive(true);
                     blanket.SetActive(true);
                 }
@@ -283,6 +297,14 @@ public class Tutorials : MonoBehaviour
         if(mGlassTutorial4)
         {
             mgText.GetComponent<TextMeshProUGUI>().text = mgText4;
+            mGlassTutorial4 = false;
+            mGlassTutorial5 = true;
+        }
+
+        if(mGlassTutorial5)
+        {
+            mgText.GetComponent<TextMeshProUGUI>().text = mgText5;
+            mGlassTutorial5 = false;
         }
     }
 }
