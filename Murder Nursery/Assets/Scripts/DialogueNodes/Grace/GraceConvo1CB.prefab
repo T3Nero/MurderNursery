@@ -90,3 +90,9 @@ MonoBehaviour:
   nodeEmotion: 0
   bribeGiven: 0
   exitTutorial: 0
+  pinboardTutorial: 0
+  interroSummaryTutorial: 0
+  dressUpTutorial: 0
+  dressUpTutorial2: 0
+  notebookTutorial: 0
+  tutorialChosen: 1

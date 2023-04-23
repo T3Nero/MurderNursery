@@ -215,7 +215,7 @@ public class DressUp : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other) //Used to detect if the player is within range of the dress up box
     {
-        if (other.gameObject.name == "DetectiveDrew" && !magGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass && !tutorialManager.GetComponent<Tutorials>().inDUTutorial)
+        if (other.gameObject.name == "DetectiveDrew" && !magGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass && !tutorialManager.GetComponent<Tutorials>().inDUTutorial2 && !tutorialManager.GetComponent<Tutorials>().inDUTutorial)
         {
             interactable = true;
             interactableText.SetActive(true);
@@ -241,6 +241,7 @@ public class DressUp : MonoBehaviour
         if(tutorialManager.GetComponent<Tutorials>().inDUTutorial2)
         {
             manager.GetComponent<DialogueManager>().StartConversation(graceTutorial.GetComponent<NPCDialogue>().dialogueTree[11], graceTutorial, tutorialManager.GetComponent<Tutorials>().graceCam2);
+            interactableText.SetActive(false);
         }
     }
 

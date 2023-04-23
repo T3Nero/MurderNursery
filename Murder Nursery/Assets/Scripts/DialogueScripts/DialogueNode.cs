@@ -68,6 +68,7 @@ public class DialogueNode : MonoBehaviour
     public bool dressUpTutorial;
     public bool dressUpTutorial2;
     public bool notebookTutorial;
+    public bool tutorialChosen;
     private void Start()
     {
         firstPathLocked = false; //Sets all the paths to unlocked at the beginning of play

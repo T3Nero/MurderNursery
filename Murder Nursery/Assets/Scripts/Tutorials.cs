@@ -46,6 +46,8 @@ public class Tutorials : MonoBehaviour
     public string pbText4 = "So, keep an eye out for whenever you get a new piece of evidence, okay? You should see a pop-up on your screen when you get one! Plus, getting to the pinboard is as easy as pressing “I” for inventory. Now let's thread that inventory one more time as practice!";
     public bool inPBTutorial4 = false;
     public GameObject pbTutorialButton;
+    public string pbText5 = "Nice work, you're clearly more seasoned than you look detective!";
+    public bool inPButorial5 = false;
 
     [Header("Interrogation Tutorial")]
     public GameObject isTextObject;
@@ -67,7 +69,9 @@ public class Tutorials : MonoBehaviour
 
     [Header("Listening Device Tutorial")]
     public bool inLDTutorial = false;
+    public GameObject ld1;
     public GameObject ld2;
+    public GameObject ld3;
     public GameObject tutorialLD;
 
 
@@ -101,9 +105,12 @@ public class Tutorials : MonoBehaviour
     public Camera introCam;
     public Camera graceNotebookCam;
 
-    [SerializeField]
-    GameObject drewIntroPos;
+    public GameObject player;
+    public GameObject togglePBMessageButton;
+    public GameObject endPBButton;
 
+    [SerializeField]
+    private Vector3 drewStartPos = new Vector3(29.242000579833986f, 0.004000000189989805f, 4.067999839782715f);
     [SerializeField]
     GameObject graceNotebook;
 
@@ -147,6 +154,7 @@ public class Tutorials : MonoBehaviour
 
     public void PinboardTutorial()
     {
+        togglePBMessageButton.SetActive(true);
         inPBTutorial1 = true;
         inventoryManager.GetComponent<ToggleUIVisibility>().TogglePinboard();
         pbTextObject.SetActive(true);
@@ -155,12 +163,20 @@ public class Tutorials : MonoBehaviour
 
     public void EndTutorial()
     {
+        mGlassTutorial5 = false;
         StartCoroutine(BlackTransition(graceCam1.gameObject, introCam.gameObject));
         StartCoroutine(WaitForSeconds());
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = drewIntroPos.transform.position;
-        player.transform.rotation = new Quaternion(0,0,0,0);
+       // player.GetComponent<Animator>().StopPlayback();
+        player.transform.position = drewStartPos;
+        player.transform.rotation = new Quaternion(0, 0, 0, 0);
+      //  player.GetComponent<Animator>().StartPlayback();
+
+        ld1.SetActive(true);
+        ld2.SetActive(true);
+        ld3.SetActive(true);
+        tutorialLD.SetActive(false);
         
+
     }
 
     public IEnumerator BlackTransition(GameObject currentCam, GameObject desiredCam, bool transitionToBlack = true, int timeToFade = 1)
@@ -187,6 +203,9 @@ public class Tutorials : MonoBehaviour
                     graceNotebook.SetActive(false);
                     deadGrace.SetActive(true);
                     blanket.SetActive(true);
+                    
+
+
                 }
 
                 yield return null;
@@ -235,6 +254,8 @@ public class Tutorials : MonoBehaviour
         inventoryManager.GetComponent<ToggleUIVisibility>().TogglePinboard();
         pbTextObject.SetActive(false);
         dialogueManager.GetComponent<DialogueManager>().StartConversation(tutorialGrace.GetComponent<NPCDialogue>().dialogueTree[4], tutorialGrace, graceCam1);
+        togglePBMessageButton.SetActive(false);
+        endPBButton.SetActive(false);
     }
 
     public void NavigateISText()
@@ -304,7 +325,28 @@ public class Tutorials : MonoBehaviour
         if(mGlassTutorial5)
         {
             mgText.GetComponent<TextMeshProUGUI>().text = mgText5;
-            mGlassTutorial5 = false;
+            
+        }
+    }
+
+    public void TogglePBtext()
+    {
+        pbTextObject.SetActive(!pbTextObject.activeSelf);
+    }
+
+    public void EndPBTutorial()
+    {
+        if(!inPButorial5)
+        {
+            StartSecondGraceConvo();
+        }
+        if (inPButorial5)
+        {
+            overPBText.GetComponent<TextMeshProUGUI>().text = pbText5;
+            togglePBMessageButton.SetActive(false);
+            pbTextObject.SetActive(true);
+            endPBButton.SetActive(true);
+            inPButorial5 = false;
         }
     }
 }

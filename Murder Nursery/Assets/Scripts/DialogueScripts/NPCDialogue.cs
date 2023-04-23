@@ -50,12 +50,15 @@ public class NPCDialogue : MonoBehaviour
     public bool reEv4Found = false;
     public bool reEv5Found = false;
 
-
+    public GameObject tutorialManager;
+    public GameObject menuManager;
 
     // Start is called before the first frame update
     void Start()
     {
         manager = GameObject.FindGameObjectWithTag("Manager"); //Stores manager
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
+        menuManager = GameObject.FindGameObjectWithTag("Menu Manager");
 
         foreach(DialogueNode node in dialogueTree) //Resets dialogue tree locking
             {
@@ -72,7 +75,7 @@ public class NPCDialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && isInteractable && !magnifyingGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass)
+        if(Input.GetKeyDown(KeyCode.E) && isInteractable && !magnifyingGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass && !menuManager.GetComponent<MainMenuSettings>().menuOpen)
         {
             ToggleConversation();
         }
@@ -86,7 +89,7 @@ public class NPCDialogue : MonoBehaviour
 
     public void OnTriggerEnter(Collider other) 
     {
-        if (other.name == "DetectiveDrew" && !magnifyingGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass)//Detects collison with the player object 
+        if (other.name == "DetectiveDrew" && !magnifyingGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass && !tutorialManager.GetComponent<Tutorials>().inTutorial)//Detects collison with the player object 
         {
             isInteractable = true;
             interactionMessage.SetActive(true); //Activates NPC interaction messages

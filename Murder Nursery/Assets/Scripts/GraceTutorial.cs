@@ -29,8 +29,9 @@ public class GraceTutorial : MonoBehaviour
         if(tutorialManager.GetComponent<Tutorials>().inDUTutorial && other.CompareTag("Player"))
         {
             dialogueManager.GetComponent<DialogueManager>().StartConversation(graceTutorial.GetComponent<NPCDialogue>().dialogueTree[9], graceTutorial, grace2ndCam);
-            tutorialManager.GetComponent<Tutorials>().inDUTutorial = false;
             tutorialManager.GetComponent<Tutorials>().inDUTutorial2 = true;
+            tutorialManager.GetComponent<Tutorials>().inDUTutorial = false;
+            
         }
     }
 }

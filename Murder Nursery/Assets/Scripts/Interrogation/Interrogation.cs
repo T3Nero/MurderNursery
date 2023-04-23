@@ -270,6 +270,8 @@ public class Interrogation : MonoBehaviour
         manager.GetComponent<SceneTransition>().ChangeToMainArea();//Transitions the player back to the main area
         
         interrogationPanel.SetActive(false); //Deactivates the interrogation UI
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         
         
     }
@@ -514,6 +516,7 @@ public class Interrogation : MonoBehaviour
         {
             tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().ipbText1;
             tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(true);
+            tutorialManager.GetComponent<Tutorials>().togglePBMessageButton.SetActive(true);
         }
         
     }
@@ -652,6 +655,7 @@ public class Interrogation : MonoBehaviour
                 LoadIntNodeInfo(activeNode.children[0]);
                 interrogationPanel.SetActive(true);
                 tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
+                tutorialManager.GetComponent<Tutorials>().togglePBMessageButton.SetActive(false);
                 pinboard.SetActive(false);
                 
             }

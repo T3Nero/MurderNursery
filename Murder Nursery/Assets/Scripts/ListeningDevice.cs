@@ -74,16 +74,12 @@ public class ListeningDevice : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // if(inLD && currentCam.activeInHierarchy)
-        //{
-          //  print("Turning off cam");
-            //currentCam.SetActive(false);
-        //}
+       
         
         if (inRange && Input.GetKeyDown(KeyCode.E) && !inLD && !ePressed)
         {
             ePressed = true;
-            if (dressUpManager.GetComponent<DressUp>().activeOutfit == requiredOutfit)
+            if (dressUpManager.GetComponent<DressUp>().activeOutfit != "Detective Outfit")
             {
                 inLD = true;
                 StartListening();

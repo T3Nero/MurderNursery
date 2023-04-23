@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     public bool inLD = false;
     public GameObject conclusionManager;
     public GameObject interrogationManager;
-
+    public GameObject tutorialManager;
     private void Awake()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         manager = GameObject.FindGameObjectWithTag("Manager");
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
         Cursor.visible = false;
     }
 
@@ -105,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
             || dialogueZone.activeInHierarchy || manager.GetComponent<SceneTransition>().interrogationActive 
             || inventory.UIVisibility.jotterOpen || dressUpManager.GetComponent<DressUp>().inDressUp || manager.GetComponent<IntroCutscene>().inIntro
             || menu.menuOpen || inspectingItem || inventory.UIVisibility.notebookOpen || inLD || conclusionManager.GetComponent<Conclusion>().inEnding || 
-            interrogationManager.GetComponent<Interrogation>().inInterrogation)
+            interrogationManager.GetComponent<Interrogation>().inInterrogation )//|| tutorialManager.GetComponent<Tutorials>().mGlassTutorial5)
         {
             animator.Play("Idle");
             animator.SetFloat("Velocity", 0);

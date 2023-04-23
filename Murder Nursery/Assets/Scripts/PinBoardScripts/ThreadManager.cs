@@ -46,8 +46,11 @@ public class ThreadManager : MonoBehaviour
                          newThread = this.GetComponent<PinboardThread>().MakeLine(firstThreadItem.transform.position.x, firstThreadItem.transform.position.y, secondThreadItem.transform.position.x, secondThreadItem.transform.position.y, Color.red); //Creates the thread
                         if (tutorialManager.GetComponent<Tutorials>().inPBTutorial4)
                         {
-                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
-                            tutorialManager.GetComponent<Tutorials>().StartSecondGraceConvo();
+                            
+                            
+                            tutorialManager.GetComponent<Tutorials>().inPBTutorial4 = false;
+                            tutorialManager.GetComponent<Tutorials>().inPButorial5 = true;
+                            tutorialManager.GetComponent<Tutorials>().EndPBTutorial();
                         }
                     }
                     if(firstThreadItem.name == "Chase")
@@ -60,8 +63,11 @@ public class ThreadManager : MonoBehaviour
                         newThread = this.GetComponent<PinboardThread>().MakeLine(firstThreadItem.transform.position.x, firstThreadItem.transform.position.y, secondThreadItem.transform.position.x, secondThreadItem.transform.position.y, Color.yellow);
                         if (tutorialManager.GetComponent<Tutorials>().inPBTutorial4)
                         {
-                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
-                            tutorialManager.GetComponent<Tutorials>().StartSecondGraceConvo();
+                            
+                            
+                            tutorialManager.GetComponent<Tutorials>().inPBTutorial4 = false;
+                            tutorialManager.GetComponent<Tutorials>().inPButorial5 = true;
+                            tutorialManager.GetComponent<Tutorials>().EndPBTutorial();
                         }
                     }
                     if(firstThreadItem.name == "Grace")
@@ -74,8 +80,11 @@ public class ThreadManager : MonoBehaviour
                         newThread = this.GetComponent<PinboardThread>().MakeLine(firstThreadItem.transform.position.x, firstThreadItem.transform.position.y, secondThreadItem.transform.position.x, secondThreadItem.transform.position.y, Color.cyan);
                         if (tutorialManager.GetComponent<Tutorials>().inPBTutorial4)
                         {
-                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
-                            tutorialManager.GetComponent<Tutorials>().StartSecondGraceConvo();
+                            
+                            
+                            tutorialManager.GetComponent<Tutorials>().inPBTutorial4 = false;
+                            tutorialManager.GetComponent<Tutorials>().inPButorial5 = true;
+                            tutorialManager.GetComponent<Tutorials>().EndPBTutorial();
                         }
                     }
                     if(firstThreadItem.name == "Eddie")
@@ -88,8 +97,11 @@ public class ThreadManager : MonoBehaviour
                         newThread = this.GetComponent<PinboardThread>().MakeLine(firstThreadItem.transform.position.x, firstThreadItem.transform.position.y, secondThreadItem.transform.position.x, secondThreadItem.transform.position.y, Color.blue);
                         if (tutorialManager.GetComponent<Tutorials>().inPBTutorial4)
                         {
-                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
-                            tutorialManager.GetComponent<Tutorials>().StartSecondGraceConvo();
+                            
+                            
+                            tutorialManager.GetComponent<Tutorials>().inPBTutorial4 = false;
+                            tutorialManager.GetComponent<Tutorials>().inPButorial5 = true;
+                            tutorialManager.GetComponent<Tutorials>().EndPBTutorial();
                         }
                     }
                     if(firstThreadItem.name == "JuiceBox")
@@ -102,8 +114,12 @@ public class ThreadManager : MonoBehaviour
                         newThread = this.GetComponent<PinboardThread>().MakeLine(firstThreadItem.transform.position.x, firstThreadItem.transform.position.y, secondThreadItem.transform.position.x, secondThreadItem.transform.position.y, Color.green);
                         if (tutorialManager.GetComponent<Tutorials>().inPBTutorial4)
                         {
-                            tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
-                            tutorialManager.GetComponent<Tutorials>().StartSecondGraceConvo();
+                            
+                            
+                            tutorialManager.GetComponent<Tutorials>().inPBTutorial4 = false;
+                            tutorialManager.GetComponent<Tutorials>().inPButorial5 = true;
+                            tutorialManager.GetComponent<Tutorials>().EndPBTutorial();
+                            
                         }
                     }
                     secondThreadItem.GetComponent<EvidenceSlot>().threads.Add(newThread);

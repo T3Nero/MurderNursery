@@ -100,7 +100,7 @@ public class PinboardManager : MonoBehaviour
         }
         discoveredEvidence = new List<EvidenceClass>();
         threadedEvidence = new List<string>();
-        UpdateEvidenceImages(tutorialEvidence);
+       // UpdateEvidenceImages(tutorialEvidence);
     }
     
     // Called when we want to update the pin board after discovering a characters likes/dislikes/events

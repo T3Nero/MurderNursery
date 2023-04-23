@@ -481,10 +481,16 @@ public class DialogueManager : MonoBehaviour
         ClearDialogue();
         activeNPC = null;
         activeNode = null;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void LoadNodeInfo(DialogueNode newNode) //Loads the information of the new node
     {
+        if(newNode.tutorialChosen)
+        {
+            pinBoardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(pinBoardManager.GetComponent<PinboardManager>().tutorialEvidence);
+        }
         if(newNode.exitTutorial)
         {
             ExitConversation();
