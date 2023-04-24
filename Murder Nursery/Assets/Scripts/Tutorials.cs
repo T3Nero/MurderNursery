@@ -108,6 +108,7 @@ public class Tutorials : MonoBehaviour
     public GameObject player;
     public GameObject togglePBMessageButton;
     public GameObject endPBButton;
+    public bool lockMovement = false;
 
     [SerializeField]
     private Vector3 drewStartPos = new Vector3(29.242000579833986f, 0.004000000189989805f, 4.067999839782715f);
@@ -163,6 +164,7 @@ public class Tutorials : MonoBehaviour
 
     public void EndTutorial()
     {
+        lockMovement = true;
         mGlassTutorial5 = false;
         StartCoroutine(BlackTransition(graceCam1.gameObject, introCam.gameObject));
         StartCoroutine(WaitForSeconds());
@@ -223,6 +225,7 @@ public class Tutorials : MonoBehaviour
 
                     blackFade.gameObject.SetActive(false);
                     dialogueManager.GetComponent<IntroCutscene>().inIntro = true;
+                    lockMovement = false;
 
                     yield return null;
 

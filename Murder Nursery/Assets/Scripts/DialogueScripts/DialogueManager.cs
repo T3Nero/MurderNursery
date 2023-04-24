@@ -516,6 +516,8 @@ public class DialogueManager : MonoBehaviour
         {
             dresserBox.GetComponent<DressUp>().EnterDressUp();
             ExitConversation();
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             return;
         }
         if(summaryPanel.activeInHierarchy)

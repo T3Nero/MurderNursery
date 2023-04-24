@@ -65,7 +65,7 @@ public class GraceTutorial2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (tutorialManager.GetComponent<Tutorials>().nbTutorial && dressUpManager.GetComponent<DressUp>().activeOutfit == "Detective Outfit")
+        if (tutorialManager.GetComponent<Tutorials>().nbTutorial && dressUpManager.GetComponent<DressUp>().activeOutfit == "Detective Outfit" && tutorialManager.GetComponent<Tutorials>().inTutorial)
         {
             manager.GetComponent<DialogueManager>().StartConversation(manager.GetComponent<DialogueManager>().grace.GetComponent<NPCDialogue>().dialogueTree[14], manager.GetComponent<DialogueManager>().grace, manager.GetComponent<DialogueManager>().graceCam4);
             tutorialManager.GetComponent<Tutorials>().nbTutorial2 = true;
