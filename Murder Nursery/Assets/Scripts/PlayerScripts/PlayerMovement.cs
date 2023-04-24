@@ -106,7 +106,8 @@ public class PlayerMovement : MonoBehaviour
             || dialogueZone.activeInHierarchy || manager.GetComponent<SceneTransition>().interrogationActive 
             || inventory.UIVisibility.jotterOpen || dressUpManager.GetComponent<DressUp>().inDressUp || manager.GetComponent<IntroCutscene>().inIntro
             || menu.menuOpen || inspectingItem || inventory.UIVisibility.notebookOpen || inLD || conclusionManager.GetComponent<Conclusion>().inEnding || 
-            interrogationManager.GetComponent<Interrogation>().inInterrogation || tutorialManager.GetComponent<Tutorials>().mGlassTutorial5 || tutorialManager.GetComponent<Tutorials>().lockMovement)
+            interrogationManager.GetComponent<Interrogation>().inInterrogation || tutorialManager.GetComponent<Tutorials>().mGlassTutorial5 || tutorialManager.GetComponent<Tutorials>().lockMovement
+             || tutorialManager.GetComponent<Tutorials>().lockMovementMainGame)
         {
             animator.Play("Idle");
             animator.SetFloat("Velocity", 0);

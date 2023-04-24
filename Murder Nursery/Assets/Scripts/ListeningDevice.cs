@@ -23,6 +23,7 @@ public class ListeningDevice : MonoBehaviour
     public Image blackFade;
     public GameObject noirFilter;
     public float currentCountdownValue;
+    public float cooldownCDValue;
     public List<string> npcStatements = new();
     public GameObject firstTextBox;
     public GameObject secondTextBox;
@@ -56,6 +57,9 @@ public class ListeningDevice : MonoBehaviour
     public Image ldIcon;
     public GameObject ldText;
     private bool tutorialTransition = false;
+    public GameObject inventoryManager;
+    private bool enterCooldown = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +72,7 @@ public class ListeningDevice : MonoBehaviour
         convoProgress = 0;
         popUpManager = GameObject.FindGameObjectWithTag("PUManager");
         tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
+        inventoryManager = GameObject.FindGameObjectWithTag("Inventory");
         
     }
 
@@ -88,204 +93,220 @@ public class ListeningDevice : MonoBehaviour
             }
         }
 
-        if (inLD && Input.GetKeyUp(KeyCode.Return) && fadeComplete)
+        if (inLD && Input.GetKeyUp(KeyCode.Return) && fadeComplete && !speechReading)
         {
-            
-            switch(convoProgress)
+            if (!enterCooldown)
             {
-                case 0:
-                    if (!speechReading)
-                    {
-                        speechReading = true;
-                        secondTextBox.SetActive(true);
-                        secondTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
-                        convoProgress = 1;
-                        progress++;
-                        speechReading = false;
-                    }
-                    break;
-                case 1:
-                    if (!speechReading)
-                    {
-                        speechReading = true;
-                        thirdTextBox.SetActive(true);
-                        thirdTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
-                        convoProgress = 2;
-                        progress++;
-                        speechReading = false;
-                    }
-                    break;
-                case 2:
-                    if (!speechReading)
-                    {
-                        speechReading = true;
-                        if (npcStatements[progress] == "BREAK")
+                switch (convoProgress)
+                {
+                    case 0:
+                        if (!speechReading)
                         {
-                            ClearDialogue();
-                            StartCoroutine(BlackTransition(desiredCam, currentCam, false));
-                            StartCoroutine(WaitForSeconds(false));
-                            inLD = false;
-                            foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
-                            {
-                                if (evidence == heardEvidence)
-                                {
-                                    evidenceAlreadyCollected = true;
-                                }
-                            }
-                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)// && !tutorialManager.GetComponent<Tutorials>().inTutorial)
-                            {
-                                pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
-                                pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
-                                heardEvidence.evidenceFound = true;
-                            }
-                            break;
-                        }
-                        firstTextBox.SetActive(false);
-                        secondTextBox.SetActive(false);
-                        thirdTextBox.SetActive(false);
-                        fourthTextBox.SetActive(true);
-                        fourthTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
-                        convoProgress = 3;
-                        progress++;
-                        speechReading = false;
-                    }
-                    break;
-                case 3:
-                    if (!speechReading)
-                    {
-                        speechReading = true;
-                        if (npcStatements[progress] == "BREAK")
-                        {
-                            ClearDialogue();
-                            StartCoroutine(BlackTransition(desiredCam, currentCam, false));
-                            StartCoroutine(WaitForSeconds(false));
-                            inLD = false;
-                            foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
-                            {
-                                if (evidence == heardEvidence)
-                                {
-                                    evidenceAlreadyCollected = true;
-                                }
-                            }
+                            speechReading = true;
+                            secondTextBox.SetActive(true);
+                            secondTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
+                            progress++;
+                            convoProgress = 1;
 
-                            if (tutorialManager.GetComponent<Tutorials>().inTutorial)
+                            speechReading = false;
+                            StartCoroutine(WaitForSecondsCooldown());
+                        }
+                        break;
+                    case 1:
+                        if (!speechReading)
+                        {
+                            speechReading = true;
+                            thirdTextBox.SetActive(true);
+                            thirdTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
+                            progress++;
+                            convoProgress = 2;
+
+                            speechReading = false;
+                            StartCoroutine(WaitForSecondsCooldown());
+                        }
+                        break;
+                    case 2:
+                        if (!speechReading)
+                        {
+                            speechReading = true;
+                            if (npcStatements[progress] == "BREAK")
                             {
-                                break;
-                                
-                            }
-                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected )//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                ClearDialogue();
+                                StartCoroutine(BlackTransition(desiredCam, currentCam, false));
+                                StartCoroutine(WaitForSeconds(false));
+                                inLD = false;
+                                foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
                                 {
-                                    
+                                    if (evidence == heardEvidence)
+                                    {
+                                        evidenceAlreadyCollected = true;
+                                    }
+                                }
+                                if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)// && !tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                {
                                     pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
                                     pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
                                     heardEvidence.evidenceFound = true;
                                 }
-                            
-                            break;
+                                break;
+                            }
+                            firstTextBox.SetActive(false);
+                            secondTextBox.SetActive(false);
+                            thirdTextBox.SetActive(false);
+                            fourthTextBox.SetActive(true);
+                            fourthTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
+                            progress++;
+                            convoProgress = 3;
+
+                            speechReading = false;
+                            StartCoroutine(WaitForSecondsCooldown());
                         }
-                        fifthTextBox.SetActive(true);
-                        fifthTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
-                        convoProgress = 4;
-                        progress++;
-                        speechReading = false;
-                    }
-                    break;
-                case 4:
-                    if (!speechReading)
-                    {
-                        speechReading = true;
-                        if (npcStatements[progress] == "BREAK")
+                        break;
+                    case 3:
+                        if (!speechReading)
                         {
-                            inLD = false;
-                            ClearDialogue();
-                            StartCoroutine(BlackTransition(desiredCam, currentCam, false));
-                            StartCoroutine(WaitForSeconds(false));
-                            foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
+                            speechReading = true;
+                            if (npcStatements[progress] == "BREAK")
                             {
-                                if (evidence == heardEvidence)
+                                ClearDialogue();
+                                StartCoroutine(BlackTransition(desiredCam, currentCam, false));
+                                StartCoroutine(WaitForSeconds(false));
+                                inLD = false;
+                                foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
                                 {
-                                    evidenceAlreadyCollected = true;
+                                    if (evidence == heardEvidence)
+                                    {
+                                        evidenceAlreadyCollected = true;
+                                    }
                                 }
+
+                                if (tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                {
+                                    break;
+
+                                }
+                                if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                {
+
+                                    pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
+                                    pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
+                                    heardEvidence.evidenceFound = true;
+                                }
+
+                                break;
                             }
-                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected )//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
-                            {
-                                pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
-                                pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
-                                heardEvidence.evidenceFound = true;
-                            }
-                            break;
+                            fifthTextBox.SetActive(true);
+                            fifthTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
+                            progress++;
+                            convoProgress = 4;
+
+                            speechReading = false;
+                            StartCoroutine(WaitForSecondsCooldown());
                         }
-                        sixthTextBox.SetActive(true);
-                        sixthTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
-                        convoProgress = 5;
-                        progress++;
-                        speechReading = false;
-                    }
-                    break;
-                case 5:
-                    if (!speechReading)
-                    {
-                        speechReading = true;
-                        if (npcStatements[progress] == "BREAK")
+                        break;
+                    case 4:
+                        if (!speechReading)
                         {
-                            inLD = false;
-                            ClearDialogue();
-                            StartCoroutine(BlackTransition(desiredCam, currentCam, false));
-                            StartCoroutine(WaitForSeconds(false));
-                            foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
+                            speechReading = true;
+                            if (npcStatements[progress] == "BREAK")
                             {
-                                if (evidence == heardEvidence)
+                                inLD = false;
+                                ClearDialogue();
+                                StartCoroutine(BlackTransition(desiredCam, currentCam, false));
+                                StartCoroutine(WaitForSeconds(false));
+                                foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
                                 {
-                                    evidenceAlreadyCollected = true;
+                                    if (evidence == heardEvidence)
+                                    {
+                                        evidenceAlreadyCollected = true;
+                                    }
                                 }
+                                if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                {
+                                    pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
+                                    pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
+                                    heardEvidence.evidenceFound = true;
+                                }
+                                break;
                             }
-                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected )//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
-                            {
-                                pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
-                                pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
-                                heardEvidence.evidenceFound = true;
-                            }
-                            break;
+                            sixthTextBox.SetActive(true);
+                            sixthTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
+                            progress++;
+                            convoProgress = 5;
+
+                            speechReading = false;
+                            StartCoroutine(WaitForSecondsCooldown());
                         }
-                        fourthTextBox.SetActive(false);
-                        fifthTextBox.SetActive(false);
-                        sixthTextBox.SetActive(false);
-                        firstTextBox.SetActive(true);
-                        firstTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
-                        convoProgress = 6;
-                        progress++;
-                        speechReading = false;
-                    }
-                    break;
-                case 6:
-                    if (!speechReading)
-                    {
-                        inLD = false;
-                        speechReading = true;
-                        if (npcStatements[progress] == "BREAK")
+                        break;
+                    case 5:
+                        if (!speechReading)
                         {
-                            inLD = false;
-                            ClearDialogue();
-                            StartCoroutine(BlackTransition(desiredCam, currentCam, false));
-                            StartCoroutine(WaitForSeconds(false));
-                            foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
+                            speechReading = true;
+                            if (npcStatements[progress] == "BREAK")
                             {
-                                if (evidence == heardEvidence)
+                                inLD = false;
+                                ClearDialogue();
+                                StartCoroutine(BlackTransition(desiredCam, currentCam, false));
+                                StartCoroutine(WaitForSeconds(false));
+                                foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
                                 {
-                                    evidenceAlreadyCollected = true;
+                                    if (evidence == heardEvidence)
+                                    {
+                                        evidenceAlreadyCollected = true;
+                                    }
                                 }
+                                if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                {
+                                    pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
+                                    pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
+                                    heardEvidence.evidenceFound = true;
+                                }
+                                break;
                             }
-                            if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected )//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
-                            {
-                                pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
-                                pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
-                                heardEvidence.evidenceFound = true;
-                            }
-                            break;
+                            fourthTextBox.SetActive(false);
+                            fifthTextBox.SetActive(false);
+                            sixthTextBox.SetActive(false);
+                            firstTextBox.SetActive(true);
+                            firstTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
+                            progress++;
+                            convoProgress = 6;
+
+                            speechReading = false;
+                            StartCoroutine(WaitForSecondsCooldown());
                         }
-                        speechReading = false;
-                    }
-                    break;
+                        break;
+                    case 6:
+                        if (!speechReading)
+                        {
+
+                            speechReading = true;
+                            if (npcStatements[progress] == "BREAK")
+                            {
+                                inLD = false;
+                                ClearDialogue();
+                                StartCoroutine(BlackTransition(desiredCam, currentCam, false));
+                                StartCoroutine(WaitForSeconds(false));
+                                foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
+                                {
+                                    if (evidence == heardEvidence)
+                                    {
+                                        evidenceAlreadyCollected = true;
+                                    }
+                                }
+                                if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                {
+                                    pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
+                                    pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
+                                    heardEvidence.evidenceFound = true;
+                                }
+                                break;
+                            }
+                            speechReading = false;
+                            StartCoroutine(WaitForSecondsCooldown());
+                        }
+                        break;
+
+                }
             }
         }
     }
@@ -351,7 +372,7 @@ public class ListeningDevice : MonoBehaviour
 
     public void StartListening()
     {
-        
+        tutorialManager.GetComponent<Tutorials>().lockMovementMainGame = true; ;
         player.GetComponent<PlayerMovement>().inLD = true;
         StartCoroutine(BlackTransition(currentCam, desiredCam, true));
         StartCoroutine(WaitForSeconds(true));
@@ -379,11 +400,13 @@ public class ListeningDevice : MonoBehaviour
                     if(intoLD)
                    {
                         player.SetActive(false);
+                        
                        
                     }
                     if (!intoLD)
                     {
                         player.SetActive(true);
+                        
                     }
                 }
 
@@ -394,10 +417,15 @@ public class ListeningDevice : MonoBehaviour
         {
             while (blackFade.color.a > 0)
             {
+                if(tutorialTransition)
+                {
+                    tutorialManager.GetComponent<Tutorials>().lockMovement = true;
+                    
+                }
                 fadeProgress = screenColour.a - (timeToFade * Time.deltaTime);
                 screenColour = new Color(screenColour.r, screenColour.g, screenColour.b, fadeProgress);
                 blackFade.color = screenColour;
-                if (fadeProgress < 0.01f)
+                if (fadeProgress < 0.05f)
                 {
                     
                     blackFade.gameObject.SetActive(false);
@@ -409,16 +437,24 @@ public class ListeningDevice : MonoBehaviour
                         firstTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[0];
                         progress = 1;
                         speechReading = false;
+                        StartCoroutine(WaitForSecondsCooldown());
                         fadeComplete = true;
+                        
+                        
+                            
+                        
                     }
                      if(!intoLD)
                     {
                         ePressed = false;
-                        if(tutorialTransition)
+                        tutorialManager.GetComponent<Tutorials>().lockMovementMainGame = false;
+                        if (tutorialTransition)
                         {
+                            
                             tutorialManager.GetComponent<Tutorials>().inDUTutorial2 = false;
                             manager.GetComponent<DialogueManager>().StartConversation(manager.GetComponent<DialogueManager>().grace.GetComponent<NPCDialogue>().dialogueTree[12], manager.GetComponent<DialogueManager>().grace, manager.GetComponent<DialogueManager>().graceCam3);
                             tutorialTransition = false;
+                            
                         }
                     }
                     
@@ -446,6 +482,20 @@ public class ListeningDevice : MonoBehaviour
         }
         StartCoroutine(BlackTransition(currentCam, desiredCam, intoLD, false));
     }
+
+    public IEnumerator WaitForSecondsCooldown(float countdownValue = 1)
+    {
+        enterCooldown = true;
+        cooldownCDValue = countdownValue;
+        while (cooldownCDValue > 0)
+        {
+            
+            yield return new WaitForSeconds(1);
+            cooldownCDValue--;
+        }
+        enterCooldown = false;
+    }
+
 
     private void ClearDialogue()
     {

@@ -277,6 +277,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartConversation(DialogueNode startNode, GameObject npc, Camera npcCam) //Begins the dialogue interaction with chosen NPC
     {
+        interrogateButton.SetActive(true);
        if(tutorialManager.GetComponent<Tutorials>().inTutorial)
         {
             interrogateButton.SetActive(false);
@@ -288,6 +289,22 @@ public class DialogueManager : MonoBehaviour
         currentNPCCam.gameObject.SetActive(true); //Changes camera to NPC cam
         playerCam.gameObject.SetActive(false);
         activeNPC = npc;//Updates the active NPC
+        if(activeNPC == chase && interrogationManager.GetComponent<Interrogation>().chaseCompleted)
+        {
+            interrogateButton.SetActive(false);
+        }
+        if(activeNPC == juiceBox && interrogationManager.GetComponent<Interrogation>().jbCompleted)
+        {
+            interrogateButton.SetActive(false);
+        }
+        if(activeNPC == scarlet && interrogationManager.GetComponent<Interrogation>().scarletCompleted)
+        {
+            interrogateButton.SetActive(false);
+        }
+        if(activeNPC == eddie && interrogationManager.GetComponent<Interrogation>().eddieCompleted)
+        {
+            interrogateButton.SetActive(true);
+        }
         if (activeNPC == chase && chaseLastNode != null)
         {
             if (chaseLastNode != activeNPC.GetComponent<NPCDialogue>().interrogationNode)
@@ -393,10 +410,7 @@ public class DialogueManager : MonoBehaviour
             {
                 interrogateButton.SetActive(false);
             }
-            else
-            {
-                interrogateButton.SetActive(true);
-            }
+            
         }
     }
 
@@ -442,6 +456,7 @@ public class DialogueManager : MonoBehaviour
 
         if(tutorialManager.GetComponent<Tutorials>().nbTutorial && !tutorialManager.GetComponent<Tutorials>().inDUTutorial2)
         {
+            tutorialManager.GetComponent<Tutorials>().lockMovement = false;
             playerCam.gameObject.SetActive(true);
             graceCam3.gameObject.SetActive(false);
             tutorialManager.GetComponent<Tutorials>().inLDTutorial = false;

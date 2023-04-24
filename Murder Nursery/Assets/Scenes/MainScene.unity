@@ -6145,6 +6145,7 @@ MonoBehaviour:
   blackFade: {fileID: 1436896496}
   noirFilter: {fileID: 1246232934}
   currentCountdownValue: 0
+  cooldownCDValue: 0
   npcStatements:
   - Eddie, ya know ya need to keep a five foot distance, right?
   - "I don\u2019t got five feet. I thought two was normal."
@@ -6172,6 +6173,7 @@ MonoBehaviour:
   popUpManager: {fileID: 0}
   ldIcon: {fileID: 303965079}
   ldText: {fileID: 285078391}
+  inventoryManager: {fileID: 0}
 --- !u!4 &159851680
 Transform:
   m_ObjectHideFlags: 0
@@ -13472,7 +13474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &309238923
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40977,6 +40979,7 @@ MonoBehaviour:
   blackFade: {fileID: 1436896496}
   noirFilter: {fileID: 479221021}
   currentCountdownValue: 0
+  cooldownCDValue: 0
   npcStatements:
   - "Hey boss, how\u2019s it goin\u2019?"
   - "Not here you idiot! Anyone could be listening\u2026"
@@ -41002,6 +41005,7 @@ MonoBehaviour:
   popUpManager: {fileID: 0}
   ldIcon: {fileID: 303965079}
   ldText: {fileID: 285078391}
+  inventoryManager: {fileID: 0}
 --- !u!4 &903207446
 Transform:
   m_ObjectHideFlags: 0
@@ -47365,6 +47369,7 @@ MonoBehaviour:
   blackFade: {fileID: 632114895}
   noirFilter: {fileID: 412673648}
   currentCountdownValue: 0
+  cooldownCDValue: 0
   npcStatements:
   - Hey, Eddie!
   - 'Oh jeez, hey Grace! Uhh, what''s the new kid doing under the tab- '
@@ -47391,6 +47396,7 @@ MonoBehaviour:
   popUpManager: {fileID: 0}
   ldIcon: {fileID: 303965079}
   ldText: {fileID: 285078391}
+  inventoryManager: {fileID: 0}
 --- !u!4 &1052736273
 Transform:
   m_ObjectHideFlags: 0
@@ -85152,6 +85158,7 @@ MonoBehaviour:
   pbTutorialButton: {fileID: 40679378}
   pbText5: Nice work, you're clearly more seasoned than you look detective!
   inPButorial5: 0
+  pinboardCloseButton: {fileID: 309238922}
   isTextObject: {fileID: 355338873}
   isOverText: {fileID: 1563551789}
   inISTutorial1: 0
@@ -85224,6 +85231,7 @@ MonoBehaviour:
   togglePBMessageButton: {fileID: 941364461}
   endPBButton: {fileID: 2079190401}
   lockMovement: 0
+  lockMovementMainGame: 0
   drewStartPos: {x: 29.242, y: 0.004, z: 4.068}
   graceNotebook: {fileID: 1943791050}
 --- !u!1 &1943791050 stripped
@@ -89485,6 +89493,7 @@ MonoBehaviour:
   blackFade: {fileID: 1436896496}
   noirFilter: {fileID: 1307749388}
   currentCountdownValue: 0
+  cooldownCDValue: 0
   npcStatements:
   - 'Juice Box: Chase! My good sir! How art thou this fine afternoon?'
   - 'Chase: Ugh.'
@@ -89512,6 +89521,7 @@ MonoBehaviour:
   popUpManager: {fileID: 0}
   ldIcon: {fileID: 303965079}
   ldText: {fileID: 285078391}
+  inventoryManager: {fileID: 0}
 --- !u!4 &2063385456
 Transform:
   m_ObjectHideFlags: 0
@@ -92962,6 +92972,18 @@ PrefabInstance:
       value: InterrogationManager
       objectReference: {fileID: 0}
     - target: {fileID: 64911682466373710, guid: 8a548156d801c664988451aa214d7ccf, type: 3}
+      propertyPath: chase
+      value: 
+      objectReference: {fileID: 802635619}
+    - target: {fileID: 64911682466373710, guid: 8a548156d801c664988451aa214d7ccf, type: 3}
+      propertyPath: eddie
+      value: 
+      objectReference: {fileID: 27609088}
+    - target: {fileID: 64911682466373710, guid: 8a548156d801c664988451aa214d7ccf, type: 3}
+      propertyPath: scarlet
+      value: 
+      objectReference: {fileID: 479695295}
+    - target: {fileID: 64911682466373710, guid: 8a548156d801c664988451aa214d7ccf, type: 3}
       propertyPath: evButton
       value: 
       objectReference: {fileID: 288394883}
@@ -92973,6 +92995,10 @@ PrefabInstance:
       propertyPath: failText
       value: 
       objectReference: {fileID: 730706534}
+    - target: {fileID: 64911682466373710, guid: 8a548156d801c664988451aa214d7ccf, type: 3}
+      propertyPath: juiceBox
+      value: 
+      objectReference: {fileID: 795236359}
     - target: {fileID: 64911682466373710, guid: 8a548156d801c664988451aa214d7ccf, type: 3}
       propertyPath: pinboard
       value: 
@@ -96093,7 +96119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5856609379633052266, guid: 040db02aca870d54ba800f9f824b2e9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.34711
+      value: 25.197
       objectReference: {fileID: 0}
     - target: {fileID: 5856609379633052266, guid: 040db02aca870d54ba800f9f824b2e9b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -96101,7 +96127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5856609379633052266, guid: 040db02aca870d54ba800f9f824b2e9b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.159342
+      value: -1.308
       objectReference: {fileID: 0}
     - target: {fileID: 5856609379633052266, guid: 040db02aca870d54ba800f9f824b2e9b, type: 3}
       propertyPath: m_LocalRotation.w

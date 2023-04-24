@@ -117,10 +117,10 @@ public class ToggleUIVisibility : MonoBehaviour
         {
             if (pinboardOpen = !pinboardOpen)
             {
-                if (tutorialManager.GetComponent<Tutorials>().inTutorial && !closePB.activeInHierarchy)
-                {
-                    closePB.SetActive(true);
-                }
+               // if (tutorialManager.GetComponent<Tutorials>().inTutorial && !closePB.activeInHierarchy)
+           //     {
+              //      closePB.SetActive(true);
+               // }
                 //   if(firstPinboard)
                 //  {
                 //       tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().pinboardTutorial);
@@ -156,6 +156,7 @@ public class ToggleUIVisibility : MonoBehaviour
             pinboardUI.SetActive(false);
             pinboardOpen = false;
             interrogationUI.SetActive(true);
+            interrogationManager.GetComponent<Interrogation>().ReloadText();
         }
     }
 

@@ -48,6 +48,7 @@ public class Tutorials : MonoBehaviour
     public GameObject pbTutorialButton;
     public string pbText5 = "Nice work, you're clearly more seasoned than you look detective!";
     public bool inPButorial5 = false;
+    public GameObject pinboardCloseButton;
 
     [Header("Interrogation Tutorial")]
     public GameObject isTextObject;
@@ -109,6 +110,7 @@ public class Tutorials : MonoBehaviour
     public GameObject togglePBMessageButton;
     public GameObject endPBButton;
     public bool lockMovement = false;
+    public bool lockMovementMainGame = false;
 
     [SerializeField]
     private Vector3 drewStartPos = new Vector3(29.242000579833986f, 0.004000000189989805f, 4.067999839782715f);
@@ -164,6 +166,7 @@ public class Tutorials : MonoBehaviour
 
     public void EndTutorial()
     {
+        pinboardCloseButton.SetActive(true);
         lockMovement = true;
         mGlassTutorial5 = false;
         StartCoroutine(BlackTransition(graceCam1.gameObject, introCam.gameObject));

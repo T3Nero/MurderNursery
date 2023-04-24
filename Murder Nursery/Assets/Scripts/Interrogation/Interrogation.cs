@@ -124,6 +124,12 @@ public class Interrogation : MonoBehaviour
     public GameObject tutorialManager;
     public GameObject tutorialGrace;
     public GameObject returnButton;
+
+    [Header("Characters")]
+    public GameObject eddie;
+    public GameObject scarlet;
+    public GameObject chase;
+    public GameObject juiceBox;
     // Start is called before the first frame update
     void Start()
     {
@@ -333,24 +339,29 @@ public class Interrogation : MonoBehaviour
         {
             
             mostRecentJuiceBoxNode = activeNode;
+            npcStatement.GetComponent<TextMeshProUGUI>().text = "Juice Box: " + newNode.speech;
         }
         if(activeInterrogant.name == "Scarlet (The Femme Fatale)")
         {
             mostRecentScarletNode = activeNode;
+            npcStatement.GetComponent<TextMeshProUGUI>().text = "Scarlet: " + newNode.speech;
         }
         if(activeInterrogant.name == "Chase (The Cool Guy)")
         {
             mostRecentChaseNode = activeNode;
+            npcStatement.GetComponent<TextMeshProUGUI>().text = "Chase: " + newNode.speech;
         }
         if(activeInterrogant.name == "Eddie (The Goon)")
         {
             mostRecentEddieNode = activeNode;
+            npcStatement.GetComponent<TextMeshProUGUI>().text = "Eddie: " + newNode.speech;
         }
         if(activeInterrogant.name == "Grace")
         {
             mostRecentGraceNode = activeNode;
+            npcStatement.GetComponent<TextMeshProUGUI>().text = "Grace: " + newNode.speech;
         }
-        npcStatement.GetComponent<TextMeshProUGUI>().text = activeInterrogant.name + ": " + newNode.speech;
+       // npcStatement.GetComponent<TextMeshProUGUI>().text = activeInterrogant.name + ": " + newNode.speech;
         //intResponseText1.GetComponent<TextMeshProUGUI>().text = activeNode.responses[0];
         if (activeNode.lifeLoss > 0)
         {
@@ -679,6 +690,26 @@ public class Interrogation : MonoBehaviour
     {
         playerChoice = 2;
         ContinueInterrogation();
+    }
+
+    public void ReloadText()
+    {
+        if(activeInterrogant ==  eddie)
+        {
+            eddieStatementText.GetComponent<TextMeshProUGUI>().text = "Eddie: " + activeNode.speech;
+        }
+        if(activeInterrogant == chase)
+        {
+            chaseStatementText.GetComponent<TextMeshProUGUI>().text = "Chase: " + activeNode.speech;
+        }
+        if(activeInterrogant == juiceBox)
+        {
+            juiceBoxStatementText.GetComponent<TextMeshProUGUI>().text = "Juice Box: " + activeNode.speech;
+        }
+        if(activeInterrogant == scarlet)
+        {
+            scarletStatementText.GetComponent<TextMeshProUGUI>().text = "Scarlet: " + activeNode.speech;
+        }
     }
     
 }
