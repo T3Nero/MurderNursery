@@ -73,6 +73,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     {
         if(tutorialManager.GetComponent<Tutorials>().inPBTutorial2)
         {
+            tutorialManager.GetComponent<Tutorials>().togglePBMessageButton.SetActive(true);
             tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(true);
             tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().pbText2;
         }

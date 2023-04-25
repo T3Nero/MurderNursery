@@ -47,17 +47,20 @@ public class EvidenceSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void ClearEvidence()
     {
-        if(tutorialManager.GetComponent<Tutorials>().inPBTutorial3)
+        if (!tutorialManager.GetComponent<Tutorials>().inPBTutorial6)
         {
-            tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().pbText4;
-            
-            tutorialManager.GetComponent<Tutorials>().inPBTutorial3 = false;
-            tutorialManager.GetComponent<Tutorials>().inPBTutorial4 = true;
+            if (tutorialManager.GetComponent<Tutorials>().inPBTutorial3)
+            {
+                tutorialManager.GetComponent<Tutorials>().overPBText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().pbText4;
+
+                tutorialManager.GetComponent<Tutorials>().inPBTutorial3 = false;
+                tutorialManager.GetComponent<Tutorials>().inPBTutorial4 = true;
+            }
+            this.GetComponent<Image>().sprite = null;
+            slotFilled = false;
+            this.gameObject.SetActive(false);
+            ReturnEvidence();
         }
-        this.GetComponent<Image>().sprite = null;
-        slotFilled = false;
-        this.gameObject.SetActive(false);
-        ReturnEvidence();
     }
 
     public void ReturnEvidence()

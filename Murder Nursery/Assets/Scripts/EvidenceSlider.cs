@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EvidenceSlider : MonoBehaviour
 {
-    private bool evidenceOpen = false;
+    public bool evidenceOpen = false;
     public GameObject evidencePanel;
     float movementProgress;
     float timeToMove = 0.1f;
@@ -32,6 +32,7 @@ public class EvidenceSlider : MonoBehaviour
             tutorialManager.GetComponent<Tutorials>().pbTextObject.SetActive(false);
             tutorialManager.GetComponent<Tutorials>().inPBTutorial1 = false;
             tutorialManager.GetComponent<Tutorials>().inPBTutorial2 = true;
+            tutorialManager.GetComponent<Tutorials>().togglePBMessageButton.SetActive(false);
         }
         if(!evidenceOpen)
         {

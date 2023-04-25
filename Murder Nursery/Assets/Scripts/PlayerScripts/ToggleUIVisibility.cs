@@ -53,6 +53,8 @@ public class ToggleUIVisibility : MonoBehaviour
     public bool chaseEddieComplete = false;
     public bool juiceboxChaseComplete = false;
 
+    public GameObject evidenceSlider;
+
     public GameObject closePB;
     public void Start()
     {
@@ -158,6 +160,10 @@ public class ToggleUIVisibility : MonoBehaviour
             pinboardOpen = false;
             interrogationUI.SetActive(true);
             interrogationManager.GetComponent<Interrogation>().ReloadText();
+        }
+        if(evidenceSlider.GetComponent<EvidenceSlider>().evidenceOpen)
+        {
+            evidenceSlider.GetComponent<EvidenceSlider>().ToggleEvidencePanel();
         }
     }
 

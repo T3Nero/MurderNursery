@@ -66,7 +66,8 @@ public class DressUp : MonoBehaviour
 
     public GameObject mainCam;
     public GameObject dressUpCam;
-    
+    public GameObject dresser2;
+    public GameObject graceDressUp;
 
     
     // Start is called before the first frame update
@@ -247,6 +248,8 @@ public class DressUp : MonoBehaviour
 
     public void ExitDressUp() //Used to exit the dress up menu 
     {
+       
+        
         dressUpCam.SetActive(false);
         mainCam.SetActive(true);
         dressUpMenu.SetActive(false);
@@ -262,6 +265,8 @@ public class DressUp : MonoBehaviour
 
     public void EnterDressUp()
     {
+        
+        
         dressUpCam.SetActive(true);
         mainCam.SetActive(false);
         inDressUp = true; //Signals that the player is in dress up 

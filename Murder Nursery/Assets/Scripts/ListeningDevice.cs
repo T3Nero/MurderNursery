@@ -430,7 +430,7 @@ public class ListeningDevice : MonoBehaviour
                     ChangeCam(currentCam, desiredCam);
                     ensureCamOff = true;
 
-                    noirFilter.GetComponent<PostProcessingActivation>().TurnFilterOn(true);
+                   // noirFilter.GetComponent<PostProcessingActivation>().TurnFilterOn(true);
                     if(intoLD)
                    {
                         player.SetActive(false);

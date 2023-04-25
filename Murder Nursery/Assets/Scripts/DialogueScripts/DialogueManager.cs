@@ -171,6 +171,14 @@ public class DialogueManager : MonoBehaviour
     public Camera graceCam3;
     public Camera graceCam4;
 
+    [Header("Name Tags")]
+    public GameObject chaseTag;
+    public GameObject eddieTag;
+    public GameObject scarletTag;
+    public GameObject jbTag;
+    public GameObject graceTag;
+    public GameObject currentTag;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -289,6 +297,31 @@ public class DialogueManager : MonoBehaviour
         currentNPCCam.gameObject.SetActive(true); //Changes camera to NPC cam
         playerCam.gameObject.SetActive(false);
         activeNPC = npc;//Updates the active NPC
+        if(activeNPC == chase)
+        {
+            chaseTag.SetActive(true);
+            currentTag = chaseTag;
+        }
+        if(activeNPC == eddie)
+        {
+            eddieTag.SetActive(true);
+            currentTag = eddieTag;
+        }
+        if(activeNPC == scarlet)
+        {
+            scarletTag.SetActive(true);
+            currentTag = scarletTag;
+        }
+        if(activeNPC == juiceBox)
+        {
+            jbTag.SetActive(true);
+            currentTag = jbTag;
+        }
+        if(activeNPC == grace)
+        {
+            graceTag.SetActive(true);
+            currentTag = graceTag;
+        }
         if(activeNPC == chase && interrogationManager.GetComponent<Interrogation>().chaseCompleted)
         {
             interrogateButton.SetActive(false);
@@ -397,7 +430,7 @@ public class DialogueManager : MonoBehaviour
         npcStatement.GetComponent<TextMeshProUGUI>().text = activeNode.speech;
         npcLastResponse1 = activeNode.speech;
         dialogueZone.SetActive(true); //Activates the dialogue zone
-        npcNameArea.GetComponent<TextMeshProUGUI>().text = npc.name;
+        
         inConvo = true; //Signals that the player is in a conversation
         npcSprite1.sprite = npc.GetComponent<NPCDialogue>().sprite; //Updates the UI sprite boxes to that of the active NPC
         npcSprite2.sprite = npc.GetComponent<NPCDialogue>().sprite;//''
@@ -489,7 +522,8 @@ public class DialogueManager : MonoBehaviour
 
 
 
-
+        currentTag.SetActive(false);
+        
 
         dialogueZone.SetActive(false);
         inConvo = false;
@@ -505,6 +539,7 @@ public class DialogueManager : MonoBehaviour
         if(newNode.tutorialChosen)
         {
             pinBoardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(pinBoardManager.GetComponent<PinboardManager>().tutorialEvidence);
+            tutorialManager.GetComponent<Tutorials>().tutorialChosen = true;
         }
         if(newNode.exitTutorial)
         {

@@ -49,6 +49,7 @@ public class Tutorials : MonoBehaviour
     public string pbText5 = "Nice work, you're clearly more seasoned than you look detective!";
     public bool inPButorial5 = false;
     public GameObject pinboardCloseButton;
+    public bool inPBTutorial6 = false;
 
     [Header("Interrogation Tutorial")]
     public GameObject isTextObject;
@@ -111,6 +112,9 @@ public class Tutorials : MonoBehaviour
     public GameObject endPBButton;
     public bool lockMovement = false;
     public bool lockMovementMainGame = false;
+    public GameObject toggleButtonText;
+    public bool tutorialChosen = false;
+    
 
     [SerializeField]
     private Vector3 drewStartPos = new Vector3(29.242000579833986f, 0.004000000189989805f, 4.067999839782715f);
@@ -169,8 +173,17 @@ public class Tutorials : MonoBehaviour
         pinboardCloseButton.SetActive(true);
         lockMovement = true;
         mGlassTutorial5 = false;
-        StartCoroutine(BlackTransition(graceCam1.gameObject, introCam.gameObject));
-        StartCoroutine(WaitForSeconds());
+        if (!tutorialChosen)
+        {
+            StartCoroutine(BlackTransition(graceCam1.gameObject, introCam.gameObject));
+            StartCoroutine(WaitForSeconds());
+        }
+         if(tutorialChosen)
+        {
+            print("Transitioning to Main Game");
+            StartCoroutine(BlackTransition(graceNotebookCam.gameObject, introCam.gameObject));
+            StartCoroutine(WaitForSeconds());
+        }
        // player.GetComponent<Animator>().StopPlayback();
         player.transform.position = drewStartPos;
         player.transform.rotation = new Quaternion(0, 0, 0, 0);
@@ -338,6 +351,14 @@ public class Tutorials : MonoBehaviour
     public void TogglePBtext()
     {
         pbTextObject.SetActive(!pbTextObject.activeSelf);
+        if(pbTextObject.activeInHierarchy)
+        {
+            toggleButtonText.GetComponent<TextMeshProUGUI>().text = "Hide Text";
+        }
+        if(!pbTextObject.activeInHierarchy)
+        {
+            toggleButtonText.GetComponent<TextMeshProUGUI>().text = "Show Text";
+        }
     }
 
     public void EndPBTutorial()
@@ -345,6 +366,7 @@ public class Tutorials : MonoBehaviour
         if(!inPButorial5)
         {
             StartSecondGraceConvo();
+            inPBTutorial6 = false;
         }
         if (inPButorial5)
         {
@@ -353,6 +375,7 @@ public class Tutorials : MonoBehaviour
             pbTextObject.SetActive(true);
             endPBButton.SetActive(true);
             inPButorial5 = false;
+            inPBTutorial6 = true; 
         }
     }
 }
