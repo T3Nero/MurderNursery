@@ -59,6 +59,7 @@ public class ListeningDevice : MonoBehaviour
     private bool tutorialTransition = false;
     public GameObject inventoryManager;
     private bool enterCooldown = false;
+    public bool ensureCamOff = false;
 
 
     // Start is called before the first frame update
@@ -81,7 +82,7 @@ public class ListeningDevice : MonoBehaviour
     {
        
         
-        if (inRange && Input.GetKeyDown(KeyCode.E) && !inLD && !ePressed)
+        if (inRange && Input.GetKeyDown(KeyCode.E) && !inLD && !ePressed && !inventoryManager.GetComponent<ToggleUIVisibility>().inventoryOpen)
         {
             ePressed = true;
             if (dressUpManager.GetComponent<DressUp>().activeOutfit != "Detective Outfit")
@@ -91,6 +92,20 @@ public class ListeningDevice : MonoBehaviour
                 popUpManager.GetComponent<PopUpManager>().FadeImage(ldIcon, ldText);
                 print("Wrong Outfit");
             }
+        }
+
+        if(textPrompt.activeInHierarchy && inventoryManager.GetComponent<ToggleUIVisibility>().inventoryOpen && inRange)
+        {
+            textPrompt.SetActive(false);
+        }
+        if(!textPrompt.activeInHierarchy && !inventoryManager.GetComponent<ToggleUIVisibility>().inventoryOpen && inRange && !inLD)
+        {
+            textPrompt.SetActive(true);
+        }
+
+        if(inLD && currentCam.activeInHierarchy && ensureCamOff)
+        {
+            currentCam.SetActive(false);
         }
 
         if (inLD && Input.GetKeyUp(KeyCode.Return) && fadeComplete && !speechReading)
@@ -395,18 +410,20 @@ public class ListeningDevice : MonoBehaviour
                 {
 
                     ChangeCam(currentCam, desiredCam);
+                    ensureCamOff = true;
 
                     noirFilter.GetComponent<PostProcessingActivation>().TurnFilterOn(true);
                     if(intoLD)
                    {
                         player.SetActive(false);
                         
-                       
+
                     }
                     if (!intoLD)
                     {
                         player.SetActive(true);
-                        
+                        ensureCamOff = false;
+
                     }
                 }
 
@@ -431,7 +448,7 @@ public class ListeningDevice : MonoBehaviour
                     blackFade.gameObject.SetActive(false);
                     if (intoLD)
                     {
-                        currentCam.SetActive(false);
+                       // currentCam.SetActive(false);
                         speechReading = true;
                         firstTextBox.SetActive(true);
                         firstTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[0];

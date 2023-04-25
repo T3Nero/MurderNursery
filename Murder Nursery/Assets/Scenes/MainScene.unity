@@ -6174,6 +6174,7 @@ MonoBehaviour:
   ldIcon: {fileID: 303965079}
   ldText: {fileID: 285078391}
   inventoryManager: {fileID: 0}
+  ensureCamOff: 0
 --- !u!4 &159851680
 Transform:
   m_ObjectHideFlags: 0
@@ -41006,6 +41007,7 @@ MonoBehaviour:
   ldIcon: {fileID: 303965079}
   ldText: {fileID: 285078391}
   inventoryManager: {fileID: 0}
+  ensureCamOff: 0
 --- !u!4 &903207446
 Transform:
   m_ObjectHideFlags: 0
@@ -47397,6 +47399,7 @@ MonoBehaviour:
   ldIcon: {fileID: 303965079}
   ldText: {fileID: 285078391}
   inventoryManager: {fileID: 0}
+  ensureCamOff: 0
 --- !u!4 &1052736273
 Transform:
   m_ObjectHideFlags: 0
@@ -89522,6 +89525,7 @@ MonoBehaviour:
   ldIcon: {fileID: 303965079}
   ldText: {fileID: 285078391}
   inventoryManager: {fileID: 0}
+  ensureCamOff: 0
 --- !u!4 &2063385456
 Transform:
   m_ObjectHideFlags: 0

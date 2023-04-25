@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 1
   itemName: Candy
   itemDescription: Bribery Item
-  icon: {fileID: 21300088, guid: fea96a0220c344686b40cf9b233701f1, type: 3}
+  icon: {fileID: 21300000, guid: 8f61454aa6549eb458e2385a6c93878e, type: 3}
   itemType: 0

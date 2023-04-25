@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 5
   itemName: Juice Box
   itemDescription: Bribery Item
-  icon: {fileID: 21300000, guid: 20770426df3d00a418d1f9136d7e5f6d, type: 3}
+  icon: {fileID: 21300000, guid: a551bf8e5c541b447b14b1e5ec62ac2a, type: 3}
   itemType: 0

@@ -63,6 +63,7 @@ public class DressUp : MonoBehaviour
 
     public GameObject manager;
     public GameObject graceTutorial;
+    
 
     
     // Start is called before the first frame update
@@ -85,7 +86,7 @@ public class DressUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (interactable && Input.GetKeyDown(KeyCode.E) && !magGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass) //Allows the player to open the dress up menu 
+        if (interactable && Input.GetKeyDown(KeyCode.E) && !magGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass &&!inventoryManager.GetComponent<ToggleUIVisibility>().inventoryOpen) //Allows the player to open the dress up menu 
         {
             //  if(firstDressUP)
             // {
@@ -100,6 +101,15 @@ public class DressUp : MonoBehaviour
             ExitDressUp();
             playerAudio.PlayOneShot(openBoxSound, 0.5f); //Plays the toggle dress up menu sound 
             Cursor.visible = false; //CURSOR STUFF- UPDATE
+        }
+
+        if(interactableText.activeInHierarchy && interactable && inventoryManager.GetComponent<ToggleUIVisibility>().inventoryOpen)
+        {
+            interactableText.SetActive(false);
+        }
+        if(!interactableText.activeInHierarchy && interactable && !inventoryManager.GetComponent<ToggleUIVisibility>().inventoryOpen)
+        {
+            interactableText.SetActive(true);
         }
 
     }
