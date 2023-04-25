@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 662fa5a23676a0b4498de9021e57aa64, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5ba6ef8130fd39c4cb005489400af633, type: 3}
   m_Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 0.09803922}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   fingerprintUI: {fileID: 0}
   fingerprintFound: {fileID: 0}
   evidenceItem: {fileID: 8712068571063368421}
+  tutorialManager: {fileID: 0}
 --- !u!65 &2035986631
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -114,8 +115,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.12, y: 1.15, z: 0.2000001}
-  m_Center: {x: 0, y: 0, z: 0.000061035156}
+  m_Size: {x: 1.12, y: 1.15, z: 0.39}
+  m_Center: {x: 0, y: 0, z: 0.06}
 --- !u!54 &2035986632
 Rigidbody:
   m_ObjectHideFlags: 0

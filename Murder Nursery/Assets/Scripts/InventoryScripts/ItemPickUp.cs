@@ -9,6 +9,7 @@ public class ItemPickUp : MonoBehaviour
     Item item;
     public GameObject text;
     public GameObject magGlass;
+    public GameObject TM; // tutorial manager
 
     private bool canPickUp;
 
@@ -32,7 +33,7 @@ public class ItemPickUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player" && !magGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass)
+        if(other.gameObject.tag == "Player" && !magGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass && !TM.GetComponent<Tutorials>().inTutorial)
         {
             canPickUp = true;
             text.GetComponent<TextMeshProUGUI>().text = "Press [E] to pick up " + item.name;
