@@ -180,7 +180,7 @@ public class Interrogation : MonoBehaviour
         {
             if (playerChoice == 1)
             { 
-                    if(activeInterrogant.name == "Juice Box (The Artiste)")
+                    if(activeInterrogant.name == "JB")
                     {
                         lastResponseJB = activeNode.responses[0];
                     }
@@ -284,7 +284,7 @@ public class Interrogation : MonoBehaviour
     public void SuccessfulEnd() //Called when a player succeeds in an interrogation
     {
         noneCompleted = false;
-        if(activeInterrogant.name == "JuiceBox (The Artiste)")
+        if(activeInterrogant.name == "JB")
         {
             jbCompleted = true;
         }
@@ -335,7 +335,7 @@ public class Interrogation : MonoBehaviour
         activeNode = newNode;
         newNode.nodeActive = true;
         SwitchEmotion();
-        if(activeInterrogant.name == "JuiceBox (The Artiste)")
+        if(activeInterrogant.name == "JB")
         {
             
             mostRecentJuiceBoxNode = activeNode;
@@ -394,7 +394,7 @@ public class Interrogation : MonoBehaviour
         activeInterrogant = targetNPC;
        // if (!firstTry) //Checks if the player has been in this interrogation before
         //{
-            if(activeInterrogant.name == "JuiceBox (The Artiste)") 
+            if(activeInterrogant.name == "JB") 
             {
                 if (mostRecentJuiceBoxNode == null)
                 {
