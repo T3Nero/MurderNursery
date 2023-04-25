@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -208,6 +209,15 @@ public class ToggleUIVisibility : MonoBehaviour
             else
             {
                 notebook.GetComponent<Notebook>().noIntMessage.SetActive(false);
+            }
+            if(tutorialManager.GetComponent<Tutorials>().nbTutorial2)
+            {
+                tutorialManager.GetComponent<Tutorials>().isTextObject.SetActive(true);
+                tutorialManager.GetComponent<Tutorials>().isOverText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().nbText1;
+                tutorialManager.GetComponent<Tutorials>().nbTutorial2 = false;
+                tutorialManager.GetComponent<Tutorials>().nbTutorial3 = true;
+                tutorialManager.GetComponent<Tutorials>().nbButton.SetActive(true);
+                tutorialManager.GetComponent<Tutorials>().pbTutorialButton.SetActive(false);
             }
         }
         else

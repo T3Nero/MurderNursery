@@ -75,7 +75,7 @@ public class NPCDialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && isInteractable && !magnifyingGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass && !menuManager.GetComponent<MainMenuSettings>().menuOpen)
+        if(Input.GetKeyDown(KeyCode.E) && isInteractable && !magnifyingGlass.GetComponent<MagnifyingGlass>().usingMagnifyingGlass && !menuManager.GetComponent<MainMenuSettings>().menuOpen && !tutorialManager.GetComponent<Tutorials>().inTutorial)
         {
             ToggleConversation();
         }

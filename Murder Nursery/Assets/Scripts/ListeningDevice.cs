@@ -60,6 +60,7 @@ public class ListeningDevice : MonoBehaviour
     public GameObject inventoryManager;
     private bool enterCooldown = false;
     public bool ensureCamOff = false;
+    public GameObject ppLayer;
 
 
     // Start is called before the first frame update
@@ -150,20 +151,23 @@ public class ListeningDevice : MonoBehaviour
                                 StartCoroutine(BlackTransition(desiredCam, currentCam, false));
                                 StartCoroutine(WaitForSeconds(false));
                                 inLD = false;
-                                foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
+                                if (!tutorialManager.GetComponent<Tutorials>().inTutorial)
                                 {
-                                    if (evidence == heardEvidence)
+                                    foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
                                     {
-                                        evidenceAlreadyCollected = true;
+                                        if (evidence == heardEvidence)
+                                        {
+                                            evidenceAlreadyCollected = true;
+                                        }
                                     }
+                                    if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)
+                                    {
+                                        pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
+                                        pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
+                                        heardEvidence.evidenceFound = true;
+                                    }
+                                    break;
                                 }
-                                if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)// && !tutorialManager.GetComponent<Tutorials>().inTutorial)
-                                {
-                                    pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
-                                    pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
-                                    heardEvidence.evidenceFound = true;
-                                }
-                                break;
                             }
                             firstTextBox.SetActive(false);
                             secondTextBox.SetActive(false);
@@ -187,28 +191,32 @@ public class ListeningDevice : MonoBehaviour
                                 StartCoroutine(BlackTransition(desiredCam, currentCam, false));
                                 StartCoroutine(WaitForSeconds(false));
                                 inLD = false;
-                                foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
+                                if (!tutorialManager.GetComponent<Tutorials>().inTutorial)
                                 {
-                                    if (evidence == heardEvidence)
+                                    foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
                                     {
-                                        evidenceAlreadyCollected = true;
+                                        if (evidence == heardEvidence)
+                                        {
+                                            evidenceAlreadyCollected = true;
+                                        }
                                     }
-                                }
 
-                                if (tutorialManager.GetComponent<Tutorials>().inTutorial)
-                                {
+                                    
+                                    if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                    {
+
+                                        pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
+                                        pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
+                                        heardEvidence.evidenceFound = true;
+                                    }
+
                                     break;
-
                                 }
-                                if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
-                                {
-
-                                    pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
-                                    pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
-                                    heardEvidence.evidenceFound = true;
-                                }
-
+                            }
+                            if (tutorialManager.GetComponent<Tutorials>().inTutorial)
+                            {
                                 break;
+
                             }
                             fifthTextBox.SetActive(true);
                             fifthTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
@@ -229,20 +237,23 @@ public class ListeningDevice : MonoBehaviour
                                 ClearDialogue();
                                 StartCoroutine(BlackTransition(desiredCam, currentCam, false));
                                 StartCoroutine(WaitForSeconds(false));
-                                foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
+                                if (!tutorialManager.GetComponent<Tutorials>().inTutorial)
                                 {
-                                    if (evidence == heardEvidence)
+                                    foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
                                     {
-                                        evidenceAlreadyCollected = true;
+                                        if (evidence == heardEvidence)
+                                        {
+                                            evidenceAlreadyCollected = true;
+                                        }
                                     }
+                                    if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                    {
+                                        pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
+                                        pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
+                                        heardEvidence.evidenceFound = true;
+                                    }
+                                    break;
                                 }
-                                if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
-                                {
-                                    pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
-                                    pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
-                                    heardEvidence.evidenceFound = true;
-                                }
-                                break;
                             }
                             sixthTextBox.SetActive(true);
                             sixthTextBox.GetComponentInChildren<TextMeshProUGUI>().text = npcStatements[progress];
@@ -263,20 +274,23 @@ public class ListeningDevice : MonoBehaviour
                                 ClearDialogue();
                                 StartCoroutine(BlackTransition(desiredCam, currentCam, false));
                                 StartCoroutine(WaitForSeconds(false));
-                                foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
+                                if (!tutorialManager.GetComponent<Tutorials>().inTutorial)
                                 {
-                                    if (evidence == heardEvidence)
+                                    foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
                                     {
-                                        evidenceAlreadyCollected = true;
+                                        if (evidence == heardEvidence)
+                                        {
+                                            evidenceAlreadyCollected = true;
+                                        }
                                     }
+                                    if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                    {
+                                        pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
+                                        pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
+                                        heardEvidence.evidenceFound = true;
+                                    }
+                                    break;
                                 }
-                                if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
-                                {
-                                    pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
-                                    pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
-                                    heardEvidence.evidenceFound = true;
-                                }
-                                break;
                             }
                             fourthTextBox.SetActive(false);
                             fifthTextBox.SetActive(false);
@@ -301,20 +315,23 @@ public class ListeningDevice : MonoBehaviour
                                 ClearDialogue();
                                 StartCoroutine(BlackTransition(desiredCam, currentCam, false));
                                 StartCoroutine(WaitForSeconds(false));
-                                foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
+                                if (!tutorialManager.GetComponent<Tutorials>().inTutorial)
                                 {
-                                    if (evidence == heardEvidence)
+                                    foreach (EvidenceClass evidence in pinboardManager.GetComponent<PinboardManager>().discoveredEvidence)
                                     {
-                                        evidenceAlreadyCollected = true;
+                                        if (evidence == heardEvidence)
+                                        {
+                                            evidenceAlreadyCollected = true;
+                                        }
                                     }
+                                    if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
+                                    {
+                                        pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
+                                        pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
+                                        heardEvidence.evidenceFound = true;
+                                    }
+                                    break;
                                 }
-                                if (!heardEvidence.evidenceFound && !evidenceAlreadyCollected)//&& !tutorialManager.GetComponent<Tutorials>().inTutorial)
-                                {
-                                    pinboardManager.GetComponent<PinboardManager>().discoveredEvidence.Add(heardEvidence);
-                                    pinboardManager.GetComponent<PinboardManager>().UpdateEvidenceImages(heardEvidence);
-                                    heardEvidence.evidenceFound = true;
-                                }
-                                break;
                             }
                             speechReading = false;
                             StartCoroutine(WaitForSecondsCooldown());
@@ -387,6 +404,7 @@ public class ListeningDevice : MonoBehaviour
 
     public void StartListening()
     {
+        ppLayer.SetActive(true);
         tutorialManager.GetComponent<Tutorials>().lockMovementMainGame = true; ;
         player.GetComponent<PlayerMovement>().inLD = true;
         StartCoroutine(BlackTransition(currentCam, desiredCam, true));
@@ -408,7 +426,7 @@ public class ListeningDevice : MonoBehaviour
                 blackFade.color = screenColour;
                 if (fadeProgress > 0.95f)
                 {
-
+                    
                     ChangeCam(currentCam, desiredCam);
                     ensureCamOff = true;
 
@@ -430,7 +448,7 @@ public class ListeningDevice : MonoBehaviour
                 yield return null;
             }
         }
-        else
+        else 
         {
             while (blackFade.color.a > 0)
             {
@@ -456,7 +474,7 @@ public class ListeningDevice : MonoBehaviour
                         speechReading = false;
                         StartCoroutine(WaitForSecondsCooldown());
                         fadeComplete = true;
-                        
+                        currentCam.SetActive(false);
                         
                             
                         
@@ -467,7 +485,7 @@ public class ListeningDevice : MonoBehaviour
                         tutorialManager.GetComponent<Tutorials>().lockMovementMainGame = false;
                         if (tutorialTransition)
                         {
-                            
+                            ppLayer.SetActive(false);
                             tutorialManager.GetComponent<Tutorials>().inDUTutorial2 = false;
                             manager.GetComponent<DialogueManager>().StartConversation(manager.GetComponent<DialogueManager>().grace.GetComponent<NPCDialogue>().dialogueTree[12], manager.GetComponent<DialogueManager>().grace, manager.GetComponent<DialogueManager>().graceCam3);
                             tutorialTransition = false;
@@ -516,6 +534,7 @@ public class ListeningDevice : MonoBehaviour
 
     private void ClearDialogue()
     {
+        
         switch(convoID)
         {
             case 0:

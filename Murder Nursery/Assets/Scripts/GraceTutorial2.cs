@@ -23,15 +23,11 @@ public class GraceTutorial2 : MonoBehaviour
     void Update()
     {
         
-        if(tutorialManager.GetComponent<Tutorials>().nbTutorial2 && Input.GetKeyUp(KeyCode.I))
+        if(tutorialManager.GetComponent<Tutorials>().nbTutorial2 && Input.GetKeyUp(KeyCode.I) && !inventoryManager.GetComponent<ToggleUIVisibility>().inventoryOpen)
         {
-            inventoryManager.GetComponent<ToggleUIVisibility>().ToggleNotebook();
-            tutorialManager.GetComponent<Tutorials>().isTextObject.SetActive(true);
-            tutorialManager.GetComponent<Tutorials>().isOverText.GetComponent<TextMeshProUGUI>().text = tutorialManager.GetComponent<Tutorials>().nbText1;
-            tutorialManager.GetComponent<Tutorials>().nbTutorial2 = false;
-            tutorialManager.GetComponent<Tutorials>().nbTutorial3 = true;
-            tutorialManager.GetComponent<Tutorials>().nbButton.SetActive(true);
-            tutorialManager.GetComponent<Tutorials>().pbTutorialButton.SetActive(false);
+            
+            inventoryManager.GetComponent<ToggleUIVisibility>().ToggleInventory();
+            
         }
 
         if(tutorialManager.GetComponent<Tutorials>().mGlassTutorial1 && Input.GetKeyUp(KeyCode.I))

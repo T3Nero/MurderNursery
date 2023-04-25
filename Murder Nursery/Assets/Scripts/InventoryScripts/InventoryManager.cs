@@ -73,7 +73,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.I) && !DM.GetComponent<IntroCutscene>().inIntro && !DM.GetComponent<DialogueManager>().inConvo && !DM.GetComponent<Conclusion>().inEnding && !interManager.GetComponent<Interrogation>().inInterrogation && !menuUI.menuOpen && !tutorialManager.GetComponent<Tutorials>().inTutorial && !tutorialManager.GetComponent<Tutorials>().lockMovementMainGame && !dressUp.GetComponent<DressUp>().inDressUp)  //Used to open and close the player's inventory
+        if(Input.GetKeyUp(KeyCode.I) && !DM.GetComponent<IntroCutscene>().inIntro && !DM.GetComponent<DialogueManager>().inConvo && !DM.GetComponent<Conclusion>().inEnding && !interManager.GetComponent<Interrogation>().inInterrogation && !menuUI.menuOpen && !tutorialManager.GetComponent<Tutorials>().inTutorial && !tutorialManager.GetComponent<Tutorials>().lockMovementMainGame && !dressUp.GetComponent<DressUp>().inDressUp && dressUp.GetComponent<DressUp>().activeOutfit == "Detective Outfit")  //Used to open and close the player's inventory
         {
             UIVisibility.ToggleInventory();
             if(blur.activeSelf)
@@ -88,7 +88,7 @@ public class InventoryManager : MonoBehaviour
             UIVisibility.ToggleInventory();
         }
 
-        if(DM.GetComponent<DialogueManager>().inConvo && UIVisibility.inventoryOpen)
+        if(DM.GetComponent<DialogueManager>().inConvo && UIVisibility.inventoryOpen && !tutorialManager.GetComponent<Tutorials>().inTutorial)
         {
             UIVisibility.ToggleInventory();
         }

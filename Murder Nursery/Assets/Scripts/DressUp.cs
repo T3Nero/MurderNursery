@@ -63,6 +63,9 @@ public class DressUp : MonoBehaviour
 
     public GameObject manager;
     public GameObject graceTutorial;
+
+    public GameObject mainCam;
+    public GameObject dressUpCam;
     
 
     
@@ -244,6 +247,8 @@ public class DressUp : MonoBehaviour
 
     public void ExitDressUp() //Used to exit the dress up menu 
     {
+        dressUpCam.SetActive(false);
+        mainCam.SetActive(true);
         dressUpMenu.SetActive(false);
         interactableText.SetActive(true);
         inDressUp = false;
@@ -257,6 +262,8 @@ public class DressUp : MonoBehaviour
 
     public void EnterDressUp()
     {
+        dressUpCam.SetActive(true);
+        mainCam.SetActive(false);
         inDressUp = true; //Signals that the player is in dress up 
         interactableText.SetActive(false);
         dressUpMenu.SetActive(true); //Activates the dress up menu UI

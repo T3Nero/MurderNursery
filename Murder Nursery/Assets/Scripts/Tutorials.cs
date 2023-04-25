@@ -55,7 +55,7 @@ public class Tutorials : MonoBehaviour
     public GameObject isOverText;
     public bool inISTutorial1 = true;
     public string isText1 = "Now, this is where you get to find out a little about the person you’re interrogating, and whether you have all the evidence you need to get your classmate to spill the beans! That’s what reveals some important info you can’t get anywhere else!";
-    public string isText2 = "See that tick? That means you found the right evidence, and it’s assigned correctly! If you assigned it to the wrong person, there would be a cross. And if you didn’t find the evidence yet, it would be blank! ";
+    public string isText2 = "See that tick? That means you found the right evidence, and it’s assigned correctly! If you haven't find the evidence yet, it would be blank! ";
     public bool inISTutorial2 = false;
     public string isText3 = "I recommend checking back here every so often to see whether you’re on the right track. You can enter this screen anytime when you’re talking to your classmates! Remember though, different people will require different evidence! Everybody has their own side to the story, right? ";
     public bool inISTutorial3 = false;
