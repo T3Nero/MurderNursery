@@ -219,6 +219,8 @@ public class Conclusion : MonoBehaviour
                         break;
                     case 4:
                         SceneManager.LoadScene(0);
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
                         break;
                 }
             }
@@ -314,6 +316,8 @@ public class Conclusion : MonoBehaviour
                         progress++;
                         break;
                     case 15: SceneManager.LoadScene(0);
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
                         break;
                         
                 }
@@ -406,6 +410,8 @@ public class Conclusion : MonoBehaviour
                         progress++;
                         break;
                     case 20: SceneManager.LoadScene(0);
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
                         break;
                 }
             }
