@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 3499891356269125111, guid: f0751e882a2e84a4db4a55965e7382c9, type: 3}
   children:
-  - {fileID: 3499891356269125111}
+  - {fileID: 3499891356269125111, guid: 67f3856c8dd85cf44bd07f97c4eec500, type: 3}
   - {fileID: 3499891356269125111, guid: b520018dff403bb41b6570161ca2155b, type: 3}
   speech: Don't quit your day job, Detective... I've been at my easel all day!
   responses:
@@ -84,3 +84,10 @@ MonoBehaviour:
   evImagesGenerated: 0
   nodeEmotion: 4
   bribeGiven: 0
+  exitTutorial: 0
+  pinboardTutorial: 0
+  interroSummaryTutorial: 0
+  dressUpTutorial: 0
+  dressUpTutorial2: 0
+  notebookTutorial: 0
+  tutorialChosen: 0

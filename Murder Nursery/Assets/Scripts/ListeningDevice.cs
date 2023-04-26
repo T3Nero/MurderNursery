@@ -345,7 +345,7 @@ public class ListeningDevice : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && dressUpManager.GetComponent<DressUp>().activeOutfit != "Detective Outfit")
         {
             
             
@@ -395,7 +395,7 @@ public class ListeningDevice : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")) 
         {
             textPrompt.SetActive(false);
             inRange = false;
@@ -404,7 +404,7 @@ public class ListeningDevice : MonoBehaviour
 
     public void StartListening()
     {
-        ppLayer.SetActive(true);
+       // ppLayer.SetActive(true);
         tutorialManager.GetComponent<Tutorials>().lockMovementMainGame = true; ;
         player.GetComponent<PlayerMovement>().inLD = true;
         StartCoroutine(BlackTransition(currentCam, desiredCam, true));
@@ -485,7 +485,7 @@ public class ListeningDevice : MonoBehaviour
                         tutorialManager.GetComponent<Tutorials>().lockMovementMainGame = false;
                         if (tutorialTransition)
                         {
-                            ppLayer.SetActive(false);
+                            //ppLayer.SetActive(false);
                             tutorialManager.GetComponent<Tutorials>().inDUTutorial2 = false;
                             manager.GetComponent<DialogueManager>().StartConversation(manager.GetComponent<DialogueManager>().grace.GetComponent<NPCDialogue>().dialogueTree[12], manager.GetComponent<DialogueManager>().grace, manager.GetComponent<DialogueManager>().graceCam3);
                             tutorialTransition = false;

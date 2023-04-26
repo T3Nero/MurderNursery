@@ -120,6 +120,7 @@ public class Tutorials : MonoBehaviour
     private Vector3 drewStartPos = new Vector3(29.242000579833986f, 0.004000000189989805f, 4.067999839782715f);
     [SerializeField]
     GameObject graceNotebook;
+    public GameObject tutorialJuiceBox;
 
     // Start is called before the first frame update
     void Start()
@@ -193,6 +194,7 @@ public class Tutorials : MonoBehaviour
         ld2.SetActive(true);
         ld3.SetActive(true);
         tutorialLD.SetActive(false);
+        tutorialJuiceBox.SetActive(false);
         
 
     }

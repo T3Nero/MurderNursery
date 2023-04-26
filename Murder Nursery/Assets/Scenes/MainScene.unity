@@ -3870,6 +3870,11 @@ Transform:
   m_Father: {fileID: 1958582944}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 90}
+--- !u!1 &88226537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8712068571063368421, guid: 24964ee1c952c4b418e7b8586cb9c783, type: 3}
+  m_PrefabInstance: {fileID: 5059985825541097180}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &88910428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89114,6 +89119,7 @@ MonoBehaviour:
   tutorialChosen: 0
   drewStartPos: {x: 29.242, y: 0.004, z: 4.068}
   graceNotebook: {fileID: 1943791050}
+  tutorialJuiceBox: {fileID: 88226537}
 --- !u!1 &1943791050 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8499095614386267852, guid: 747d5b5c68a52d74f97f182d6eb70562, type: 3}
@@ -99338,6 +99344,18 @@ PrefabInstance:
     - target: {fileID: 3083092588556728891, guid: df89e8e70ab984b45af65863ba7f2e3e, type: 3}
       propertyPath: m_Name
       value: Chase
+      objectReference: {fileID: 0}
+    - target: {fileID: 4289550255686705261, guid: df89e8e70ab984b45af65863ba7f2e3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.398
+      objectReference: {fileID: 0}
+    - target: {fileID: 4289550255686705261, guid: df89e8e70ab984b45af65863ba7f2e3e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4289550255686705261, guid: df89e8e70ab984b45af65863ba7f2e3e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.792
       objectReference: {fileID: 0}
     - target: {fileID: 4289550256790897715, guid: df89e8e70ab984b45af65863ba7f2e3e, type: 3}
       propertyPath: volumeTrigger
