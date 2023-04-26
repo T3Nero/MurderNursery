@@ -677,6 +677,8 @@ public class Interrogation : MonoBehaviour
                 LoadIntNodeInfo(activeNode.children[1]);
                 interrogationPanel.SetActive(true);
                 pinboard.SetActive(false);
+                pressedButton.GetComponent<EvidenceSlot>().evidenceTooltip.SetActive(false);
+
             }
         }
     }

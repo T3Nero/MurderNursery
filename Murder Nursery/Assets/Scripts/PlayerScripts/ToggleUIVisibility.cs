@@ -103,7 +103,7 @@ public class ToggleUIVisibility : MonoBehaviour
         if(pinboardOpen)
         {
             pinboardUI.SetActive(false);
-            evidenceJotter.SetActive(false);
+          //  evidenceJotter.SetActive(false);
             pinboardOpen = false;
         }
 

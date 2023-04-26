@@ -7888,7 +7888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &198892565
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33671,6 +33671,11 @@ RectTransform:
   m_AnchoredPosition: {x: -1465.5, y: 881}
   m_SizeDelta: {x: -3120.8, y: -2088.5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &698998935 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8712068571063368421, guid: 24964ee1c952c4b418e7b8586cb9c783, type: 3}
+  m_PrefabInstance: {fileID: 842663588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &700060529 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8639815407638529140, guid: ec29c44ed3bb89647840c47cd92a3f03, type: 3}
@@ -35575,6 +35580,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 90709dd9a41ddb04a94fa961ca355867, type: 3}
+--- !u!1 &744795647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7860510370897394212, guid: 5c427a4490667f949ab2e9b32d99f766, type: 3}
+  m_PrefabInstance: {fileID: 5195870337018551953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &749628049
 GameObject:
   m_ObjectHideFlags: 0
@@ -40285,6 +40295,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 174289ffdaa052949af2fc802a3495d0, type: 3}
   m_PrefabInstance: {fileID: 838738129}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &839497224 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2477402749742161093, guid: d25f47036386cc54ab865de9ed15a1ea, type: 3}
+  m_PrefabInstance: {fileID: 2378972171206195541}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &839654262 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6116977970473544539, guid: 51c6c7f4cd75872458cb3ef685008667, type: 3}
@@ -40437,6 +40452,10 @@ PrefabInstance:
     - target: {fileID: 8712068571063368421, guid: 24964ee1c952c4b418e7b8586cb9c783, type: 3}
       propertyPath: m_Name
       value: Grace Drawing
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712068571063368421, guid: 24964ee1c952c4b418e7b8586cb9c783, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -53942,6 +53961,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141798801}
   m_CullTransparentMesh: 1
+--- !u!1 &1142639878 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3564528627409693236, guid: 1ab0adc765683844ea83c6c94d48e462, type: 3}
+  m_PrefabInstance: {fileID: 3289931592935341509}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1143421832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57552,6 +57576,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242618365}
   m_CullTransparentMesh: 1
+--- !u!1 &1244615029 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3010028145380960347, guid: f9b8c0c720103c846991a3ef685d4da6, type: 3}
+  m_PrefabInstance: {fileID: 7333566003879360665}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1245776492
 GameObject:
   m_ObjectHideFlags: 0
@@ -61263,6 +61292,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355933646}
   m_CullTransparentMesh: 1
+--- !u!1 &1360180145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2347137056283718725, guid: d773e8454f5bc734aa47392c35b53447, type: 3}
+  m_PrefabInstance: {fileID: 1899814159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1360340211
 GameObject:
   m_ObjectHideFlags: 0
@@ -86736,6 +86770,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Twig
       objectReference: {fileID: 0}
+    - target: {fileID: 2347137056283718725, guid: d773e8454f5bc734aa47392c35b53447, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4828773773073995917, guid: d773e8454f5bc734aa47392c35b53447, type: 3}
       propertyPath: item
       value: 
@@ -89120,6 +89158,13 @@ MonoBehaviour:
   drewStartPos: {x: 29.242, y: 0.004, z: 4.068}
   graceNotebook: {fileID: 1943791050}
   tutorialJuiceBox: {fileID: 88226537}
+  notebookExitSlip: {fileID: 198892564}
+  fi1: {fileID: 839497224}
+  fi2: {fileID: 744795647}
+  fi3: {fileID: 1244615029}
+  fi4: {fileID: 1142639878}
+  fi5: {fileID: 698998935}
+  fi6: {fileID: 1360180145}
 --- !u!1 &1943791050 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8499095614386267852, guid: 747d5b5c68a52d74f97f182d6eb70562, type: 3}
@@ -98100,6 +98145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Glitter Paint
       objectReference: {fileID: 0}
+    - target: {fileID: 2477402749742161093, guid: d25f47036386cc54ab865de9ed15a1ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4751425368828358669, guid: d25f47036386cc54ab865de9ed15a1ea, type: 3}
       propertyPath: item
       value: 
@@ -98788,6 +98837,10 @@ PrefabInstance:
     - target: {fileID: 3564528627409693236, guid: 1ab0adc765683844ea83c6c94d48e462, type: 3}
       propertyPath: m_Name
       value: Ransom Note
+      objectReference: {fileID: 0}
+    - target: {fileID: 3564528627409693236, guid: 1ab0adc765683844ea83c6c94d48e462, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -99962,6 +100015,10 @@ PrefabInstance:
     - target: {fileID: 7860510370897394212, guid: 5c427a4490667f949ab2e9b32d99f766, type: 3}
       propertyPath: m_Name
       value: White Cast Debris
+      objectReference: {fileID: 0}
+    - target: {fileID: 7860510370897394212, guid: 5c427a4490667f949ab2e9b32d99f766, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -101333,6 +101390,10 @@ PrefabInstance:
     - target: {fileID: 3010028145380960347, guid: f9b8c0c720103c846991a3ef685d4da6, type: 3}
       propertyPath: m_Name
       value: Nerf Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010028145380960347, guid: f9b8c0c720103c846991a3ef685d4da6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5355958876801991827, guid: f9b8c0c720103c846991a3ef685d4da6, type: 3}
       propertyPath: helpText

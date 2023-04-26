@@ -121,6 +121,15 @@ public class Tutorials : MonoBehaviour
     [SerializeField]
     GameObject graceNotebook;
     public GameObject tutorialJuiceBox;
+    public GameObject notebookExitSlip;
+
+    [Header("Found Items")]
+    public GameObject fi1;
+    public GameObject fi2;
+    public GameObject fi3;
+    public GameObject fi4;
+    public GameObject fi5;
+    public GameObject fi6;
 
     // Start is called before the first frame update
     void Start()
@@ -182,8 +191,22 @@ public class Tutorials : MonoBehaviour
          if(tutorialChosen)
         {
             print("Transitioning to Main Game");
-            StartCoroutine(BlackTransition(graceNotebookCam.gameObject, introCam.gameObject));
-            StartCoroutine(WaitForSeconds());
+            graceNotebookCam.gameObject.SetActive(false);
+            introCam.gameObject.SetActive(true);
+
+            
+            introCam.GetComponent<IntroCutscene>().inIntro = true;
+            inTutorial = false;
+            tutorialGrace.SetActive(false);
+            graceNotebook.SetActive(false);
+            deadGrace.SetActive(true);
+            blanket.SetActive(true);
+
+            dialogueManager.GetComponent<IntroCutscene>().inIntro = true;
+            lockMovement = false;
+
+            //   StartCoroutine(BlackTransition(graceNotebookCam.gameObject, introCam.gameObject));
+            //   StartCoroutine(WaitForSeconds());
         }
        // player.GetComponent<Animator>().StopPlayback();
         player.transform.position = drewStartPos;
@@ -195,6 +218,13 @@ public class Tutorials : MonoBehaviour
         ld3.SetActive(true);
         tutorialLD.SetActive(false);
         tutorialJuiceBox.SetActive(false);
+        notebookExitSlip.SetActive(true);
+        fi1.SetActive(true);
+        fi2.SetActive(true);
+        fi3.SetActive(true);
+        fi4.SetActive(true);
+        fi5.SetActive(true);
+        fi6.SetActive(true);
         
 
     }

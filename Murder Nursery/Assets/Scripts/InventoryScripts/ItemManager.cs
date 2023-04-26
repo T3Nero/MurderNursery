@@ -23,8 +23,9 @@ public class ItemManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void Start()
     {
-        tutorialManager = InventoryManager.inventory.tutorialPanel;
+        tutorialManager = GameObject.FindGameObjectWithTag("Tutorial Manager");
         dressUp = GameObject.FindGameObjectWithTag("Dress Up Manager");
+
         
     }
 
@@ -70,23 +71,32 @@ public class ItemManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 //    tutorialManager.GetComponent<Tutorials>().ActivateTutorial(tutorialManager.GetComponent<Tutorials>().magnifyingGlassTutorial);
                 //    firstMG = false;
                 //}
-                if (InventoryManager.inventory.MG.GetComponent<MagnifyingGlass>().OutfitCheck())
+                if (!tutorialManager.GetComponent<Tutorials>().nbTutorial2)
                 {
-                    InventoryManager.inventory.MG.GetComponent<MagnifyingGlass>().ToggleMagnifyingGlass();
-                    InventoryManager.inventory.UIVisibility.ToggleInventory();
-                    itemTooltip.SetActive(false);
+                    if (InventoryManager.inventory.MG.GetComponent<MagnifyingGlass>().OutfitCheck())
+                    {
+                        InventoryManager.inventory.MG.GetComponent<MagnifyingGlass>().ToggleMagnifyingGlass();
+                        InventoryManager.inventory.UIVisibility.ToggleInventory();
+                        itemTooltip.SetActive(false);
+                    }
                 }
                 
                 break;
             case Item.ItemType.PinBoard:
-                InventoryManager.inventory.UIVisibility.TogglePinboard();
-                itemTooltip.SetActive(false);
+                if (!tutorialManager.GetComponent<Tutorials>().mGlassTutorial1 && !tutorialManager.GetComponent<Tutorials>().nbTutorial2)
+                {
+                    InventoryManager.inventory.UIVisibility.TogglePinboard();
+                    itemTooltip.SetActive(false);
+                }
                 break;
             case Item.ItemType.Jotter:
                 InventoryManager.inventory.UIVisibility.ToggleJotter();
                 break;
             case Item.ItemType.NoteBook:
-                InventoryManager.inventory.UIVisibility.ToggleNotebook();
+                if (!tutorialManager.GetComponent<Tutorials>().mGlassTutorial1)
+                {
+                    InventoryManager.inventory.UIVisibility.ToggleNotebook();
+                }
                 break;
         }
     }
