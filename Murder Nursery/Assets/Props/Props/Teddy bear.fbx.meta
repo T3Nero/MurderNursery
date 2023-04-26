@@ -3,7 +3,17 @@ guid: a6ef813e405cfa94c82945bd1e21fc7f
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Teddybear_body
+    second: {fileID: 2100000, guid: e0f1bd20f0df4374b8b808299f029bb9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Teddybear_eyesnose
+    second: {fileID: 2100000, guid: 7f2c9625a8e6ef043a6c2b14525a9e2c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

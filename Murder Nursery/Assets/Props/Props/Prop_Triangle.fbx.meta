@@ -3,7 +3,12 @@ guid: 204cbe5ae69f5b244b33da2005addd34
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Toy_Car_Color_Blue_1
+    second: {fileID: 2100000, guid: f9596c701763e954ca979a90de926d4b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

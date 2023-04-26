@@ -3,7 +3,12 @@ guid: 7eba6941202117f4e9ede9215dfa3214
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Jenga_Blocks
+    second: {fileID: 2100000, guid: 379e2a29354f5e341be50d69cebcb2b7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

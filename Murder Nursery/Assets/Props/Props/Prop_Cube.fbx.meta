@@ -3,7 +3,12 @@ guid: ef66c4c6424b0134ba69aae09e2c94c2
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Square_Color
+    second: {fileID: 2100000, guid: 69aad0498b71f4a4eac102ffab3b2978, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

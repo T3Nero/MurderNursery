@@ -3,7 +3,22 @@ guid: 5d5d6d16b0cb4154f9f8072e8b1a85b4
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Swing_rope
+    second: {fileID: 2100000, guid: d2ab3d8064bbc5e498a52c78ede7ab4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Swing_seat1
+    second: {fileID: 2100000, guid: 4938ea093f76d4543be5a6a93a1d93ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Swing_wood1
+    second: {fileID: 2100000, guid: 3c93d65aabd9e1c4f9ca30e9bbf8ed7b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

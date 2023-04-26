@@ -3,7 +3,17 @@ guid: 28b8200d89b2f794c8c795f3b7723b05
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Puzzle_cube1
+    second: {fileID: 2100000, guid: 6f2777322eec6014e80a6bc9f29c0c2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Puzzle_cube2
+    second: {fileID: 2100000, guid: 48fa9903ec913d14a97f31ffdfce2344, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

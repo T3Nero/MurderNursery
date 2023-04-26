@@ -3,7 +3,12 @@ guid: a05470fa853740e439024ae8fec84394
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shader_Color_Yellow
+    second: {fileID: 2100000, guid: 7f0896d1319a053439be349fdc1f0c1e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

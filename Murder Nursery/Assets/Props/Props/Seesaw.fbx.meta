@@ -3,7 +3,22 @@ guid: cb5ebc009d9f8cb4689476fd711e93b3
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Seesaw_handle1
+    second: {fileID: 2100000, guid: 18fe98cdf19527d4fb07e4a1bb0189b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Seesaw_plank1
+    second: {fileID: 2100000, guid: 0ab50038b4988f5419533eba5d9ffb53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Seesaw_rock1
+    second: {fileID: 2100000, guid: 25dd81e32093b27439cffb2b262d63be, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
