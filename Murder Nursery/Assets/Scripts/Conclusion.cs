@@ -11,6 +11,7 @@ public class Conclusion : MonoBehaviour
     [Header("General Variables")]
     public GameObject mainScene;
     public GameObject manager;
+    public GameObject outtroCam;
     public Image blackFade;
     public bool endingReady = false;
     public bool dialogueActive;
@@ -112,6 +113,16 @@ public class Conclusion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(inEnding)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        if(dialogueActive)
+        {
+            Cursor.visible = false;
+        }
+
         if(Input.GetKeyDown(KeyCode.C) && endingReady && !inEnding) //Temporary ending trigger
         {
             StartConclusion();
@@ -121,6 +132,7 @@ public class Conclusion : MonoBehaviour
         }
         if(Input.GetKeyUp(KeyCode.Return) && dialogueActive)
         {
+            outtroCam.SetActive(true);
             if(eddieChosen)
             {
                 switch (progress) //Triggers the bad ending progress with Eddie
@@ -128,18 +140,21 @@ public class Conclusion : MonoBehaviour
                     
                     case 1:
                         endingText.GetComponent<TextMeshProUGUI>().text = "Detective Drew: " + badEnd2 + " \n <Press [Enter] to Continue>";
-                        ChangeCams(eddieCam, drewCam);
+                        //ChangeCams(eddieCam, drewCam);
+                        outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(6, drewEnd);
                         progress++;
                         break;
                     case 2:
                         endingText.GetComponent<TextMeshProUGUI>().text = "Teacher: " + badEnd3 + " \n <Press [Enter] to Continue>";
-                        ChangeCams(drewCam, badEndingCam);
+                        //ChangeCams(drewCam, badEndingCam);
+                        outtroCam.GetComponent<OuttroCutscene>().ChangePosition(5);
                         progress++;
                         break;
                     case 3:
                         endingText.GetComponent<TextMeshProUGUI>().text = "Detective Drew: " + badEnd4 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(badEndingCam, drewCam);
+                       // ChangeCams(badEndingCam, drewCam);
+                       outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(5, drewEnd);
                         progress++;
                         break;
@@ -154,17 +169,20 @@ public class Conclusion : MonoBehaviour
                     case 1:
                         endingText.GetComponent<TextMeshProUGUI>().text = "Detective Drew: " + badEnd2 + "\n<Press [Enter] to Continue>";
                         progress++;
-                        ChangeCams(scarletCam, drewCam);
+                        //ChangeCams(scarletCam, drewCam);
+                        outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(6, drewEnd);
                         break;
                     case 2:
                         endingText.GetComponent<TextMeshProUGUI>().text = "Teacher: " + badEnd3 + "\n<Press [Enter] to Continue>";
                         progress++;
-                        ChangeCams(drewCam, badEndingCam);
+                        //ChangeCams(drewCam, badEndingCam);
+                        outtroCam.GetComponent<OuttroCutscene>().ChangePosition(5);
                         break;
                     case 3:
                         endingText.GetComponent<TextMeshProUGUI>().text = "Detective Drew: " + badEnd4 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(badEndingCam, drewCam);
+                        //ChangeCams(badEndingCam, drewCam);
+                        outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(5, drewEnd);
                         progress++;
                         break;
@@ -181,18 +199,21 @@ public class Conclusion : MonoBehaviour
                     case 1:
                         endingText.GetComponent<TextMeshProUGUI>().text = "Detective Drew: " + badEnd2 + "\n<Press [Enter] to Continue>";
                         progress++;
-                        ChangeCams(juiceBoxCam, drewCam);
+                        //ChangeCams(juiceBoxCam, drewCam);
+                        outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(6, drewEnd);
 
                         break;
                     case 2:
                         endingText.GetComponent<TextMeshProUGUI>().text = "Teacher: " +  badEnd3 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(drewCam, badEndingCam);
+                        //ChangeCams(drewCam, badEndingCam);
+                        outtroCam.GetComponent<OuttroCutscene>().ChangePosition(5);
                         progress++;
                         break;
                     case 3:
                         endingText.GetComponent<TextMeshProUGUI>().text = "Detective Drew: " + badEnd4 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(badEndingCam, drewCam);
+                        //ChangeCams(badEndingCam, drewCam);
+                        outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(5, drewEnd);
                         progress++;
                         break;
@@ -209,57 +230,68 @@ public class Conclusion : MonoBehaviour
                     
                         
                     case 1: endingText.GetComponent<TextMeshProUGUI>().text = "Detective Drew: " + goodEnd2 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(chaseCam, drewCam);
+                        //ChangeCams(chaseCam, drewCam);
+                        outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(7, drewEnd);
                         progress++;
                         break;
                     case 2: endingText.GetComponent<TextMeshProUGUI>().text = "Chase: " + goodEnd3 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(drewCam, chaseCam);
+                        //ChangeCams(drewCam, chaseCam);
+                        outtroCam.GetComponent<OuttroCutscene>().ChangePosition(2);
                         SwitchEmotion(5, chaseEnd);
                         progress++;
                         break;
                     case 3: endingText.GetComponent<TextMeshProUGUI>().text = "Detective Drew: " + goodEnd4 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(chaseCam, drewCam);
+                       // ChangeCams(chaseCam, drewCam);
+                       outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(6, drewEnd);
                         progress++;
                         break;
                     case 4: endingText.GetComponent<TextMeshProUGUI>().text = "Chase: " +  goodEnd5 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(drewCam, chaseCam);
+                      //  ChangeCams(drewCam, chaseCam);
+                      outtroCam.GetComponent<OuttroCutscene>().ChangePosition(2);
                         SwitchEmotion(3, chaseEnd);
                         progress++;
                         break;
                     case 5: endingText.GetComponent<TextMeshProUGUI>().text = "Detective Drew: " +  goodEnd6 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(chaseCam, drewCam);
+                      //  ChangeCams(chaseCam, drewCam);
+                      outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(7, drewEnd);
                         progress++;
                         break;
                     case 6: endingText.GetComponent<TextMeshProUGUI>().text = "Chase: " +  goodEnd7 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(drewCam, chaseCam);
+                     //   ChangeCams(drewCam, chaseCam);
+                     outtroCam.GetComponent<OuttroCutscene>().ChangePosition(2);
                         SwitchEmotion(6, chaseEnd);
                         progress++;
                         break;
                     case 7: endingText.GetComponent<TextMeshProUGUI>().text = "Chase: " +  goodEnd8 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(chaseCam, scarletCam);
+                     //   ChangeCams(chaseCam, scarletCam);
+                     outtroCam.GetComponent<OuttroCutscene>().ChangePosition(3);
                         SwitchEmotion(5, scarletEnd);
                         progress++;
                         break;
                     case 8: endingText.GetComponent<TextMeshProUGUI>().text = "Chase: " +  goodEnd9 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(scarletCam, eddieCam);
+                     //   ChangeCams(scarletCam, eddieCam);
+                     outtroCam.GetComponent<OuttroCutscene>().ChangePosition(1);
                         SwitchEmotion(4, eddieEnd);
                         progress++;
                         break;
                     case 9: endingText.GetComponent<TextMeshProUGUI>().text = "Chase: " + goodEnd10 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(eddieCam, juiceBoxCam);
+                      //  ChangeCams(eddieCam, juiceBoxCam);
+                      outtroCam.GetComponent<OuttroCutscene>().ChangePosition(4);
                         SwitchEmotion(6, juiceBoxEnd);
                         progress++;
                         break;
                     case 10: endingText.GetComponent<TextMeshProUGUI>().text = "Chase: " + goodEnd11 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(juiceBoxCam, drewCam);
+                      //  ChangeCams(juiceBoxCam, drewCam);
+                      outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(4, drewEnd);
                         progress++;
                         break;
                     case 11: endingText.GetComponent<TextMeshProUGUI>().text = "Chase: " + goodEnd12 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(drewCam, graceCam);
+                      //  ChangeCams(drewCam, graceCam);
+                      outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(4, graceEnd);
                         progress++;
                         break;
@@ -267,7 +299,8 @@ public class Conclusion : MonoBehaviour
                         progress++;
                         break;
                     case 13: endingText.GetComponent<TextMeshProUGUI>().text = "Everyone: " + goodEnd14 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(graceCam, badEndingCam);
+                       // ChangeCams(graceCam, badEndingCam);
+                       outtroCam.GetComponent<OuttroCutscene>().ChangePosition(5);
                         SwitchEmotion(4, scarletEnd);
                         SwitchEmotion(4, eddieEnd);
                         SwitchEmotion(4, chaseEnd);
@@ -275,7 +308,8 @@ public class Conclusion : MonoBehaviour
                         progress++;
                         break;
                     case 14:endingText.GetComponent<TextMeshProUGUI>().text = "Detective Drew: " + goodEnd15 + "\n<Press [Enter] to Continue>";
-                        ChangeCams(badEndingCam, drewCam);
+                      //  ChangeCams(badEndingCam, drewCam);
+                      outtroCam.GetComponent<OuttroCutscene>().ChangePosition(0);
                         SwitchEmotion(7, drewEnd);
                         progress++;
                         break;
